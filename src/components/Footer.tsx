@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
           <p className="text-xs text-charcoal-500 flex items-center justify-center gap-1">
             Made with
             <Heart className="w-3 h-3 text-blush-400" fill="currentColor" />
-            © {currentYear} Nexus Peptides.
+            © {currentYear} Nexus sample Peptide website.
           </p>
         </div>
       </div>

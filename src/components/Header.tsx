@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
             >
 
               <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-blush-600 tracking-tight">
-                Nexus Peptides
+                Nexus sample Peptide website
               </span>
             </button>
 
@@ -117,7 +117,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <div className="flex items-center gap-3">
 
                 <span className="text-lg font-heading font-bold text-blush-600">
-                  Nexus Peptides
+                  Nexus sample Peptide website
                 </span>
               </div>
               <button
