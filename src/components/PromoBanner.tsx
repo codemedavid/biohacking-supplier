@@ -5,9 +5,7 @@ import posthog from '../lib/posthog';
 const PromoBanner: React.FC = () => {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const [dismissed, setDismissed] = useState(() => {
-        return localStorage.getItem('promoBannerDismissed') === 'true';
-    });
+    const [dismissed, setDismissed] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,7 +16,6 @@ const PromoBanner: React.FC = () => {
             setSubmitted(true);
             setTimeout(() => {
                 setDismissed(true);
-                localStorage.setItem('promoBannerDismissed', 'true');
             }, 3000);
         } else {
             alert('Please enter a valid @gmail.com address.');
@@ -27,7 +24,6 @@ const PromoBanner: React.FC = () => {
 
     const handleDismiss = () => {
         setDismissed(true);
-        localStorage.setItem('promoBannerDismissed', 'true');
     };
 
     if (dismissed) return null;
