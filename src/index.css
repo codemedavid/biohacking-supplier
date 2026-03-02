@@ -5,24 +5,24 @@
 @tailwind utilities;
 
 :root {
-  /* Better Than Bare - Soft Pink Luxury Theme */
-  --theme-bg: #FAFAFB;
-  --theme-text: #3D3D3D;
+  /* Sleek Premium Dark Theme */
+  --theme-bg: #0B0F19;
+  --theme-text: #E2E8F0;
 
   /* Primary Palette */
-  --blush-pink: #F8C8D8;
-  --dusty-rose: #E8A4B8;
-  --soft-pink: #FADADD;
+  --blush-pink: #9333EA;
+  --dusty-rose: #C084FC;
+  --soft-pink: #D8B4FE;
 
   /* Backgrounds */
-  --cream: #FFFCFA;
-  --blush-light: #FDF5F7;
-  --warm-white: #FFFFFF;
+  --cream: #0F172A;
+  --blush-light: #1E1B4B;
+  --warm-white: #0B0F19;
 }
 
 @layer base {
   body {
-    @apply font-sans text-charcoal-800 bg-white antialiased leading-relaxed;
+    @apply font-sans text-charcoal-200 bg-theme-bg antialiased leading-relaxed;
   }
 
   h1,
@@ -31,40 +31,40 @@
   h4,
   h5,
   h6 {
-    @apply font-heading font-semibold text-charcoal-900 tracking-tight;
+    @apply font-heading font-semibold text-white tracking-tight;
   }
 }
 
 @layer components {
 
-  /* Better Than Bare Button Styles */
+  /* Sleek Premium Button Styles */
   .btn-primary {
-    @apply bg-blush-500 text-white px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 shadow-soft hover:bg-blush-600 hover:shadow-luxury active:transform active:scale-[0.98];
+    @apply bg-gradient-to-r from-blush-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold text-sm tracking-wide transition-all duration-300 shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_30px_rgba(147,51,234,0.6)] hover:-translate-y-1 active:transform active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply bg-transparent text-rose-500 border-2 border-rose-400 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-rose-50 hover:border-rose-500 active:transform active:scale-[0.98];
+    @apply bg-charcoal-900/50 backdrop-blur-md text-glow-teal-400 border border-glow-teal-500/50 px-8 py-4 rounded-xl font-semibold text-sm transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.1)] hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 hover:border-glow-teal-400 active:transform active:scale-[0.98];
   }
 
-  /* Luxury Card Styles */
+  /* Glassmorphism Luxury Card Styles */
   .card {
-    @apply bg-white rounded-2xl shadow-soft border border-blush-100 p-6 transition-all duration-300 hover:shadow-luxury hover:border-blush-200;
+    @apply bg-charcoal-900/40 backdrop-blur-lg rounded-2xl shadow-soft border border-charcoal-800/50 p-6 transition-all duration-500 hover:shadow-[0_0_25px_rgba(147,51,234,0.2)] hover:border-blush-500/50 hover:-translate-y-1;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-white border border-charcoal-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blush-400 focus:border-transparent transition-all placeholder-charcoal-400 text-charcoal-800;
+    @apply w-full px-4 py-3 bg-charcoal-900/50 border border-charcoal-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blush-500 focus:border-transparent transition-all placeholder-charcoal-500 text-white;
   }
 
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-wider;
   }
 
   .badge-primary {
-    @apply bg-blush-100 text-rose-700;
+    @apply bg-blush-900/50 text-blush-200 border border-blush-700/50;
   }
 
   .badge-accent {
-    @apply bg-rose-100 text-rose-800;
+    @apply bg-glow-teal-900/50 text-glow-teal-200 border border-glow-teal-700/50;
   }
 }
 

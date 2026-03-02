@@ -249,26 +249,26 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
           {onBack && (
             <button
               onClick={onBack}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors"
               title="Go Back"
             >
-              <ArrowLeft className="w-6 h-6 text-gray-600" />
+              <ArrowLeft className="w-6 h-6 text-charcoal-300" />
             </button>
           )}
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
               <Shield className="w-7 h-7 text-gold-600" />
               COA Lab Reports
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-charcoal-300 mt-1">
               Manage certificates of analysis and lab test reports
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           {/* COA Page Toggle */}
-          <div className="flex items-center gap-2 bg-white border border-navy-700/30 rounded-lg px-3 py-2 shadow-sm">
-            <span className="text-xs font-medium text-gray-700">Show COA Page:</span>
+          <div className="flex items-center gap-2 bg-charcoal-900/40 backdrop-blur-md border border-charcoal-700/50 rounded-lg px-3 py-2 shadow-sm">
+            <span className="text-xs font-medium text-charcoal-200">Show COA Page:</span>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -276,15 +276,15 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                 onChange={(e) => toggleCOAPage(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold-600"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-charcoal-900/40 backdrop-blur-md after:border-charcoal-600/50 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold-600"></div>
             </label>
-            <span className={`text-xs font-semibold ${coaPageEnabled ? 'text-gold-600' : 'text-gray-400'}`}>
+            <span className={`text-xs font-semibold ${coaPageEnabled ? 'text-gold-600' : 'text-charcoal-500'}`}>
               {coaPageEnabled ? 'ON' : 'OFF'}
             </span>
           </div>
           <button
             onClick={handleAdd}
-            className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-black px-4 py-2 rounded-lg font-medium transition-all shadow-md"
+            className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-md"
           >
             <Plus className="w-5 h-5" />
             Add COA Report
@@ -294,16 +294,16 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
 
       {/* Add/Edit Form */}
       {(isAdding || editingId) && (
-        <div className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-3xl p-6 border-2 border-sky-200 shadow-cute">
-          <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-sky-500" />
+        <div className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-3xl p-6 border-2 border-charcoal-700/50 shadow-cute">
+          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-glow-teal-400" />
             {editingId ? 'Edit COA Report' : 'Add New COA Report'}
           </h3>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Product Name *
                 </label>
                 <input
@@ -311,26 +311,26 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.product_name}
                   onChange={(e) => setFormData({ ...formData, product_name: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="e.g., Tirzepatide 15mg"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Batch Number
                 </label>
                 <input
                   type="text"
                   value={formData.batch}
                   onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="Unknown"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Test Date *
                 </label>
                 <input
@@ -338,12 +338,12 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.test_date}
                   onChange={(e) => setFormData({ ...formData, test_date: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Purity (%) *
                 </label>
                 <input
@@ -352,13 +352,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.purity_percentage}
                   onChange={(e) => setFormData({ ...formData, purity_percentage: parseFloat(e.target.value) })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="99.658"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Quantity *
                 </label>
                 <input
@@ -366,13 +366,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.quantity}
                   onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="e.g., 16.80 mg"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Task Number *
                 </label>
                 <input
@@ -380,13 +380,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.task_number}
                   onChange={(e) => setFormData({ ...formData, task_number: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="#68396"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Verification Key *
                 </label>
                 <input
@@ -394,13 +394,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.verification_key}
                   onChange={(e) => setFormData({ ...formData, verification_key: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                   placeholder="9AUYT3EZV9Y9"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-3">
                   COA Report Image *
                 </label>
                 <ImageUpload
@@ -411,26 +411,26 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Manufacturer
                 </label>
                 <input
                   type="text"
                   value={formData.manufacturer}
                   onChange={(e) => setFormData({ ...formData, manufacturer: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
                   Laboratory
                 </label>
                 <input
                   type="text"
                   value={formData.laboratory}
                   onChange={(e) => setFormData({ ...formData, laboratory: e.target.value })}
-                  className="input-field text-black"
+                  className="input-field text-white"
                 />
               </div>
             </div>
@@ -441,9 +441,9 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                 id="featured"
                 checked={formData.featured}
                 onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                className="w-4 h-4 text-sky-500 rounded focus:ring-sky-400"
+                className="w-4 h-4 text-glow-teal-400 rounded focus:ring-sky-400"
               />
-              <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+              <label htmlFor="featured" className="text-sm font-medium text-charcoal-200">
                 Featured Report (show prominently)
               </label>
             </div>
@@ -459,7 +459,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
               <button
                 type="button"
                 onClick={handleCancel}
-                className="flex items-center gap-2 bg-white text-gray-700 border-2 border-gray-300 hover:bg-gray-50 px-6 py-3 rounded-2xl font-medium transition-all"
+                className="flex items-center gap-2 bg-charcoal-900/40 backdrop-blur-md text-charcoal-200 border-2 border-charcoal-600/50 hover:bg-theme-bg px-6 py-3 rounded-2xl font-medium transition-all"
               >
                 <X className="w-5 h-5" />
                 Cancel
@@ -472,24 +472,24 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
       {/* COA Reports List */}
       <div className="space-y-4">
         {coaReports.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-3xl border-2 border-sky-100">
+          <div className="text-center py-12 bg-charcoal-900/40 backdrop-blur-md rounded-3xl border-2 border-charcoal-700/50">
             <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500">No COA reports yet. Add your first lab report!</p>
+            <p className="text-charcoal-400">No COA reports yet. Add your first lab report!</p>
           </div>
         ) : (
           coaReports.map((report) => (
             <div
               key={report.id}
-              className="bg-white rounded-3xl p-6 border-2 border-sky-100 hover:border-sky-200 shadow-md hover:shadow-lg transition-all"
+              className="bg-charcoal-900/40 backdrop-blur-md rounded-3xl p-6 border-2 border-charcoal-700/50 hover:border-charcoal-700/50 shadow-md hover:shadow-lg transition-all"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <h3 className="text-lg font-bold text-gray-800">
+                    <h3 className="text-lg font-bold text-white">
                       {report.product_name}
                     </h3>
                     {report.featured && (
-                      <span className="bg-gradient-to-r from-sky-100 to-blue-100 text-sky-700 px-3 py-1 rounded-full text-xs font-bold border border-sky-300">
+                      <span className="bg-charcoal-900/40 backdrop-blur-md border-b border-charcoal-700/50 text-glow-teal-300 px-3 py-1 rounded-full text-xs font-bold border border-charcoal-600/50">
                         ⭐ FEATURED
                       </span>
                     )}
@@ -497,20 +497,20 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                     <div>
-                      <span className="text-gray-500">Purity:</span>
+                      <span className="text-charcoal-400">Purity:</span>
                       <p className="font-bold text-green-600">{report.purity_percentage}%</p>
                     </div>
                     <div>
-                      <span className="text-gray-500">Quantity:</span>
-                      <p className="font-bold text-sky-600">{report.quantity}</p>
+                      <span className="text-charcoal-400">Quantity:</span>
+                      <p className="font-bold text-glow-teal-400">{report.quantity}</p>
                     </div>
                     <div>
-                      <span className="text-gray-500">Task Number:</span>
-                      <p className="font-mono text-gray-800">{report.task_number}</p>
+                      <span className="text-charcoal-400">Task Number:</span>
+                      <p className="font-mono text-white">{report.task_number}</p>
                     </div>
                     <div>
-                      <span className="text-gray-500">Test Date:</span>
-                      <p className="text-gray-800">{new Date(report.test_date).toLocaleDateString()}</p>
+                      <span className="text-charcoal-400">Test Date:</span>
+                      <p className="text-white">{new Date(report.test_date).toLocaleDateString()}</p>
                     </div>
                   </div>
 
@@ -519,20 +519,20 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                       href={`https://www.janoshik.com/verify/?key=${report.verification_key}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-600 hover:text-sky-700 font-medium"
+                      className="flex items-center gap-1 text-glow-teal-400 hover:text-glow-teal-300 font-medium"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Verify on Janoshik
                     </a>
-                    <span className="text-gray-400">•</span>
-                    <span className="text-gray-600">Lab: {report.laboratory}</span>
+                    <span className="text-charcoal-500">•</span>
+                    <span className="text-charcoal-300">Lab: {report.laboratory}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleEdit(report)}
-                    className="p-2 text-sky-600 hover:bg-sky-50 rounded-xl transition-all"
+                    className="p-2 text-glow-teal-400 hover:bg-charcoal-800/40 rounded-xl transition-all"
                     title="Edit"
                   >
                     <Edit2 className="w-5 h-5" />

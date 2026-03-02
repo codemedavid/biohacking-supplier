@@ -7,43 +7,43 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Glow with Joo - Purple Theme
-        'theme-bg': '#FFFFFF',           // Pure White
-        'theme-text': '#4A4A4A',         // Soft Charcoal
+        // Sleek Dark Theme Colors
+        'theme-bg': '#0B0F19',           // Obsidian
+        'theme-text': '#E2E8F0',         // Soft Light Gray
 
-        // Primary - Glow Purple
+        // Primary - Vibrant Purple
         'blush': {
-          DEFAULT: '#7A28CB', // Main Purple
+          DEFAULT: '#9333EA', // Primary Brand Color
           50: '#F5F3FF',
-          100: '#EDE9FE',
-          200: '#DDD6FE',
-          300: '#C4B5FD',
-          400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#7A28CB', // Primary Brand Color
-          700: '#6D28D9',
-          800: '#5B21B6',
-          900: '#4C1D95',
+          100: '#E0E7FF',
+          200: '#C7D2FE',
+          300: '#A5B4FC',
+          400: '#818CF8',
+          500: '#6366F1',
+          600: '#9333EA', // Electric Purple
+          700: '#7E22CE',
+          800: '#6B21A8',
+          900: '#581C87',
         },
 
-        // Accent - Glow Teal
+        // Accent - Electric Cyan
         'glow-teal': {
-          DEFAULT: '#1ABC9C',
-          50: '#F0FDFA',
-          100: '#CCFBF1',
-          200: '#99F6E4',
-          300: '#5EEAD4',
-          400: '#2DD4BF',
-          500: '#14B8A6',
-          600: '#0D9488',
-          700: '#0F766E',
-          800: '#115E59',
-          900: '#134E4A',
+          DEFAULT: '#06B6D4',
+          50: '#ECFEFF',
+          100: '#CFFAFE',
+          200: '#A5F3FC',
+          300: '#67E8F9',
+          400: '#22D3EE',
+          500: '#06B6D4', // Electric Cyan
+          600: '#0891B2',
+          700: '#0E7490',
+          800: '#155E75',
+          900: '#164E63',
         },
 
-        // Secondary - Soft Gold/Accent
+        // Secondary - Vibrant Amber/Gold
         'rose': {
-          DEFAULT: '#FBBF24',
+          DEFAULT: '#F59E0B',
           50: '#FFFBEB',
           100: '#FEF3C7',
           200: '#FDE68A',
@@ -56,25 +56,25 @@ export default {
           900: '#78350F',
         },
 
-        // Neutral - Soft Charcoal
+        // Neutral - Sleek Darkness
         'charcoal': {
-          DEFAULT: '#3D3D3D',
-          50: '#F7F7F7',
-          100: '#EFEFEF',
-          200: '#DFDFDF',
-          300: '#CFCFCF',
-          400: '#9F9F9F',
-          500: '#6F6F6F',
-          600: '#5F5F5F',
-          700: '#4F4F4F',
-          800: '#3D3D3D', // Primary Text
-          900: '#2D2D2D',
+          DEFAULT: '#E2E8F0',
+          50: '#F8FAFC',
+          100: '#F1F5F9',
+          200: '#E2E8F0', // Primary Text
+          300: '#CBD5E1',
+          400: '#94A3B8',
+          500: '#64748B',
+          600: '#475569',
+          700: '#334155',
+          800: '#1E293B',
+          900: '#0F172A', // Deep background accent
         },
 
         // Backgrounds
-        'cream': '#FFFFFF',
-        'blush-light': '#F5F3FF',
-        'warm-white': '#FAFAFB',
+        'cream': '#0F172A',         // Slate 900
+        'blush-light': '#1E1B4B',   // Deep Purple/Midnight 
+        'warm-white': '#0B0F19',    // Pitch back to bg
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

@@ -9,6 +9,7 @@ import Checkout from './components/Checkout';
 import FloatingCartButton from './components/FloatingCartButton';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import PromoPopup from './components/PromoPopup';
 
 // Lazy load route components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
@@ -23,7 +24,7 @@ import { useMenu } from './hooks/useMenu';
 
 function MainApp() {
     const cart = useCart();
-    const { menuItems, refreshProducts } = useMenu();
+    const { menuItems } = useMenu();
     const [currentView, setCurrentView] = useState<'menu' | 'cart' | 'checkout'>('menu');
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -43,7 +44,7 @@ function MainApp() {
         : menuItems.filter(item => item.category === selectedCategory);
 
     return (
-        <div className="min-h-screen bg-white font-inter flex flex-col">
+        <div className="min-h-screen bg-theme-bg font-inter flex flex-col">
             <Header
                 cartItemsCount={cart.getTotalItems()}
                 onCartClick={() => handleViewChange('cart')}
@@ -55,6 +56,7 @@ function MainApp() {
             )}
 
             <main className="flex-grow">
+                <PromoPopup />
                 {currentView === 'menu' && (
                     <Menu
                         menuItems={filteredProducts}

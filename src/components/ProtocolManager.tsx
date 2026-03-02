@@ -111,26 +111,26 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <div className="min-h-screen bg-theme-bg flex items-center justify-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-white shadow-sm border-b border-gray-200">
+            <div className="bg-charcoal-900/40 backdrop-blur-md shadow-sm border-b border-charcoal-700/50">
                 <div className="max-w-4xl mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={onBack}
-                                className="text-gray-500 hover:text-gray-900 transition-colors"
+                                className="text-charcoal-400 hover:text-white transition-colors"
                             >
                                 <ArrowLeft className="w-5 h-5" />
                             </button>
-                            <h1 className="text-xl font-bold text-gray-900">📋 Protocol Manager</h1>
+                            <h1 className="text-xl font-bold text-white">📋 Protocol Manager</h1>
                         </div>
                         {!isAdding && !editingId && (
                             <button
@@ -148,91 +148,91 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
             <div className="max-w-4xl mx-auto px-4 py-6">
                 {/* Add/Edit Form */}
                 {(isAdding || editingId) && (
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-                        <h2 className="text-lg font-bold text-gray-900 mb-4">
+                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border border-charcoal-700/50 p-6 mb-6">
+                        <h2 className="text-lg font-bold text-white mb-4">
                             {isAdding ? '➕ Add New Protocol' : '✏️ Edit Protocol'}
                         </h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Name *</label>
                                 <input
                                     type="text"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                     placeholder="e.g., Tirzepatide"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Category *</label>
                                 <input
                                     type="text"
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                     placeholder="e.g., Weight Management"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Dosage *</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Dosage *</label>
                                 <input
                                     type="text"
                                     value={formData.dosage}
                                     onChange={(e) => setFormData({ ...formData, dosage: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                     placeholder="e.g., 2.5mg - 15mg"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Frequency</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Frequency</label>
                                 <input
                                     type="text"
                                     value={formData.frequency}
                                     onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                     placeholder="e.g., Once weekly"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Duration</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Duration</label>
                                 <input
                                     type="text"
                                     value={formData.duration}
                                     onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                     placeholder="e.g., 12-16 weeks"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Sort Order</label>
                                 <input
                                     type="number"
                                     value={formData.sort_order}
                                     onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                 />
                             </div>
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Storage Instructions</label>
+                            <label className="block text-sm font-medium text-charcoal-200 mb-1">Storage Instructions</label>
                             <input
                                 type="text"
                                 value={formData.storage}
                                 onChange={(e) => setFormData({ ...formData, storage: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                 placeholder="e.g., Refrigerate at 2-8°C"
                             />
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Protocol Notes (one per line)</label>
+                            <label className="block text-sm font-medium text-charcoal-200 mb-1">Protocol Notes (one per line)</label>
                             <textarea
                                 value={notesText}
                                 onChange={(e) => setNotesText(e.target.value)}
                                 rows={5}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                                 placeholder="Enter each note on a new line..."
                             />
                         </div>
@@ -243,9 +243,9 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 id="active"
                                 checked={formData.active}
                                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                                className="w-4 h-4 text-gray-900 rounded focus:ring-gray-900"
+                                className="w-4 h-4 text-white rounded focus:ring-gray-900"
                             />
-                            <label htmlFor="active" className="text-sm font-medium text-gray-700">Active (visible on website)</label>
+                            <label htmlFor="active" className="text-sm font-medium text-charcoal-200">Active (visible on website)</label>
                         </div>
 
                         <div className="flex items-center gap-3">
@@ -259,7 +259,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                             </button>
                             <button
                                 onClick={handleCancel}
-                                className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 border border-charcoal-600/50 text-charcoal-200 rounded-lg hover:bg-theme-bg transition-colors"
                             >
                                 <X className="w-4 h-4" />
                                 Cancel
@@ -271,14 +271,14 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                 {/* Protocols List */}
                 <div className="space-y-3">
                     {protocols.length === 0 ? (
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
-                            <p className="text-gray-500">No protocols yet. Add your first protocol!</p>
+                        <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border border-charcoal-700/50 p-8 text-center">
+                            <p className="text-charcoal-400">No protocols yet. Add your first protocol!</p>
                         </div>
                     ) : (
                         protocols.map((protocol) => (
                             <div
                                 key={protocol.id}
-                                className={`bg-white rounded-xl shadow-sm border ${protocol.active ? 'border-gray-200' : 'border-red-200 bg-red-50/30'} p-4`}
+                                className={`bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border ${protocol.active ? 'border-charcoal-700/50' : 'border-red-200 bg-red-50/30'} p-4`}
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">
@@ -288,8 +288,8 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                                 <span className="text-xs font-medium text-red-500 bg-red-100 px-2 py-0.5 rounded">Hidden</span>
                                             )}
                                         </div>
-                                        <h3 className="font-semibold text-gray-900">{protocol.name}</h3>
-                                        <p className="text-sm text-gray-600 mt-1">
+                                        <h3 className="font-semibold text-white">{protocol.name}</h3>
+                                        <p className="text-sm text-charcoal-300 mt-1">
                                             {protocol.dosage} • {protocol.frequency}
                                         </p>
                                     </div>
@@ -298,14 +298,14 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                         <button
                                             onClick={() => handleToggleActive(protocol.id, protocol.active)}
                                             disabled={isProcessing}
-                                            className={`p-2 rounded-lg transition-colors ${protocol.active ? 'text-green-600 hover:bg-green-50' : 'text-gray-400 hover:bg-gray-100'}`}
+                                            className={`p-2 rounded-lg transition-colors ${protocol.active ? 'text-green-600 hover:bg-green-50' : 'text-charcoal-500 hover:bg-charcoal-800/50'}`}
                                             title={protocol.active ? 'Hide from website' : 'Show on website'}
                                         >
                                             {protocol.active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                                         </button>
                                         <button
                                             onClick={() => handleEdit(protocol)}
-                                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                            className="p-2 text-blue-600 hover:bg-charcoal-900/40 rounded-lg transition-colors"
                                             title="Edit"
                                         >
                                             <Edit className="w-4 h-4" />

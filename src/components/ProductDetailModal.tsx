@@ -62,17 +62,17 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
   return (
     <div className="fixed inset-0 bg-science-blue-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4 overflow-y-auto">
-      <div className="bg-white rounded sm:rounded shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden my-2 sm:my-8 border border-gray-100">
+      <div className="bg-charcoal-900/40 backdrop-blur-md rounded sm:rounded shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden my-2 sm:my-8 border border-charcoal-800/50">
         {/* Header */}
-        <div className="bg-white text-charcoal-900 p-3 sm:p-4 md:p-6 relative border-b border-gray-100">
+        <div className="bg-charcoal-900/40 backdrop-blur-md text-charcoal-900 p-3 sm:p-4 md:p-6 relative border-b border-charcoal-800/50">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 hover:bg-gray-100 rounded transition-colors text-gray-400 hover:text-gray-600"
+            className="absolute top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 p-1.5 sm:p-2 hover:bg-charcoal-800/50 rounded transition-colors text-charcoal-500 hover:text-charcoal-300"
           >
             <X className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
           </button>
           <div className="pr-10 sm:pr-12">
-            <h2 className="font-heading text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1.5 sm:mb-2 text-blush-900 tracking-tight">{product.name}</h2>
+            <h2 className="font-heading text-base sm:text-xl md:text-2xl lg:text-3xl font-bold mb-1.5 sm:mb-2 text-white tracking-tight">{product.name}</h2>
             <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 flex-wrap">
               {showPurity && (
                 <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold bg-tech-teal/20 border border-tech-teal/30 text-tech-teal-light">
@@ -99,7 +99,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
             {/* Left Column */}
             <div className="space-y-3 sm:space-y-4 md:space-y-6">
               {/* Product Image */}
-              <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 bg-gray-50 rounded overflow-hidden border border-gray-100 shadow-inner">
+              <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 bg-theme-bg rounded overflow-hidden border border-charcoal-800/50 shadow-inner">
                 {product.image_url && !imageError ? (
                   <img
                     src={product.image_url}
@@ -108,7 +108,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                     onError={() => setImageError(true)}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-300 bg-blush-50/50">
+                  <div className="w-full h-full flex items-center justify-center text-gray-300 bg-charcoal-800/60/50">
                     <Package className="w-16 h-16 sm:w-20 sm:h-20 opacity-50" />
                   </div>
                 )}
@@ -116,23 +116,23 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
               {/* Description */}
               <div>
-                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
+                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-white mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
                   <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                   Product Description
                 </h3>
-                <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed font-sans">{product.description}</p>
+                <p className="text-xs sm:text-sm md:text-base text-charcoal-300 leading-relaxed font-sans">{product.description}</p>
               </div>
 
               {/* Complete Set Inclusions */}
               {product.inclusions && product.inclusions.length > 0 && (
-                <div className="bg-blush-50 rounded p-3 sm:p-4 border border-blush-100">
-                  <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+                <div className="bg-charcoal-800/60 rounded p-3 sm:p-4 border border-charcoal-700/50">
+                  <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-white mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
                     <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                     Kit Inclusions
                   </h3>
                   <ul className="space-y-1.5 sm:space-y-2">
                     {product.inclusions.map((inclusion, idx) => (
-                      <li key={idx} className="text-[11px] sm:text-xs md:text-sm text-gray-700 flex items-start gap-2">
+                      <li key={idx} className="text-[11px] sm:text-xs md:text-sm text-charcoal-200 flex items-start gap-2">
                         <span className="text-bio-green font-bold mt-0.5">✓</span>
                         <span className="flex-1">{inclusion}</span>
                       </li>
@@ -142,24 +142,24 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
               )}
 
               {/* Scientific Details */}
-              <div className="bg-gray-50 rounded p-3 sm:p-4 border border-gray-200">
-                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-blush-900 mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
+              <div className="bg-theme-bg rounded p-3 sm:p-4 border border-charcoal-700/50">
+                <h3 className="font-heading text-sm sm:text-base md:text-lg font-bold text-white mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2">
                   <Beaker className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-glow-teal-600" />
                   Technical Specifications
                 </h3>
                 <div className="space-y-1.5 sm:space-y-2">
                   {showPurity && (
                     <div className="flex justify-between">
-                      <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm">Purity Analysis:</span>
+                      <span className="text-charcoal-400 text-[11px] sm:text-xs md:text-sm">Purity Analysis:</span>
                       <span className="font-semibold text-blush-700 text-[11px] sm:text-xs md:text-sm">{product.purity_percentage}% (HPLC Verified)</span>
                     </div>
                   )}
                   <div className="flex justify-between">
-                    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm">Storage:</span>
-                    <span className="font-medium text-gray-700 text-[11px] sm:text-xs md:text-sm">{product.storage_conditions}</span>
+                    <span className="text-charcoal-400 text-[11px] sm:text-xs md:text-sm">Storage:</span>
+                    <span className="font-medium text-charcoal-200 text-[11px] sm:text-xs md:text-sm">{product.storage_conditions}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-500 text-[11px] sm:text-xs md:text-sm">Availability:</span>
+                    <span className="text-charcoal-400 text-[11px] sm:text-xs md:text-sm">Availability:</span>
                     <span className={`font-medium text-[11px] sm:text-xs md:text-sm ${(product.variations && product.variations.length > 0
                       ? product.variations.some(v => v.stock_quantity > 0)
                       : product.stock_quantity > 0)
@@ -178,13 +178,13 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
             {/* Right Column - Purchase Section */}
             <div className="space-y-3 sm:space-y-4 md:space-y-6">
               {/* Price */}
-              <div className="bg-white rounded p-3 sm:p-4 md:p-6 border border-gray-100 shadow-clinical">
+              <div className="bg-charcoal-900/40 backdrop-blur-md rounded p-3 sm:p-4 md:p-6 border border-charcoal-800/50 shadow-[0_0_15px_rgba(0,0,0,0.3)]">
                 <div className="text-center mb-3 sm:mb-4">
                   {hasDiscount ? (
                     <>
                       {/* Original Price - Strikethrough */}
                       <div className="flex items-center justify-center gap-2 mb-1">
-                        <span className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-400 line-through font-medium">
+                        <span className="text-base sm:text-lg md:text-xl lg:text-2xl text-charcoal-500 line-through font-medium">
                           ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                         </span>
                         <span className="text-xs sm:text-sm font-bold text-bio-green bg-bio-green-light/30 px-2 py-1 rounded">
@@ -192,7 +192,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         </span>
                       </div>
                       {/* Sale Price */}
-                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blush-900 mb-2">
+                      <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2">
                         ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                       </div>
                       <div className="inline-block bg-bio-green-light text-bio-green-700 px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1 rounded text-[10px] sm:text-xs md:text-sm font-bold border border-bio-green-200">
@@ -200,7 +200,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                       </div>
                     </>
                   ) : (
-                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blush-900">
+                    <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                       ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </div>
                   )}
@@ -209,7 +209,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 {/* Size Selection */}
                 {product.variations && product.variations.length > 0 && (
                   <div className="mb-3 sm:mb-4">
-                    <label className="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 sm:mb-2 uppercase tracking-wide">
+                    <label className="block text-xs sm:text-sm font-bold text-charcoal-200 mb-1.5 sm:mb-2 uppercase tracking-wide">
                       Select Format
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -228,10 +228,10 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                             className={`
                                 p-3 rounded border text-sm text-left transition-all
                                 ${isSelected
-                                ? 'border-blush-500 bg-blush-50 text-blush-900 ring-1 ring-blush-500'
-                                : 'border-gray-200 hover:border-blush-300 text-gray-700 bg-white'
+                                ? 'border-blush-500 bg-charcoal-800/60 text-white ring-1 ring-blush-500'
+                                : 'border-charcoal-700/50 hover:border-blush-300 text-charcoal-200 bg-charcoal-900/40 backdrop-blur-md'
                               }
-                                ${isOutOfStock ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''}
+                                ${isOutOfStock ? 'opacity-50 cursor-not-allowed bg-theme-bg' : ''}
                               `}
                           >
                             <div className="font-bold">{variation.name}</div>
@@ -252,7 +252,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 {/* Pen Type Selection - Only for injectable products */}
                 {isInjectableProduct && (
                   <div className="mb-3 sm:mb-4">
-                    <label className="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 sm:mb-2 uppercase tracking-wide flex items-center gap-2">
+                    <label className="block text-xs sm:text-sm font-bold text-charcoal-200 mb-1.5 sm:mb-2 uppercase tracking-wide flex items-center gap-2">
                       <Pen className="w-4 h-4 text-glow-teal-600" />
                       Pen Type
                     </label>
@@ -263,8 +263,8 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         className={`
                           p-3 rounded border text-sm text-left transition-all flex justify-between items-center
                           ${selectedPenType === null
-                            ? 'border-blush-500 bg-blush-50 text-blush-900 ring-1 ring-blush-500'
-                            : 'border-gray-200 hover:border-blush-300 text-gray-700 bg-white'
+                            ? 'border-blush-500 bg-charcoal-800/60 text-white ring-1 ring-blush-500'
+                            : 'border-charcoal-700/50 hover:border-blush-300 text-charcoal-200 bg-charcoal-900/40 backdrop-blur-md'
                           }
                         `}
                       >
@@ -272,7 +272,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                           <div className="font-bold">Complete Set</div>
                           <div className="text-xs opacity-80">With insulin syringes & alcohol swabs</div>
                         </div>
-                        <div className="font-bold text-blush-900">
+                        <div className="font-bold text-white">
                           ₱{selectedVariation?.price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                         </div>
                       </button>
@@ -284,17 +284,17 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         className={`
                           p-3 rounded border text-sm text-left transition-all flex justify-between items-center
                           ${selectedPenType === 'disposable'
-                            ? 'border-blush-500 bg-blush-50 text-blush-900 ring-1 ring-blush-500'
-                            : 'border-gray-200 hover:border-blush-300 text-gray-700 bg-white'
+                            ? 'border-blush-500 bg-charcoal-800/60 text-white ring-1 ring-blush-500'
+                            : 'border-charcoal-700/50 hover:border-blush-300 text-charcoal-200 bg-charcoal-900/40 backdrop-blur-md'
                           }
-                          ${!selectedVariation?.disposable_pen_price ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''}
+                          ${!selectedVariation?.disposable_pen_price ? 'opacity-50 cursor-not-allowed bg-theme-bg' : ''}
                         `}
                       >
                         <div>
                           <div className="font-bold">Disposable Pen</div>
                           <div className="text-xs opacity-80">Includes 3 needles</div>
                         </div>
-                        <div className="font-bold text-blush-900">
+                        <div className="font-bold text-white">
                           {selectedVariation?.disposable_pen_price
                             ? `₱${selectedVariation.disposable_pen_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}`
                             : 'N/A'}
@@ -308,17 +308,17 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         className={`
                           p-3 rounded border text-sm text-left transition-all flex justify-between items-center
                           ${selectedPenType === 'reusable'
-                            ? 'border-blush-500 bg-blush-50 text-blush-900 ring-1 ring-blush-500'
-                            : 'border-gray-200 hover:border-blush-300 text-gray-700 bg-white'
+                            ? 'border-blush-500 bg-charcoal-800/60 text-white ring-1 ring-blush-500'
+                            : 'border-charcoal-700/50 hover:border-blush-300 text-charcoal-200 bg-charcoal-900/40 backdrop-blur-md'
                           }
-                          ${!selectedVariation?.reusable_pen_price ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''}
+                          ${!selectedVariation?.reusable_pen_price ? 'opacity-50 cursor-not-allowed bg-theme-bg' : ''}
                         `}
                       >
                         <div>
                           <div className="font-bold">Reusable Pen</div>
                           <div className="text-xs opacity-80">Includes cartridge & 3 needles</div>
                         </div>
-                        <div className="font-bold text-blush-900">
+                        <div className="font-bold text-white">
                           {selectedVariation?.reusable_pen_price
                             ? `₱${selectedVariation.reusable_pen_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}`
                             : 'N/A'}
@@ -327,7 +327,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                     </div>
 
                     {!selectedPenType && (
-                      <p className="text-xs text-gray-500 mt-1.5">
+                      <p className="text-xs text-charcoal-400 mt-1.5">
                         Optional: Select your preferred pen type
                       </p>
                     )}
@@ -336,23 +336,23 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
                 {/* Quantity */}
                 <div className="mb-3 sm:mb-4">
-                  <label className="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 sm:mb-2 uppercase tracking-wide">
+                  <label className="block text-xs sm:text-sm font-bold text-charcoal-200 mb-1.5 sm:mb-2 uppercase tracking-wide">
                     Quantity
                   </label>
                   <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5">
                     <button
                       onClick={decrementQuantity}
-                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:border-gray-300 rounded transition-all active:scale-95 text-gray-600"
+                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-theme-bg border border-charcoal-700/50 hover:bg-charcoal-800/50 hover:border-charcoal-600/50 rounded transition-all active:scale-95 text-charcoal-300"
                       disabled={!product.available}
                     >
                       <Minus className="w-5 h-5" />
                     </button>
-                    <span className="text-xl sm:text-2xl font-bold text-blush-900 min-w-[50px] text-center">
+                    <span className="text-xl sm:text-2xl font-bold text-white min-w-[50px] text-center">
                       {quantity}
                     </span>
                     <button
                       onClick={incrementQuantity}
-                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:border-gray-300 rounded transition-all active:scale-95 text-gray-600"
+                      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-theme-bg border border-charcoal-700/50 hover:bg-charcoal-800/50 hover:border-charcoal-600/50 rounded transition-all active:scale-95 text-charcoal-300"
                       disabled={!product.available}
                     >
                       <Plus className="w-5 h-5" />
@@ -361,10 +361,10 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 </div>
 
                 {/* Total */}
-                <div className="bg-gray-50 rounded p-3 mb-4 border border-gray-100">
+                <div className="bg-theme-bg rounded p-3 mb-4 border border-charcoal-800/50">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-500 font-medium text-sm">Total Estimate:</span>
-                    <span className="text-xl font-bold text-blush-900">
+                    <span className="text-charcoal-400 font-medium text-sm">Total Estimate:</span>
+                    <span className="text-xl font-bold text-white">
                       ₱{(currentPrice * quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
                     </span>
                   </div>
@@ -387,7 +387,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 {/* Return to Shop Button */}
                 <button
                   onClick={onClose}
-                  className="w-full mt-3 py-3 text-sm md:text-base font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors flex items-center justify-center gap-2"
+                  className="w-full mt-3 py-3 text-sm md:text-base font-medium text-charcoal-400 hover:text-white hover:bg-charcoal-800/50 rounded transition-colors flex items-center justify-center gap-2"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Return to Shop

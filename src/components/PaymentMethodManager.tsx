@@ -121,25 +121,25 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
   if (currentView === 'add' || currentView === 'edit') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white">
-        <div className="bg-white shadow-md border-b border-navy-700/30">
+        <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 py-3 sm:py-0 sm:h-16">
               <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
                 <button
                   onClick={handleCancel}
-                  className="flex items-center space-x-1 sm:space-x-2 text-gray-700 hover:text-amber-600 transition-colors duration-200"
+                  className="flex items-center space-x-1 sm:space-x-2 text-charcoal-200 hover:text-amber-600 transition-colors duration-200"
                 >
                   <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                   <span className="text-sm sm:text-base">Back</span>
                 </button>
-                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-navy-900">
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
                   {currentView === 'add' ? 'Add Payment Method' : 'Edit Payment Method'}
                 </h1>
               </div>
               <div className="flex space-x-2 sm:space-x-3 w-full sm:w-auto">
                 <button
                   onClick={handleCancel}
-                  className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-200 flex items-center justify-center space-x-1 sm:space-x-2 text-sm sm:text-base"
+                  className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-charcoal-700/50 rounded-lg hover:bg-theme-bg transition-colors duration-200 flex items-center justify-center space-x-1 sm:space-x-2 text-sm sm:text-base"
                 >
                   <X className="h-4 w-4" />
                   <span className="hidden sm:inline">Cancel</span>
@@ -157,46 +157,46 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
         </div>
 
         <div className="max-w-2xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
-          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-navy-700/30 p-4 sm:p-6 md:p-8">
+          <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-700/50 p-4 sm:p-6 md:p-8">
             <div className="space-y-4 sm:space-y-6">
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">Payment Method Name *</label>
+                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Payment Method Name *</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-white"
                   placeholder="e.g., GCash, Maya, Bank Transfer"
                 />
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">Account Number/Phone *</label>
+                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Account Number/Phone *</label>
                 <input
                   type="text"
                   value={formData.account_number}
                   onChange={(e) => setFormData({ ...formData, account_number: e.target.value })}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-white"
                   placeholder="09XX XXX XXXX or Account: 1234-5678-9012"
                 />
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">Account Name *</label>
+                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Account Name *</label>
                 <input
                   type="text"
                   value={formData.account_name}
                   onChange={(e) => setFormData({ ...formData, account_name: e.target.value })}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-white"
                   placeholder="SLIMMETRY"
                 />
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">
                   QR Code Image (Optional)
                 </label>
-                <p className="text-xs text-gray-500 mb-2">
+                <p className="text-xs text-charcoal-400 mb-2">
                   Upload a QR code image or paste an image URL. If upload fails, you can use the URL input below.
                 </p>
                 <ImageUpload
@@ -224,15 +224,15 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
               </div>
 
               <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">Sort Order</label>
+                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Sort Order</label>
                 <input
                   type="number"
                   value={formData.sort_order}
                   onChange={(e) => setFormData({ ...formData, sort_order: Number(e.target.value) })}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-white"
                   placeholder="0"
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-charcoal-400 mt-1">
                   Lower numbers appear first in the checkout
                 </p>
               </div>
@@ -243,9 +243,9 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                     type="checkbox"
                     checked={formData.active}
                     onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                    className="w-4 h-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-charcoal-600/50 text-amber-600 focus:ring-amber-500 cursor-pointer"
                   />
-                  <span className="text-xs sm:text-sm font-medium text-gray-900">Active Payment Method</span>
+                  <span className="text-xs sm:text-sm font-medium text-white">Active Payment Method</span>
                 </label>
               </div>
             </div>
@@ -258,18 +258,18 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
   // List View
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white">
-      <div className="bg-white shadow-md border-b border-gray-200">
+      <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 py-3 sm:py-0 sm:h-16">
             <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
               <button
                 onClick={onBack}
-                className="flex items-center space-x-1 sm:space-x-2 text-gray-700 hover:text-amber-600 transition-colors duration-200"
+                className="flex items-center space-x-1 sm:space-x-2 text-charcoal-200 hover:text-amber-600 transition-colors duration-200"
               >
                 <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span className="text-sm sm:text-base">Dashboard</span>
               </button>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
                 Payment Methods
               </h1>
             </div>
@@ -285,17 +285,17 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
       </div>
 
       <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden">
+        <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-700/50 overflow-hidden">
           <div className="p-4 sm:p-6">
-            <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
               <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600" />
               Payment Methods
             </h2>
 
             {paymentMethods.length === 0 ? (
               <div className="text-center py-8">
-                <CreditCard className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-sm sm:text-base text-gray-500 mb-4">No payment methods found</p>
+                <CreditCard className="h-10 w-10 sm:h-12 sm:w-12 text-charcoal-500 mx-auto mb-4" />
+                <p className="text-sm sm:text-base text-charcoal-400 mb-4">No payment methods found</p>
                 <button
                   onClick={handleAddMethod}
                   className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl border border-gray-900/20 text-sm sm:text-base"
@@ -308,38 +308,38 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                 {paymentMethods.map((method) => (
                   <div
                     key={method.id}
-                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 p-3 sm:p-4 border-2 border-charcoal-700/50 rounded-lg hover:bg-theme-bg transition-all duration-200"
                   >
                     <div className="flex items-center space-x-3 sm:space-x-4 w-full sm:w-auto">
                       <div className="flex-shrink-0">
                         <img
                           src={method.qr_code_url}
                           alt={`${method.name} QR Code`}
-                          className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg border-2 border-gray-200 object-cover"
+                          className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg border-2 border-charcoal-700/50 object-cover"
                           onError={(e) => {
                             e.currentTarget.src = 'https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop';
                           }}
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-bold text-sm sm:text-base text-gray-900 mb-1">{method.name}</h3>
-                        <p className="text-xs sm:text-sm text-gray-600 truncate">{method.account_number}</p>
-                        <p className="text-xs sm:text-sm text-gray-500 truncate">Account: {method.account_name}</p>
-                        <p className="text-xs text-gray-400 mt-1">ID: {method.id} • Order: #{method.sort_order}</p>
+                        <h3 className="font-bold text-sm sm:text-base text-white mb-1">{method.name}</h3>
+                        <p className="text-xs sm:text-sm text-charcoal-300 truncate">{method.account_number}</p>
+                        <p className="text-xs sm:text-sm text-charcoal-400 truncate">Account: {method.account_name}</p>
+                        <p className="text-xs text-charcoal-500 mt-1">ID: {method.id} • Order: #{method.sort_order}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-end sm:justify-start">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${method.active
                         ? 'bg-green-100 text-green-800 border border-green-200'
-                        : 'bg-gray-100 text-gray-600 border border-gray-300'
+                        : 'bg-charcoal-800/50 text-charcoal-300 border border-charcoal-600/50'
                         }`}>
                         {method.active ? 'Active' : 'Inactive'}
                       </span>
 
                       <button
                         onClick={() => handleEditMethod(method)}
-                        className="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors duration-200 border border-blue-200"
+                        className="p-2 text-blue-600 hover:text-blue-700 hover:bg-charcoal-900/40 rounded-lg transition-colors duration-200 border border-blue-200"
                         aria-label="Edit"
                       >
                         <Edit className="h-4 w-4" />

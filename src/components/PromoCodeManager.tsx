@@ -127,7 +127,7 @@ const PromoCodeManager: React.FC = () => {
     return (
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                     <Tag className="w-6 h-6 text-teal-500" />
                     Promo Codes
                 </h2>
@@ -140,16 +140,16 @@ const PromoCodeManager: React.FC = () => {
                 </button>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="p-4 border-b border-gray-100 flex gap-4">
+            <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border border-charcoal-800/50 overflow-hidden">
+                <div className="p-4 border-b border-charcoal-800/50 flex gap-4">
                     <div className="relative flex-1">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-500" />
                         <input
                             type="text"
                             placeholder="Search by code..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent text-black"
+                            className="w-full pl-9 pr-4 py-2 border border-charcoal-700/50 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white"
                         />
                     </div>
                 </div>
@@ -157,12 +157,12 @@ const PromoCodeManager: React.FC = () => {
                 {/* Card-based layout */}
                 <div className="p-4 space-y-4">
                     {loading ? (
-                        <div className="p-8 text-center text-gray-500">Loading...</div>
+                        <div className="p-8 text-center text-charcoal-400">Loading...</div>
                     ) : filteredCodes.length === 0 ? (
-                        <div className="p-8 text-center text-gray-500">No promo codes found.</div>
+                        <div className="p-8 text-center text-charcoal-400">No promo codes found.</div>
                     ) : (
                         filteredCodes.map(code => (
-                            <div key={code.id} className="bg-gray-50 rounded-xl p-4 border border-gray-100 hover:border-gray-200 transition-colors">
+                            <div key={code.id} className="bg-theme-bg rounded-xl p-4 border border-charcoal-800/50 hover:border-charcoal-700/50 transition-colors">
                                 {/* Header Row - Code Name & Actions */}
                                 <div className="flex items-center justify-between mb-3">
                                     <h3 className="text-lg font-bold text-teal-600">{code.code}</h3>
@@ -190,7 +190,7 @@ const PromoCodeManager: React.FC = () => {
                                             : `₱${code.discount_value.toLocaleString()} OFF`}
                                     </span>
                                     {code.min_purchase_amount > 0 && (
-                                        <span className="ml-2 text-xs text-gray-500">
+                                        <span className="ml-2 text-xs text-charcoal-400">
                                             Min: ₱{code.min_purchase_amount.toLocaleString()}
                                         </span>
                                     )}
@@ -199,12 +199,12 @@ const PromoCodeManager: React.FC = () => {
                                 {/* Status, Usage, Expiry Row */}
                                 <div className="grid grid-cols-3 gap-4 text-sm">
                                     <div>
-                                        <p className="text-gray-400 text-xs uppercase font-medium mb-1">STATUS</p>
+                                        <p className="text-charcoal-500 text-xs uppercase font-medium mb-1">STATUS</p>
                                         <button
                                             onClick={() => toggleActive(code.id, code.active)}
                                             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${code.active
                                                 ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                                                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                                                : 'bg-gray-200 text-charcoal-300 hover:bg-gray-300'
                                                 }`}
                                         >
                                             {code.active ? <CheckCircle className="w-3.5 h-3.5" /> : <XCircle className="w-3.5 h-3.5" />}
@@ -212,12 +212,12 @@ const PromoCodeManager: React.FC = () => {
                                         </button>
                                     </div>
                                     <div>
-                                        <p className="text-gray-400 text-xs uppercase font-medium mb-1">USAGE</p>
-                                        <p className="font-semibold text-gray-700">{code.usage_count} / {code.usage_limit || '∞'}</p>
+                                        <p className="text-charcoal-500 text-xs uppercase font-medium mb-1">USAGE</p>
+                                        <p className="font-semibold text-charcoal-200">{code.usage_count} / {code.usage_limit || '∞'}</p>
                                     </div>
                                     <div>
-                                        <p className="text-gray-400 text-xs uppercase font-medium mb-1">EXPIRY</p>
-                                        <p className="font-semibold text-gray-700">
+                                        <p className="text-charcoal-500 text-xs uppercase font-medium mb-1">EXPIRY</p>
+                                        <p className="font-semibold text-charcoal-200">
                                             {code.end_date ? new Date(code.end_date).toLocaleDateString() : 'Never'}
                                         </p>
                                     </div>
@@ -231,23 +231,23 @@ const PromoCodeManager: React.FC = () => {
             {/* Edit/Create Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 animate-in fade-in zoom-in-95 duration-200">
+                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl shadow-xl w-full max-w-lg p-6 animate-in fade-in zoom-in-95 duration-200">
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-xl font-bold text-gray-900">
+                            <h3 className="text-xl font-bold text-white">
                                 {editingCode ? 'Edit Promo Code' : 'Create Promo Code'}
                             </h3>
-                            <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                            <button onClick={() => setIsModalOpen(false)} className="text-charcoal-500 hover:text-charcoal-300">
                                 <span className="text-2xl">&times;</span>
                             </button>
                         </div>
 
                         <form onSubmit={handleSave} className="space-y-4">
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Promo Code</label>
+                                <label className="block text-sm font-bold text-charcoal-200 mb-1">Promo Code</label>
                                 <input
                                     type="text"
                                     required
-                                    className="w-full px-4 py-2 border border-gray-200 rounded-lg uppercase placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent text-black"
+                                    className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg uppercase placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white"
                                     placeholder="e.g. SAVE100"
                                     value={formData.code}
                                     onChange={e => setFormData({ ...formData, code: e.target.value })}
@@ -256,9 +256,9 @@ const PromoCodeManager: React.FC = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-1">Type</label>
                                     <select
-                                        className="w-full px-4 py-2 border border-gray-200 rounded-lg bg-white text-black"
+                                        className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg bg-charcoal-900/40 backdrop-blur-md text-white"
                                         value={formData.discount_type}
                                         onChange={e => setFormData({ ...formData, discount_type: e.target.value as any })}
                                     >
@@ -267,12 +267,12 @@ const PromoCodeManager: React.FC = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-1">Value</label>
                                     <input
                                         type="number"
                                         required
                                         min="0"
-                                        className="w-full px-4 py-2 border border-gray-200 rounded-lg text-black"
+                                        className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg text-white"
                                         value={formData.discount_value}
                                         onChange={e => setFormData({ ...formData, discount_value: Number(e.target.value) })}
                                     />
@@ -281,21 +281,21 @@ const PromoCodeManager: React.FC = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Min. Purchase (₱)</label>
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-1">Min. Purchase (₱)</label>
                                     <input
                                         type="number"
                                         min="0"
-                                        className="w-full px-4 py-2 border border-gray-200 rounded-lg text-black"
+                                        className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg text-white"
                                         value={formData.min_purchase_amount}
                                         onChange={e => setFormData({ ...formData, min_purchase_amount: Number(e.target.value) })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Usage Limit</label>
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-1">Usage Limit</label>
                                     <input
                                         type="number"
                                         min="0"
-                                        className="w-full px-4 py-2 border border-gray-200 rounded-lg text-black"
+                                        className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg text-white"
                                         placeholder="No limit"
                                         value={formData.usage_limit || ''}
                                         onChange={e => setFormData({ ...formData, usage_limit: e.target.value ? Number(e.target.value) : undefined })}
@@ -304,10 +304,10 @@ const PromoCodeManager: React.FC = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Expiry Date</label>
                                 <input
                                     type="date"
-                                    className="w-full px-4 py-2 border border-gray-200 rounded-lg text-black"
+                                    className="w-full px-4 py-2 border border-charcoal-700/50 rounded-lg text-white"
                                     value={formData.end_date ? formData.end_date.split('T')[0] : ''}
                                     onChange={e => setFormData({ ...formData, end_date: e.target.value ? new Date(e.target.value).toISOString() : undefined })}
                                 />
@@ -317,7 +317,7 @@ const PromoCodeManager: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg font-medium transition-colors"
+                                    className="px-4 py-2 text-charcoal-300 hover:bg-charcoal-800/50 rounded-lg font-medium transition-colors"
                                 >
                                     Cancel
                                 </button>

@@ -81,24 +81,24 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white">
             {/* Header */}
-            <div className="bg-white shadow-md border-b border-navy-700/30">
+            <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
                 <div className="max-w-4xl mx-auto px-3 sm:px-4">
                     <div className="flex items-center justify-between h-12 md:h-14">
                         <div className="flex items-center space-x-2">
                             <button
                                 onClick={onBack}
-                                className="text-gray-700 hover:text-gold-600 transition-colors flex items-center gap-1 group"
+                                className="text-charcoal-200 hover:text-gold-600 transition-colors flex items-center gap-1 group"
                             >
                                 <span className="text-xs md:text-sm">← Dashboard</span>
                             </button>
-                            <h1 className="text-sm md:text-base font-bold text-navy-900 flex items-center gap-2">
+                            <h1 className="text-sm md:text-base font-bold text-white flex items-center gap-2">
                                 <MapPin className="w-4 h-4 text-gold-500" />
                                 Shipping Locations
                             </h1>
                         </div>
                         <button
                             onClick={() => setIsAdding(true)}
-                            className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-black px-3 py-1.5 rounded-md font-medium text-xs shadow-sm flex items-center gap-1"
+                            className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-3 py-1.5 rounded-md font-medium text-xs shadow-sm flex items-center gap-1"
                         >
                             <Plus className="w-3 h-3" />
                             Add New
@@ -118,7 +118,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
 
                 {/* Database Setup Info */}
                 {locations.length === 0 && !error && (
-                    <div className="mb-4 bg-blue-50 border border-blue-200 rounded-xl p-4">
+                    <div className="mb-4 bg-charcoal-900/40 border border-blue-200 rounded-xl p-4">
                         <h4 className="font-medium text-blue-900 mb-2">💡 Database Setup</h4>
                         <p className="text-sm text-blue-700">
                             To enable shipping location management, run the migration file:
@@ -131,36 +131,36 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
 
                 {/* Add New Form */}
                 {isAdding && (
-                    <div className="mb-4 bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                        <h3 className="font-semibold text-gray-900 mb-3">Add New Shipping Location</h3>
+                    <div className="mb-4 bg-charcoal-900/40 backdrop-blur-md border border-charcoal-700/50 rounded-xl p-4 shadow-sm">
+                        <h3 className="font-semibold text-white mb-3">Add New Shipping Location</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">ID (e.g., CEBU)</label>
+                                <label className="block text-xs font-medium text-charcoal-200 mb-1">ID (e.g., CEBU)</label>
                                 <input
                                     type="text"
                                     value={newLocation.id}
                                     onChange={(e) => setNewLocation({ ...newLocation, id: e.target.value.toUpperCase() })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-sm text-white"
                                     placeholder="LOCATION_ID"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Display Name</label>
+                                <label className="block text-xs font-medium text-charcoal-200 mb-1">Display Name</label>
                                 <input
                                     type="text"
                                     value={newLocation.name}
                                     onChange={(e) => setNewLocation({ ...newLocation, name: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-sm text-white"
                                     placeholder="Location Name"
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Fee (₱)</label>
+                                <label className="block text-xs font-medium text-charcoal-200 mb-1">Fee (₱)</label>
                                 <input
                                     type="number"
                                     value={newLocation.fee}
                                     onChange={(e) => setNewLocation({ ...newLocation, fee: Number(e.target.value) })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-sm text-white"
                                     min={0}
                                 />
                             </div>
@@ -174,7 +174,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                             </button>
                             <button
                                 onClick={() => { setIsAdding(false); setSaveError(null); }}
-                                className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium"
+                                className="bg-charcoal-800/50 text-charcoal-200 px-4 py-2 rounded-lg text-sm font-medium"
                             >
                                 Cancel
                             </button>
@@ -187,27 +187,27 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                     {locations.map((location) => (
                         <div
                             key={location.id}
-                            className={`bg-white border rounded-xl p-4 shadow-sm transition-all ${location.is_active ? 'border-gray-200' : 'border-red-200 bg-red-50/30'
+                            className={`bg-charcoal-900/40 backdrop-blur-md border rounded-xl p-4 shadow-sm transition-all ${location.is_active ? 'border-charcoal-700/50' : 'border-red-200 bg-red-50/30'
                                 }`}
                         >
                             {editingId === location.id ? (
                                 <div className="flex flex-col md:flex-row gap-3">
                                     <div className="flex-1">
-                                        <label className="block text-xs font-medium text-gray-700 mb-1">Name</label>
+                                        <label className="block text-xs font-medium text-charcoal-200 mb-1">Name</label>
                                         <input
                                             type="text"
                                             value={editName}
                                             onChange={(e) => setEditName(e.target.value)}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                                            className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-sm text-white"
                                         />
                                     </div>
                                     <div className="w-32">
-                                        <label className="block text-xs font-medium text-gray-700 mb-1">Fee (₱)</label>
+                                        <label className="block text-xs font-medium text-charcoal-200 mb-1">Fee (₱)</label>
                                         <input
                                             type="number"
                                             value={editFee}
                                             onChange={(e) => setEditFee(Number(e.target.value))}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                                            className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-sm text-white"
                                             min={0}
                                         />
                                     </div>
@@ -220,7 +220,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                         </button>
                                         <button
                                             onClick={handleCancel}
-                                            className="p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+                                            className="p-2 bg-gray-200 text-charcoal-200 rounded-lg hover:bg-gray-300"
                                         >
                                             <X className="w-4 h-4" />
                                         </button>
@@ -231,7 +231,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                     <div className="flex items-center gap-4">
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-mono">
+                                                <span className="text-xs px-2 py-0.5 rounded bg-charcoal-800/50 text-charcoal-300 font-mono">
                                                     {location.id}
                                                 </span>
                                                 {!location.is_active && (
@@ -240,7 +240,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="font-medium text-gray-900 mt-1">{location.name}</p>
+                                            <p className="font-medium text-white mt-1">{location.name}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
@@ -252,7 +252,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                                 onClick={() => handleToggleActive(location)}
                                                 className={`p-2 rounded-lg transition-colors ${location.is_active
                                                     ? 'text-green-600 hover:bg-green-50'
-                                                    : 'text-gray-400 hover:bg-gray-100'
+                                                    : 'text-charcoal-500 hover:bg-charcoal-800/50'
                                                     }`}
                                                 title={location.is_active ? 'Disable' : 'Enable'}
                                             >
@@ -260,7 +260,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                             </button>
                                             <button
                                                 onClick={() => handleEdit(location)}
-                                                className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                                                className="p-2 text-blue-600 hover:bg-charcoal-900/40 rounded-lg"
                                             >
                                                 <Edit2 className="w-4 h-4" />
                                             </button>
@@ -279,9 +279,9 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                 </div>
 
                 {/* Info */}
-                <div className="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-4">
-                    <h4 className="font-medium text-gray-900 mb-2">ℹ️ How it works</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
+                <div className="mt-6 bg-theme-bg border border-charcoal-700/50 rounded-xl p-4">
+                    <h4 className="font-medium text-white mb-2">ℹ️ How it works</h4>
+                    <ul className="text-sm text-charcoal-300 space-y-1">
                         <li>• Changes to shipping fees take effect immediately on the checkout page</li>
                         <li>• Disabled locations won't appear in checkout</li>
                         <li>• The ID is used internally (e.g., NCR, LUZON)</li>

@@ -210,21 +210,21 @@ export default function GuideManager() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-white shadow-md border-b border-gray-200">
+            <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
                 <div className="max-w-6xl mx-auto px-4">
                     <div className="flex items-center justify-between h-14">
                         <div className="flex items-center space-x-2">
                             <a
                                 href="/admin"
-                                className="text-gray-700 hover:text-theme-accent transition-colors flex items-center gap-1 group"
+                                className="text-charcoal-200 hover:text-theme-accent transition-colors flex items-center gap-1 group"
                             >
                                 <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                                 <span className="text-sm">Dashboard</span>
                             </a>
-                            <span className="text-gray-400">•</span>
-                            <h1 className="text-base font-bold text-navy-900">Article Manager</h1>
+                            <span className="text-charcoal-500">•</span>
+                            <h1 className="text-base font-bold text-white">Article Manager</h1>
                         </div>
                         <button
                             onClick={() => openModal()}
@@ -239,13 +239,13 @@ export default function GuideManager() {
 
             <div className="max-w-6xl mx-auto px-4 py-6">
                 <div className="mb-4">
-                    <p className="text-gray-700 text-sm">
+                    <p className="text-charcoal-200 text-sm">
                         Create and manage educational articles. Only enabled articles are visible to customers.
                     </p>
                 </div>
 
                 {articles.length === 0 ? (
-                    <div className="bg-white rounded-2xl p-12 text-center shadow-lg">
+                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-12 text-center shadow-lg">
                         <FileText className="w-16 h-16 text-theme-secondary mx-auto mb-4 opacity-50" />
                         <h3 className="text-xl font-semibold text-theme-text mb-2">
                             No Articles Yet
@@ -266,12 +266,12 @@ export default function GuideManager() {
                         {articles.map((article) => (
                             <div
                                 key={article.id}
-                                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200"
+                                className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-md overflow-hidden border border-charcoal-700/50"
                             >
                                 <div className="p-4">
                                     <div className="flex items-start justify-between gap-4">
                                         <div className="flex items-start gap-3 flex-1 min-w-0">
-                                            <GripVertical className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
+                                            <GripVertical className="w-5 h-5 text-charcoal-500 mt-1 flex-shrink-0" />
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-3 mb-2">
                                                     <h3 className="text-base font-semibold text-theme-text truncate">
@@ -279,17 +279,17 @@ export default function GuideManager() {
                                                     </h3>
                                                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0 ${article.is_enabled
                                                         ? 'bg-green-100 text-green-700'
-                                                        : 'bg-gray-100 text-gray-700'
+                                                        : 'bg-charcoal-800/50 text-charcoal-200'
                                                         }`}>
                                                         {article.is_enabled ? 'Published' : 'Draft'}
                                                     </span>
                                                 </div>
                                                 {article.preview && (
-                                                    <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+                                                    <p className="text-sm text-charcoal-300 line-clamp-2 mb-2">
                                                         {article.preview}
                                                     </p>
                                                 )}
-                                                <div className="flex items-center gap-3 text-xs text-gray-500">
+                                                <div className="flex items-center gap-3 text-xs text-charcoal-400">
                                                     <span>By {article.author}</span>
                                                     <span>•</span>
                                                     <span>{new Date(article.published_date).toLocaleDateString()}</span>
@@ -301,13 +301,13 @@ export default function GuideManager() {
                                         <div className="flex items-center gap-1 flex-shrink-0">
                                             <button
                                                 onClick={() => toggleEnabled(article.id, article.is_enabled)}
-                                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                                                className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors"
                                                 title={article.is_enabled ? 'Unpublish' : 'Publish'}
                                             >
                                                 {article.is_enabled ? (
                                                     <Eye className="w-4 h-4 text-green-600" />
                                                 ) : (
-                                                    <EyeOff className="w-4 h-4 text-gray-400" />
+                                                    <EyeOff className="w-4 h-4 text-charcoal-500" />
                                                 )}
                                             </button>
                                             <button
@@ -336,15 +336,15 @@ export default function GuideManager() {
             {/* Modal */}
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-                    <div className="bg-white rounded-2xl max-w-4xl w-full shadow-2xl my-8">
-                        <div className="p-6 border-b border-gray-200 sticky top-0 bg-white z-10 rounded-t-2xl">
+                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl max-w-4xl w-full shadow-2xl my-8">
+                        <div className="p-6 border-b border-charcoal-700/50 sticky top-0 bg-charcoal-900/40 backdrop-blur-md z-10 rounded-t-2xl">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-2xl font-bold text-theme-text">
                                     {editingArticle ? 'Edit Article' : 'Create New Article'}
                                 </h3>
                                 <button
                                     onClick={closeModal}
-                                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                                    className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -354,21 +354,21 @@ export default function GuideManager() {
                         <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
                             {/* Article Title */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                     Article Title *
                                 </label>
                                 <input
                                     type="text"
                                     value={modalData.title}
                                     onChange={(e) => setModalData({ ...modalData, title: e.target.value })}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-gray-900"
+                                    className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-white"
                                     placeholder="e.g., Understanding Weight Loss Plateaus and How to Overcome Them"
                                 />
                             </div>
 
                             {/* Cover Image */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                     Cover Image (Hero Banner)
                                 </label>
                                 <ImageUpload
@@ -380,7 +380,7 @@ export default function GuideManager() {
 
                             {/* Preview Text */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                     Preview Text (shown on article cards)
                                 </label>
                                 <textarea
@@ -388,27 +388,27 @@ export default function GuideManager() {
                                     onChange={(e) => setModalData({ ...modalData, preview: e.target.value })}
                                     rows={2}
                                     maxLength={150}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-sm text-gray-900"
+                                    className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-sm text-white"
                                     placeholder="Short 1-2 line preview (max 150 characters)"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">
+                                <p className="text-xs text-charcoal-400 mt-1">
                                     {modalData.preview.length}/150 characters
                                 </p>
                             </div>
 
                             {/* Article Content */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                     Article Content *
                                 </label>
                                 <textarea
                                     value={modalData.content}
                                     onChange={(e) => setModalData({ ...modalData, content: e.target.value })}
                                     rows={15}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent font-mono text-sm text-gray-900"
+                                    className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent font-mono text-sm text-white"
                                     placeholder="Write your full article content here. Use line breaks for paragraphs."
                                 />
-                                <p className="text-xs text-gray-500 mt-2">
+                                <p className="text-xs text-charcoal-400 mt-2">
                                     💡 Tip: Use line breaks to separate paragraphs. Your formatting will be preserved.
                                 </p>
                             </div>
@@ -416,42 +416,42 @@ export default function GuideManager() {
                             {/* Metadata Row */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                         Author
                                     </label>
                                     <input
                                         type="text"
                                         value={modalData.author}
                                         onChange={(e) => setModalData({ ...modalData, author: e.target.value })}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-gray-900"
+                                        className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-white"
                                     />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                         Published Date
                                     </label>
                                     <input
                                         type="date"
                                         value={modalData.published_date}
                                         onChange={(e) => setModalData({ ...modalData, published_date: e.target.value })}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-gray-900"
+                                        className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-white"
                                     />
                                 </div>
                             </div>
 
                             {/* Display Order */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-2">
                                     Display Order
                                 </label>
                                 <input
                                     type="number"
                                     value={modalData.display_order}
                                     onChange={(e) => setModalData({ ...modalData, display_order: parseInt(e.target.value) || 0 })}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-gray-900"
+                                    className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-theme-accent focus:border-transparent text-white"
                                 />
-                                <p className="text-xs text-gray-500 mt-1">
+                                <p className="text-xs text-charcoal-400 mt-1">
                                     Lower numbers appear first in the article list
                                 </p>
                             </div>
@@ -465,16 +465,16 @@ export default function GuideManager() {
                                     onChange={(e) => setModalData({ ...modalData, is_enabled: e.target.checked })}
                                     className="w-5 h-5 text-theme-accent rounded focus:ring-2 focus:ring-theme-accent"
                                 />
-                                <label htmlFor="is_enabled" className="text-sm font-medium text-gray-700">
+                                <label htmlFor="is_enabled" className="text-sm font-medium text-charcoal-200">
                                     Publish this article (make visible to customers)
                                 </label>
                             </div>
                         </div>
 
-                        <div className="p-6 border-t border-gray-200 flex justify-end gap-3 bg-gray-50 rounded-b-2xl">
+                        <div className="p-6 border-t border-charcoal-700/50 flex justify-end gap-3 bg-theme-bg rounded-b-2xl">
                             <button
                                 onClick={closeModal}
-                                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                                className="px-6 py-2 border border-charcoal-600/50 text-charcoal-200 rounded-lg font-medium hover:bg-theme-bg transition-colors"
                             >
                                 Cancel
                             </button>

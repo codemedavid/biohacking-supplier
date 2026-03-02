@@ -10,10 +10,10 @@ const categoryIcons: { [key: string]: React.ReactElement } = {
 };
 
 const categoryColors: { [key: string]: string } = {
-    'PRODUCT & USAGE': 'text-black border-navy-900 bg-gold-50/50',
-    'ORDERING & PACKAGING': 'text-black border-navy-900 bg-gold-50/50',
-    'PAYMENT METHODS': 'text-black border-navy-900 bg-gold-50/50',
-    'SHIPPING & DELIVERY': 'text-black border-navy-900 bg-gold-50/50',
+    'PRODUCT & USAGE': 'text-white border-charcoal-700/50 bg-charcoal-800/40',
+    'ORDERING & PACKAGING': 'text-white border-charcoal-700/50 bg-charcoal-800/40',
+    'PAYMENT METHODS': 'text-white border-charcoal-700/50 bg-charcoal-800/40',
+    'SHIPPING & DELIVERY': 'text-white border-charcoal-700/50 bg-charcoal-800/40',
 };
 
 const FAQ: React.FC = () => {
@@ -42,27 +42,27 @@ const FAQ: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="animate-spin w-8 h-8 border-2 border-navy-900 border-t-transparent rounded-full" />
+            <div className="min-h-screen bg-theme-bg flex items-center justify-center">
+                <div className="animate-spin w-8 h-8 border-2 border-charcoal-700/50 border-t-transparent rounded-full" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-white border-b-4 border-navy-900 sticky top-0 z-10 shadow-sm">
+            <div className="bg-charcoal-900/40 backdrop-blur-md border-b-4 border-charcoal-700/50 sticky top-0 z-10 shadow-sm">
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center gap-4">
                         <a
                             href="/"
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors group"
+                            className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors group"
                         >
-                            <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-navy-900" />
+                            <ArrowLeft className="w-5 h-5 text-charcoal-300 group-hover:text-white" />
                         </a>
                         <div className="flex items-center gap-2">
-                            <HelpCircle className="w-6 h-6 text-black" />
-                            <h1 className="text-xl md:text-2xl font-bold text-black">Frequently Asked Questions</h1>
+                            <HelpCircle className="w-6 h-6 text-white" />
+                            <h1 className="text-xl md:text-2xl font-bold text-white">Frequently Asked Questions</h1>
                         </div>
                     </div>
                 </div>
@@ -74,8 +74,8 @@ const FAQ: React.FC = () => {
                     <button
                         onClick={() => setActiveCategory(null)}
                         className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all border shadow-sm ${activeCategory === null
-                            ? 'bg-navy-900 text-black border-navy-900 shadow-md transform scale-105'
-                            : 'bg-white text-black border-navy-900 hover:bg-navy-50'
+                            ? 'bg-charcoal-800 text-white border-charcoal-700/50 shadow-md transform scale-105'
+                            : 'bg-charcoal-900/40 backdrop-blur-md text-white border-charcoal-700/50 hover:bg-charcoal-800/40'
                             }`}
                     >
                         All
@@ -85,11 +85,11 @@ const FAQ: React.FC = () => {
                             key={category}
                             onClick={() => setActiveCategory(category)}
                             className={`px-4 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all flex items-center gap-2 border shadow-sm ${activeCategory === category
-                                ? 'bg-navy-900 text-white border-navy-900 shadow-md transform scale-105'
-                                : 'bg-white text-black border-navy-900 hover:bg-navy-50 hover:text-black'
+                                ? 'bg-charcoal-800 text-white border-charcoal-700/50 shadow-md transform scale-105'
+                                : 'bg-charcoal-900/40 backdrop-blur-md text-white border-charcoal-700/50 hover:bg-charcoal-800/40 hover:text-white'
                                 }`}
                         >
-                            <span className={activeCategory === category ? 'text-black' : 'text-black'}>
+                            <span className={activeCategory === category ? 'text-white' : 'text-white'}>
                                 {categoryIcons[category]}
                             </span>
                             {category}
@@ -101,11 +101,11 @@ const FAQ: React.FC = () => {
                 {(activeCategory ? [activeCategory] : categories).map(category => (
                     <div key={category} className="mb-10">
                         {/* Section Header */}
-                        <div className="flex items-center gap-3 mb-6 px-4 py-3 rounded-lg border border-navy-900 bg-white shadow-sm w-full">
-                            <span className="text-black">
+                        <div className="flex items-center gap-3 mb-6 px-4 py-3 rounded-lg border border-charcoal-700/50 bg-charcoal-900/40 backdrop-blur-md shadow-sm w-full">
+                            <span className="text-white">
                                 {categoryIcons[category] || <HelpCircle className="w-5 h-5" />}
                             </span>
-                            <h2 className="font-bold text-sm md:text-base uppercase tracking-wide text-black">{category}</h2>
+                            <h2 className="font-bold text-sm md:text-base uppercase tracking-wide text-white">{category}</h2>
                         </div>
 
                         <div className="space-y-4">
@@ -114,25 +114,25 @@ const FAQ: React.FC = () => {
                                 .map(faq => (
                                     <div
                                         key={faq.id}
-                                        className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200"
+                                        className="bg-charcoal-900/40 backdrop-blur-md rounded-xl border border-charcoal-800/50 shadow-sm hover:shadow-md transition-all duration-200"
                                     >
                                         <button
                                             onClick={() => toggleItem(faq.id)}
                                             className="w-full px-6 py-5 flex items-start justify-between text-left group gap-4"
                                         >
-                                            <span className="font-bold text-black text-base md:text-lg group-hover:text-black transition-colors leading-snug">
+                                            <span className="font-bold text-white text-base md:text-lg group-hover:text-white transition-colors leading-snug">
                                                 {faq.question}
                                             </span>
                                             {openItems.has(faq.id) ? (
-                                                <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" />
+                                                <ChevronUp className="w-5 h-5 text-charcoal-500 flex-shrink-0 mt-1" />
                                             ) : (
-                                                <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-navy-900 flex-shrink-0 transition-colors mt-1" />
+                                                <ChevronDown className="w-5 h-5 text-charcoal-500 group-hover:text-white flex-shrink-0 transition-colors mt-1" />
                                             )}
                                         </button>
                                         {openItems.has(faq.id) && (
                                             <div className="px-6 pb-6 pt-0">
-                                                <div className="h-px w-full bg-gray-100 mb-4"></div>
-                                                <p className="text-black whitespace-pre-line leading-relaxed text-base">
+                                                <div className="h-px w-full bg-charcoal-800/50 mb-4"></div>
+                                                <p className="text-white whitespace-pre-line leading-relaxed text-base">
                                                     {faq.answer}
                                                 </p>
                                             </div>
@@ -144,11 +144,11 @@ const FAQ: React.FC = () => {
                 ))}
 
                 {/* Contact CTA */}
-                <div className="mt-12 bg-white rounded-2xl border border-navy-900/30 p-6 md:p-8 text-center shadow-lg">
-                    <h3 className="text-lg md:text-xl font-bold text-black mb-2">
+                <div className="mt-12 bg-charcoal-900/40 backdrop-blur-md rounded-2xl border border-charcoal-700/50 p-6 md:p-8 text-center shadow-lg">
+                    <h3 className="text-lg md:text-xl font-bold text-white mb-2">
                         Still have questions?
                     </h3>
-                    <p className="text-black mb-6">
+                    <p className="text-white mb-6">
                         We're here to help! Reach out to us via Viber or WhatsApp for quick assistance.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

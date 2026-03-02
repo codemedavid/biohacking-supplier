@@ -17,8 +17,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ activeCategory, onCategoryClick }
             key={category.id}
             onClick={() => onCategoryClick(category.id)}
             className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 ${activeCategory === category.id
-                ? 'bg-white text-black shadow-glow'
-                : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10 hover:text-white'
+                ? 'bg-charcoal-900/40 backdrop-blur-md text-white shadow-glow'
+                : 'bg-charcoal-900/5 text-charcoal-500 border border-white/10 hover:bg-charcoal-900/10 hover:text-white'
               }`}
           >
             {category.name}

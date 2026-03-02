@@ -80,7 +80,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
           <div className="mb-10 flex flex-col sm:flex-row gap-4">
             {/* Search Bar */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-charcoal-500 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search catalog..."
@@ -91,12 +91,12 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
             </div>
 
             {/* Sort Dropdown */}
-            <div className="flex items-center gap-3 sm:w-auto bg-white rounded-lg px-4 py-3 border border-gray-200">
-              <Filter className="text-gray-400 w-5 h-5" />
+            <div className="flex items-center gap-3 sm:w-auto bg-charcoal-900/40 backdrop-blur-md rounded-lg px-4 py-3 border border-charcoal-700/50">
+              <Filter className="text-charcoal-500 w-5 h-5" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'name' | 'price' | 'purity')}
-                className="focus:outline-none bg-transparent font-medium text-gray-700 text-sm"
+                className="focus:outline-none bg-transparent font-medium text-charcoal-200 text-sm"
               >
                 <option value="name">Sort by Name</option>
                 <option value="price">Sort by Price</option>
@@ -107,8 +107,8 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
 
           {/* Results Count */}
           <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-xl font-heading font-bold text-science-blue-900">Product Catalog</h2>
-            <span className="text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+            <h2 className="text-xl font-heading font-bold text-white">Product Catalog</h2>
+            <span className="text-sm font-medium text-charcoal-400 bg-theme-bg px-3 py-1 rounded-full border border-charcoal-800/50">
               {sortedProducts.length} Results
             </span>
           </div>
@@ -116,12 +116,12 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
           {/* Products Grid */}
           {sortedProducts.length === 0 ? (
             <div className="text-center py-20">
-              <div className="bg-white rounded-lg shadow-sm p-12 max-w-md mx-auto border border-gray-100">
-                <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="bg-charcoal-900/40 backdrop-blur-md rounded-lg shadow-sm p-12 max-w-md mx-auto border border-charcoal-800/50">
+                <div className="bg-theme-bg w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Package className="w-10 h-10 text-gray-300" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
-                <p className="text-gray-500 mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">No products found</h3>
+                <p className="text-charcoal-400 mb-6">
                   {searchQuery
                     ? `No products match "${searchQuery}".`
                     : 'No products available.'}
@@ -129,7 +129,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems }) => {
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="text-science-blue-600 font-semibold hover:underline"
+                    className="text-glow-teal-400 font-semibold hover:underline"
                   >
                     Clear Search
                   </button>

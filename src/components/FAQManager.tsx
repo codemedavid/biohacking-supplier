@@ -105,21 +105,21 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                     {onBack && (
                         <button
                             onClick={onBack}
-                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors mr-2"
+                            className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors mr-2"
                             title="Go Back"
                         >
-                            <ArrowLeft className="w-6 h-6 text-gray-600" />
+                            <ArrowLeft className="w-6 h-6 text-charcoal-300" />
                         </button>
                     )}
-                    <HelpCircle className="w-6 h-6 text-navy-900" />
-                    <h2 className="text-xl font-bold text-navy-900">FAQ Management</h2>
+                    <HelpCircle className="w-6 h-6 text-white" />
+                    <h2 className="text-xl font-bold text-white">FAQ Management</h2>
                 </div>
                 <button
                     onClick={() => {
                         resetForm();
                         setIsAdding(true);
                     }}
-                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-navy-900 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
+                    className="w-full md:w-auto flex items-center justify-center gap-2 bg-charcoal-800 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
                 >
                     <Plus className="w-4 h-4" />
                     Add FAQ
@@ -134,15 +134,15 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
 
             {/* Add/Edit Form */}
             {isAdding && (
-                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                <div className="bg-charcoal-900/40 backdrop-blur-md border border-charcoal-700/50 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-semibold text-gray-900">
+                        <h3 className="font-semibold text-white">
                             {editingId ? 'Edit FAQ' : 'Add New FAQ'}
                         </h3>
                         <button
                             type="button"
                             onClick={saveFAQ}
-                            className="flex items-center gap-2 bg-navy-900 text-white px-3 py-1.5 rounded-lg hover:bg-navy-800 transition-colors text-sm shadow-sm"
+                            className="flex items-center gap-2 bg-charcoal-800 text-white px-3 py-1.5 rounded-lg hover:bg-navy-800 transition-colors text-sm shadow-sm"
                         >
                             <Save className="w-4 h-4" />
                             Save
@@ -150,26 +150,26 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                     </div>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-charcoal-200 mb-1">
                                 Question *
                             </label>
                             <input
                                 type="text"
                                 value={formData.question}
                                 onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-gray-900"
+                                className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-white"
                                 placeholder="Enter the question"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-charcoal-200 mb-1">
                                 Answer *
                             </label>
                             <textarea
                                 value={formData.answer}
                                 onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-gray-900"
+                                className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-white"
                                 placeholder="Enter the answer (supports line breaks)"
                                 rows={5}
                                 required
@@ -177,13 +177,13 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">
                                     Category *
                                 </label>
                                 <select
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-gray-900"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-white"
                                 >
                                     {categories.map((cat) => (
                                         <option key={cat} value={cat}>
@@ -193,14 +193,14 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                <label className="block text-sm font-medium text-charcoal-200 mb-1">
                                     Order
                                 </label>
                                 <input
                                     type="number"
                                     value={formData.order_index}
                                     onChange={(e) => setFormData({ ...formData, order_index: parseInt(e.target.value) })}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-gray-900"
+                                    className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-navy-900 focus:border-transparent text-white"
                                     min={1}
                                 />
                             </div>
@@ -211,16 +211,16 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                 id="is_active"
                                 checked={formData.is_active}
                                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                                className="w-4 h-4 rounded border-gray-300 text-navy-900 focus:ring-navy-900"
+                                className="w-4 h-4 rounded border-charcoal-600/50 text-white focus:ring-navy-900"
                             />
-                            <label htmlFor="is_active" className="text-sm text-gray-700">
+                            <label htmlFor="is_active" className="text-sm text-charcoal-200">
                                 Active (visible on website)
                             </label>
                         </div>
                         <div className="flex gap-3">
                             <button
                                 type="submit"
-                                className="flex items-center gap-2 bg-navy-900 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
+                                className="flex items-center gap-2 bg-charcoal-800 text-white px-4 py-2 rounded-lg hover:bg-navy-800 transition-colors shadow-sm"
                             >
                                 <Save className="w-4 h-4" />
                                 {editingId ? 'Update FAQ' : 'Save FAQ'}
@@ -228,7 +228,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                             <button
                                 type="button"
                                 onClick={resetForm}
-                                className="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                                className="flex items-center gap-2 bg-charcoal-800/50 text-charcoal-200 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                             >
                                 <X className="w-4 h-4" />
                                 Cancel
@@ -241,10 +241,10 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
             {/* FAQ List */}
             <div className="space-y-12">
                 {faqs.length === 0 ? (
-                    <div className="text-center py-16 bg-white rounded-xl border border-gray-200 border-dashed">
+                    <div className="text-center py-16 bg-charcoal-900/40 backdrop-blur-md rounded-xl border border-charcoal-700/50 border-dashed">
                         <HelpCircle className="w-16 h-16 text-gray-300 mx-auto mb-6" />
-                        <p className="text-gray-500 text-lg">No FAQs found. Add your first FAQ above.</p>
-                        <p className="text-sm text-gray-400 mt-2">
+                        <p className="text-charcoal-400 text-lg">No FAQs found. Add your first FAQ above.</p>
+                        <p className="text-sm text-charcoal-500 mt-2">
                             Note: If the FAQs table doesn't exist in Supabase, default FAQs will be shown on the website.
                         </p>
                     </div>
@@ -256,41 +256,41 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                         return (
                             <div key={category}>
                                 {/* Section Header */}
-                                <div className="flex items-center gap-3 mb-8 px-5 py-4 rounded-lg border border-navy-900 bg-white shadow-sm w-full">
+                                <div className="flex items-center gap-3 mb-8 px-5 py-4 rounded-lg border border-charcoal-700/50 bg-charcoal-900/40 backdrop-blur-md shadow-sm w-full">
                                     <HelpCircle className="w-6 h-6 text-gold-500" />
-                                    <h2 className="font-bold text-base md:text-lg uppercase tracking-wide text-navy-900">{category}</h2>
+                                    <h2 className="font-bold text-base md:text-lg uppercase tracking-wide text-white">{category}</h2>
                                 </div>
 
                                 <div className="space-y-6">
                                     {categoryFAQs.map((faq) => (
                                         <div
                                             key={faq.id}
-                                            className={`bg-white rounded-xl border shadow-sm hover:shadow-md transition-all duration-200 ${faq.is_active ? 'border-gray-100' : 'border-red-200 bg-red-50/10'}`}
+                                            className={`bg-charcoal-900/40 backdrop-blur-md rounded-xl border shadow-sm hover:shadow-md transition-all duration-200 ${faq.is_active ? 'border-charcoal-800/50' : 'border-red-200 bg-red-50/10'}`}
                                         >
                                             <div className="px-5 py-5 md:px-8 md:py-6 flex flex-col md:flex-row items-start justify-between gap-4 md:gap-6">
                                                 <div className="flex-1 w-full">
                                                     <div className="flex items-center gap-3 mb-3">
-                                                        <span className="text-sm font-mono text-gray-400">#{faq.order_index}</span>
+                                                        <span className="text-sm font-mono text-charcoal-500">#{faq.order_index}</span>
                                                         {!faq.is_active && (
                                                             <span className="text-xs px-2.5 py-1 rounded-full bg-red-100 text-red-600 font-medium">
                                                                 Hidden
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <h3 className="font-bold text-navy-900 text-lg md:text-xl leading-snug mb-3">
+                                                    <h3 className="font-bold text-white text-lg md:text-xl leading-snug mb-3">
                                                         {faq.question}
                                                     </h3>
-                                                    <p className="text-gray-600 whitespace-pre-line leading-relaxed text-base md:text-lg">
+                                                    <p className="text-charcoal-300 whitespace-pre-line leading-relaxed text-base md:text-lg">
                                                         {faq.answer}
                                                     </p>
                                                 </div>
 
-                                                <div className="flex items-center gap-2 flex-shrink-0 w-full md:w-auto justify-end md:ml-6 md:self-start border-t md:border-t-0 border-gray-100 pt-4 md:pt-0 mt-2 md:mt-0">
+                                                <div className="flex items-center gap-2 flex-shrink-0 w-full md:w-auto justify-end md:ml-6 md:self-start border-t md:border-t-0 border-charcoal-800/50 pt-4 md:pt-0 mt-2 md:mt-0">
                                                     <button
                                                         onClick={() => toggleActive(faq)}
                                                         className={`p-2.5 rounded-lg transition-colors ${faq.is_active
                                                             ? 'text-green-600 hover:bg-green-50'
-                                                            : 'text-gray-400 hover:bg-gray-100'
+                                                            : 'text-charcoal-500 hover:bg-charcoal-800/50'
                                                             }`}
                                                         title={faq.is_active ? 'Hide FAQ' : 'Show FAQ'}
                                                     >
@@ -302,7 +302,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
                                                     </button>
                                                     <button
                                                         onClick={() => handleEdit(faq)}
-                                                        className="p-2.5 text-navy-900 hover:bg-navy-50 rounded-lg transition-colors"
+                                                        className="p-2.5 text-white hover:bg-charcoal-800/40 rounded-lg transition-colors"
                                                         title="Edit FAQ"
                                                     >
                                                         <Edit2 className="w-5 h-5" />
@@ -326,7 +326,7 @@ const FAQManager: React.FC<FAQManagerProps> = ({ onBack }) => {
             </div>
 
             {/* Info Box */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="bg-charcoal-900/40 border border-blue-200 rounded-xl p-4">
                 <h4 className="font-medium text-blue-900 mb-2">💡 Database Setup</h4>
                 <p className="text-sm text-blue-700">
                     To enable FAQ management, create a <code className="bg-blue-100 px-1 rounded">faqs</code> table in Supabase with columns:
