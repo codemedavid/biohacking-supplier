@@ -66,8 +66,8 @@ const COA: React.FC = () => {
       <div className="min-h-screen bg-theme-bg flex items-center justify-center">
         <div className="text-center p-8">
           <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-white mb-2">Lab Reports Unavailable</h1>
-          <p className="text-charcoal-300 mb-6">The COA page is currently disabled.</p>
+          <h1 className="text-2xl font-bold text-charcoal-800 mb-2">Lab Reports Unavailable</h1>
+          <p className="text-charcoal-600 mb-6">The COA page is currently disabled.</p>
           <a href="/" className="px-6 py-2 bg-blush-600 text-white rounded-lg hover:bg-blush-700 transition-colors">
             Return Home
           </a>
@@ -79,14 +79,14 @@ const COA: React.FC = () => {
   return (
     <div className="min-h-screen bg-theme-bg">
       {/* Hero Section - Mobile Optimized */}
-      <div className="relative overflow-hidden bg-charcoal-900/40 backdrop-blur-md border-b border-charcoal-700/50 py-6 md:py-12">
+      <div className="relative overflow-hidden bg-white backdrop-blur-md border-b border-charcoal-200 py-6 md:py-12">
         <div className="absolute top-0 left-0 w-48 h-48 md:w-64 md:h-64 bg-charcoal-700 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
         <div className="absolute bottom-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
 
         {/* Back Button */}
         <a
           href="/"
-          className="absolute top-4 left-4 z-20 flex items-center gap-2 bg-charcoal-900/90 backdrop-blur-sm px-3 py-2 rounded-full shadow-md border border-charcoal-700/50 text-charcoal-200 hover:text-glow-teal-400 transition-colors"
+          className="absolute top-4 left-4 z-20 flex items-center gap-2 bg-charcoal-900/90 backdrop-blur-sm px-3 py-2 rounded-full shadow-md border border-charcoal-200 text-charcoal-700 hover:text-glow-teal-400 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="text-sm font-medium">Back</span>
@@ -94,34 +94,34 @@ const COA: React.FC = () => {
 
         <div className="relative container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 md:gap-2 bg-charcoal-900/90 backdrop-blur-md px-3 py-1.5 md:px-6 md:py-3 rounded-full shadow-cute mb-3 md:mb-6 border-2 border-charcoal-700/50">
+            <div className="inline-flex items-center gap-1.5 md:gap-2 bg-charcoal-900/90 backdrop-blur-md px-3 py-1.5 md:px-6 md:py-3 rounded-full shadow-cute mb-3 md:mb-6 border-2 border-charcoal-200">
               <Shield className="w-3.5 h-3.5 md:w-5 md:h-5 text-glow-teal-400" />
               <span className="text-xs md:text-sm font-bold text-glow-teal-400">Lab Verified</span>
             </div>
 
-            <h1 className="font-outfit text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 text-white px-2">
+            <h1 className="font-outfit text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 text-charcoal-800 px-2">
               <span className="bg-gradient-to-r from-glow-teal-400 to-blush-500 bg-clip-text text-transparent">
                 Lab Reports
               </span>
               <Sparkles className="inline-block w-5 h-5 md:w-8 md:h-8 text-yellow-400 ml-2 mb-1 animate-pulse" />
             </h1>
 
-            <p className="text-sm md:text-lg text-charcoal-300 mb-4 md:mb-6 px-4">
+            <p className="text-sm md:text-lg text-charcoal-600 mb-4 md:mb-6 px-4">
               Tested by <strong className="text-glow-teal-400">Janoshik + Chromate</strong>
             </p>
 
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 text-xs md:text-sm px-2">
-              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-700/50">
+              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-200">
                 <CheckCircle className="w-3.5 h-3.5 md:w-5 md:h-5 text-green-500" />
-                <span className="font-medium text-charcoal-200">99%+ Purity</span>
+                <span className="font-medium text-charcoal-700">99%+ Purity</span>
               </div>
-              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-700/50">
+              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-200">
                 <Award className="w-3.5 h-3.5 md:w-5 md:h-5 text-blue-500" />
-                <span className="font-medium text-charcoal-200">Certified</span>
+                <span className="font-medium text-charcoal-700">Certified</span>
               </div>
-              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-700/50">
+              <div className="flex items-center gap-1.5 md:gap-2 bg-charcoal-900/80 backdrop-blur-sm px-2.5 py-1.5 md:px-4 md:py-2 rounded-full shadow-md border border-charcoal-200">
                 <Shield className="w-3.5 h-3.5 md:w-5 md:h-5 text-glow-teal-400" />
-                <span className="font-medium text-charcoal-200">Verified</span>
+                <span className="font-medium text-charcoal-700">Verified</span>
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ const COA: React.FC = () => {
             coaReports.map((report) => (
               <div
                 key={report.id}
-                className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-cute hover:shadow-glow transition-all duration-300 overflow-hidden border-2 border-charcoal-700/50 hover:border-charcoal-700/50 transform hover:-translate-y-1 md:hover:-translate-y-2"
+                className="bg-white backdrop-blur-md rounded-2xl md:rounded-3xl shadow-cute hover:shadow-glow transition-all duration-300 overflow-hidden border-2 border-charcoal-200 hover:border-charcoal-200 transform hover:-translate-y-1 md:hover:-translate-y-2"
               >
                 {/* Report Image - Mobile Optimized */}
                 <div
@@ -169,31 +169,31 @@ const COA: React.FC = () => {
                 {/* Report Details - Mobile Optimized */}
                 <div className="p-4 md:p-6">
                   <div className="flex items-center justify-between mb-3 md:mb-4 gap-2">
-                    <h3 className="text-base md:text-xl font-bold text-white">{report.product_name}</h3>
+                    <h3 className="text-base md:text-xl font-bold text-charcoal-800">{report.product_name}</h3>
                     {report.featured && (
-                      <span className="bg-charcoal-900/40 backdrop-blur-md border-b border-charcoal-700/50 text-glow-teal-300 px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold border border-charcoal-600/50 whitespace-nowrap">
+                      <span className="bg-white backdrop-blur-md border-b border-charcoal-200 text-glow-teal-300 px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold border border-charcoal-600/50 whitespace-nowrap">
                         ✓ VERIFIED
                       </span>
                     )}
                   </div>
 
                   <div className="space-y-2 md:space-y-3 mb-4 md:mb-6">
-                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-700/50">
-                      <span className="text-xs md:text-sm text-charcoal-300 font-medium">Purity:</span>
+                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-200">
+                      <span className="text-xs md:text-sm text-charcoal-600 font-medium">Purity:</span>
                       <span className="text-sm md:text-base font-bold text-green-600">{report.purity_percentage}%</span>
                     </div>
-                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-700/50">
-                      <span className="text-xs md:text-sm text-charcoal-300 font-medium">Quantity:</span>
+                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-200">
+                      <span className="text-xs md:text-sm text-charcoal-600 font-medium">Quantity:</span>
                       <span className="text-sm md:text-base font-bold text-glow-teal-400">{report.quantity}</span>
                     </div>
-                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-700/50">
-                      <span className="text-xs md:text-sm text-charcoal-300 font-medium">Test Date:</span>
-                      <span className="text-xs md:text-sm text-white">{new Date(report.test_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase()}</span>
+                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-200">
+                      <span className="text-xs md:text-sm text-charcoal-600 font-medium">Test Date:</span>
+                      <span className="text-xs md:text-sm text-charcoal-800">{new Date(report.test_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase()}</span>
                     </div>
-                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-700/50">
-                      <span className="text-xs md:text-sm text-charcoal-300 font-medium">Task:</span>
+                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-200">
+                      <span className="text-xs md:text-sm text-charcoal-600 font-medium">Task:</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs md:text-sm text-white font-mono">#{report.task_number}</span>
+                        <span className="text-xs md:text-sm text-charcoal-800 font-mono">#{report.task_number}</span>
                         <button
                           onClick={() => handleCopy(report.task_number, `${report.id}-task`)}
                           className="p-1 hover:bg-charcoal-800/40 rounded-full transition-colors"
@@ -207,10 +207,10 @@ const COA: React.FC = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-700/50">
-                      <span className="text-xs md:text-sm text-charcoal-300 font-medium">Unique Key:</span>
+                    <div className="flex items-center justify-between py-1.5 md:py-2 border-b border-charcoal-200">
+                      <span className="text-xs md:text-sm text-charcoal-600 font-medium">Unique Key:</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs md:text-sm text-white font-mono">{report.verification_key}</span>
+                        <span className="text-xs md:text-sm text-charcoal-800 font-mono">{report.verification_key}</span>
                         <button
                           onClick={() => handleCopy(report.verification_key, `${report.id}-key`)}
                           className="p-1 hover:bg-charcoal-800/40 rounded-full transition-colors"
@@ -251,7 +251,7 @@ const COA: React.FC = () => {
 
                     <button
                       onClick={() => setSelectedImage(report.image_url)}
-                      className="w-full flex items-center justify-center gap-1.5 md:gap-2 bg-charcoal-900/40 backdrop-blur-md text-glow-teal-400 border-2 border-sky-400 hover:border-sky-500 hover:bg-charcoal-800/40 px-3 py-2 md:px-4 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-medium transition-all duration-300"
+                      className="w-full flex items-center justify-center gap-1.5 md:gap-2 bg-white backdrop-blur-md text-glow-teal-400 border-2 border-sky-400 hover:border-sky-500 hover:bg-charcoal-800/40 px-3 py-2 md:px-4 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-medium transition-all duration-300"
                     >
                       <Download className="w-4 h-4 md:w-5 md:h-5" />
                       View Full Report
@@ -265,7 +265,7 @@ const COA: React.FC = () => {
 
         {/* Info Section - Mobile Optimized */}
         <div className="mt-6 md:mt-12 max-w-4xl mx-auto">
-          <div className="bg-charcoal-900/40 rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 border-2 border-charcoal-700/50 shadow-cute">
+          <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 border-2 border-charcoal-200 shadow-cute">
             <div className="flex flex-col md:flex-row items-start gap-3 md:gap-4">
               <div className="flex-shrink-0">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sky-400 to-blue-500 rounded-xl md:rounded-2xl flex items-center justify-center">
@@ -273,8 +273,8 @@ const COA: React.FC = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <h3 className="text-base md:text-xl font-bold text-white mb-2 md:mb-3">Independent Laboratory Verification</h3>
-                <p className="text-sm md:text-base text-charcoal-200 leading-relaxed mb-3 md:mb-4">
+                <h3 className="text-base md:text-xl font-bold text-charcoal-800 mb-2 md:mb-3">Independent Laboratory Verification</h3>
+                <p className="text-sm md:text-base text-charcoal-700 leading-relaxed mb-3 md:mb-4">
                   We partner with top-tier third-party laboratories like <strong>Janoshik Analytical</strong> and <strong>Chromate</strong> to ensure the highest quality standards.
                   Each batch is rigorously tested for purity and concentration using HPLC and Mass Spectrometry.
                 </p>
@@ -313,7 +313,7 @@ const COA: React.FC = () => {
           <div className="relative w-full max-w-5xl">
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute -top-10 md:-top-12 right-0 bg-charcoal-900/95 hover:bg-charcoal-900/40 backdrop-blur-md text-white rounded-full p-2 md:p-2.5 transition-all shadow-lg"
+              className="absolute -top-10 md:-top-12 right-0 bg-charcoal-900/95 hover:bg-white backdrop-blur-md text-white rounded-full p-2 md:p-2.5 transition-all shadow-lg"
             >
               <X className="w-5 h-5 md:w-6 md:h-6" />
             </button>

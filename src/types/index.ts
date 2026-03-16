@@ -10,6 +10,18 @@ export interface Product {
   discount_end_date: string | null;
   discount_active: boolean;
 
+  // Product identification
+  code: string | null;
+  spec: string | null;
+  units_per_pack: number;
+  unit_type: string;
+
+  // Availability & fulfillment
+  region_restriction: string | null; // e.g. 'PH' for Philippines only
+  onhand_available: boolean;
+  preorder_available: boolean;
+  notes: string | null;
+
   // Peptide-specific fields
   purity_percentage: number;
   molecular_weight: string | null;
@@ -32,6 +44,7 @@ export interface Product {
 
   // Relations
   variations?: ProductVariation[];
+  prices?: ProductPrice[];
 }
 
 export interface ProductVariation {
@@ -47,6 +60,34 @@ export interface ProductVariation {
   discount_active: boolean;
   stock_quantity: number;
   created_at: string;
+}
+
+// Multi-pricing types
+export type PriceType = 'preorder_box' | 'preorder_vial' | 'onhand_box' | 'onhand_vial' | 'complete_set';
+export type CurrencyCode = 'USD' | 'PHP';
+export type PurchaseMode = 'box' | 'vial' | 'complete_set';
+export type FulfillmentType = 'preorder' | 'onhand';
+
+export interface ProductPrice {
+  id: string;
+  product_id: string;
+  price_type: PriceType;
+  currency: CurrencyCode;
+  amount: number;
+  min_qty: number;
+  max_qty: number | null;
+  is_override: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// Helper to get structured pricing from flat price rows
+export interface StructuredPricing {
+  preorder_box?: { usd?: number; php?: number };
+  preorder_vial?: { php?: number };
+  onhand_box?: { php?: number };
+  onhand_vial?: { php?: number };
+  complete_set?: { php?: number };
 }
 
 export interface Category {
@@ -105,6 +146,10 @@ export interface CartItem {
   quantity: number;
   price: number;
   penType?: PenType;
+  // Multi-pricing fields
+  purchaseMode?: PurchaseMode;
+  fulfillmentType?: FulfillmentType;
+  currency?: CurrencyCode;
 }
 
 // Order Types

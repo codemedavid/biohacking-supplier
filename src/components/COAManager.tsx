@@ -252,23 +252,23 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
               className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors"
               title="Go Back"
             >
-              <ArrowLeft className="w-6 h-6 text-charcoal-300" />
+              <ArrowLeft className="w-6 h-6 text-charcoal-600" />
             </button>
           )}
           <div>
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-charcoal-800 flex items-center gap-2">
               <Shield className="w-7 h-7 text-gold-600" />
               COA Lab Reports
             </h2>
-            <p className="text-sm text-charcoal-300 mt-1">
+            <p className="text-sm text-charcoal-600 mt-1">
               Manage certificates of analysis and lab test reports
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           {/* COA Page Toggle */}
-          <div className="flex items-center gap-2 bg-charcoal-900/40 backdrop-blur-md border border-charcoal-700/50 rounded-lg px-3 py-2 shadow-sm">
-            <span className="text-xs font-medium text-charcoal-200">Show COA Page:</span>
+          <div className="flex items-center gap-2 bg-white backdrop-blur-md border border-charcoal-200 rounded-lg px-3 py-2 shadow-sm">
+            <span className="text-xs font-medium text-charcoal-700">Show COA Page:</span>
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -276,7 +276,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                 onChange={(e) => toggleCOAPage(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-charcoal-900/40 backdrop-blur-md after:border-charcoal-600/50 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold-600"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white backdrop-blur-md after:border-charcoal-600/50 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gold-600"></div>
             </label>
             <span className={`text-xs font-semibold ${coaPageEnabled ? 'text-gold-600' : 'text-charcoal-500'}`}>
               {coaPageEnabled ? 'ON' : 'OFF'}
@@ -294,8 +294,8 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
 
       {/* Add/Edit Form */}
       {(isAdding || editingId) && (
-        <div className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-3xl p-6 border-2 border-charcoal-700/50 shadow-cute">
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-sky-50 to-blue-50 rounded-3xl p-6 border-2 border-charcoal-200 shadow-cute">
+          <h3 className="text-xl font-bold text-charcoal-800 mb-4 flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-glow-teal-400" />
             {editingId ? 'Edit COA Report' : 'Add New COA Report'}
           </h3>
@@ -303,7 +303,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Product Name *
                 </label>
                 <input
@@ -311,26 +311,26 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.product_name}
                   onChange={(e) => setFormData({ ...formData, product_name: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="e.g., Tirzepatide 15mg"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Batch Number
                 </label>
                 <input
                   type="text"
                   value={formData.batch}
                   onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="Unknown"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Test Date *
                 </label>
                 <input
@@ -338,12 +338,12 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.test_date}
                   onChange={(e) => setFormData({ ...formData, test_date: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Purity (%) *
                 </label>
                 <input
@@ -352,13 +352,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.purity_percentage}
                   onChange={(e) => setFormData({ ...formData, purity_percentage: parseFloat(e.target.value) })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="99.658"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Quantity *
                 </label>
                 <input
@@ -366,13 +366,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.quantity}
                   onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="e.g., 16.80 mg"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Task Number *
                 </label>
                 <input
@@ -380,13 +380,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.task_number}
                   onChange={(e) => setFormData({ ...formData, task_number: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="#68396"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Verification Key *
                 </label>
                 <input
@@ -394,13 +394,13 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                   required
                   value={formData.verification_key}
                   onChange={(e) => setFormData({ ...formData, verification_key: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                   placeholder="9AUYT3EZV9Y9"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-charcoal-200 mb-3">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-3">
                   COA Report Image *
                 </label>
                 <ImageUpload
@@ -411,26 +411,26 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Manufacturer
                 </label>
                 <input
                   type="text"
                   value={formData.manufacturer}
                   onChange={(e) => setFormData({ ...formData, manufacturer: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-charcoal-200 mb-2">
+                <label className="block text-sm font-semibold text-charcoal-700 mb-2">
                   Laboratory
                 </label>
                 <input
                   type="text"
                   value={formData.laboratory}
                   onChange={(e) => setFormData({ ...formData, laboratory: e.target.value })}
-                  className="input-field text-white"
+                  className="input-field text-charcoal-800"
                 />
               </div>
             </div>
@@ -443,7 +443,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                 onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                 className="w-4 h-4 text-glow-teal-400 rounded focus:ring-sky-400"
               />
-              <label htmlFor="featured" className="text-sm font-medium text-charcoal-200">
+              <label htmlFor="featured" className="text-sm font-medium text-charcoal-700">
                 Featured Report (show prominently)
               </label>
             </div>
@@ -459,7 +459,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
               <button
                 type="button"
                 onClick={handleCancel}
-                className="flex items-center gap-2 bg-charcoal-900/40 backdrop-blur-md text-charcoal-200 border-2 border-charcoal-600/50 hover:bg-theme-bg px-6 py-3 rounded-2xl font-medium transition-all"
+                className="flex items-center gap-2 bg-white backdrop-blur-md text-charcoal-700 border-2 border-charcoal-600/50 hover:bg-theme-bg px-6 py-3 rounded-2xl font-medium transition-all"
               >
                 <X className="w-5 h-5" />
                 Cancel
@@ -472,7 +472,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
       {/* COA Reports List */}
       <div className="space-y-4">
         {coaReports.length === 0 ? (
-          <div className="text-center py-12 bg-charcoal-900/40 backdrop-blur-md rounded-3xl border-2 border-charcoal-700/50">
+          <div className="text-center py-12 bg-white backdrop-blur-md rounded-3xl border-2 border-charcoal-200">
             <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <p className="text-charcoal-400">No COA reports yet. Add your first lab report!</p>
           </div>
@@ -480,16 +480,16 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
           coaReports.map((report) => (
             <div
               key={report.id}
-              className="bg-charcoal-900/40 backdrop-blur-md rounded-3xl p-6 border-2 border-charcoal-700/50 hover:border-charcoal-700/50 shadow-md hover:shadow-lg transition-all"
+              className="bg-white backdrop-blur-md rounded-3xl p-6 border-2 border-charcoal-200 hover:border-charcoal-200 shadow-md hover:shadow-lg transition-all"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <h3 className="text-lg font-bold text-white">
+                    <h3 className="text-lg font-bold text-charcoal-800">
                       {report.product_name}
                     </h3>
                     {report.featured && (
-                      <span className="bg-charcoal-900/40 backdrop-blur-md border-b border-charcoal-700/50 text-glow-teal-300 px-3 py-1 rounded-full text-xs font-bold border border-charcoal-600/50">
+                      <span className="bg-white backdrop-blur-md border-b border-charcoal-200 text-glow-teal-300 px-3 py-1 rounded-full text-xs font-bold border border-charcoal-600/50">
                         ⭐ FEATURED
                       </span>
                     )}
@@ -506,11 +506,11 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                     </div>
                     <div>
                       <span className="text-charcoal-400">Task Number:</span>
-                      <p className="font-mono text-white">{report.task_number}</p>
+                      <p className="font-mono text-charcoal-800">{report.task_number}</p>
                     </div>
                     <div>
                       <span className="text-charcoal-400">Test Date:</span>
-                      <p className="text-white">{new Date(report.test_date).toLocaleDateString()}</p>
+                      <p className="text-charcoal-800">{new Date(report.test_date).toLocaleDateString()}</p>
                     </div>
                   </div>
 
@@ -525,7 +525,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
                       Verify on Janoshik
                     </a>
                     <span className="text-charcoal-500">•</span>
-                    <span className="text-charcoal-300">Lab: {report.laboratory}</span>
+                    <span className="text-charcoal-600">Lab: {report.laboratory}</span>
                   </div>
                 </div>
 

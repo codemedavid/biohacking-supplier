@@ -477,10 +477,10 @@ const AdminDashboard: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-theme-bg flex items-center justify-center px-4">
-        <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 w-full max-w-md border border-charcoal-700/50">
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 w-full max-w-md border border-gray-200">
           <div className="text-center mb-6">
 
-            <h1 className="text-2xl font-bold text-white mb-1">Admin Access</h1>
+            <h1 className="text-2xl font-bold text-charcoal-800 mb-1">Admin Access</h1>
             <p className="text-sm text-charcoal-500">
               Enter password to continue
             </p>
@@ -493,7 +493,7 @@ const AdminDashboard: React.FC = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-charcoal-600/50 rounded-lg bg-charcoal-900/40 backdrop-blur-md text-white focus:ring-2 focus:ring-navy-900 focus:border-transparent transition-colors placeholder-gray-400"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-charcoal-800 focus:ring-2 focus:ring-navy-900 focus:border-transparent transition-colors placeholder-gray-400"
                 placeholder="Enter admin password"
                 required
               />
@@ -530,23 +530,23 @@ const AdminDashboard: React.FC = () => {
       <>
         {variationManagerModal}
         <div className="min-h-screen bg-theme-bg">
-          <div className="bg-charcoal-900/40 backdrop-blur-md shadow-sm border-b border-charcoal-700/50">
+          <div className="bg-white shadow-sm border-b border-gray-200">
             <div className="max-w-6xl mx-auto px-3 sm:px-4">
               <div className="flex items-center justify-between h-12 md:h-14 gap-2">
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={handleCancel}
-                    className="text-charcoal-200 hover:text-theme-accent transition-colors flex items-center gap-1 group"
+                    className="text-charcoal-700 hover:text-theme-accent transition-colors flex items-center gap-1 group"
                   >
                     <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                     <span className="text-xs md:text-sm">Back</span>
                   </button>
-                  <h1 className="text-sm md:text-base font-bold text-white">
+                  <h1 className="text-sm md:text-base font-bold text-charcoal-800">
                     {currentView === 'add' ? '✨ Add New' : '✏️ Edit Product'}
                   </h1>
                 </div>
                 <div className="flex space-x-1.5">
-                  <button onClick={handleCancel} className="px-2 py-1 bg-charcoal-800/50 border border-charcoal-600/50 hover:border-gray-400 rounded-md hover:bg-gray-200 transition-all flex items-center gap-1 text-xs text-charcoal-200">
+                  <button onClick={handleCancel} className="px-2 py-1 bg-gray-100 border border-gray-300 hover:border-gray-400 rounded-md hover:bg-gray-200 transition-all flex items-center gap-1 text-xs text-charcoal-700">
                     <X className="h-3 w-3" />
                     <span className="hidden sm:inline">Cancel</span>
                   </button>
@@ -564,42 +564,42 @@ const AdminDashboard: React.FC = () => {
           </div>
 
           <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 md:py-4">
-            <div className="bg-charcoal-900/40 backdrop-blur-md rounded-lg md:rounded-xl shadow-sm p-3 md:p-4 lg:p-5 space-y-3 md:space-y-4 border border-charcoal-700/50">
+            <div className="bg-white rounded-lg md:rounded-xl shadow-sm p-3 md:p-4 lg:p-5 space-y-3 md:space-y-4 border border-gray-200">
               {/* Basic Information */}
               <div>
-                <h3 className="text-sm md:text-base font-bold text-white mb-2 md:mb-3 flex items-center gap-1.5">
+                <h3 className="text-sm md:text-base font-bold text-charcoal-800 mb-2 md:mb-3 flex items-center gap-1.5">
                   <span className="text-base md:text-lg">📝</span>
                   Basic Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Product Name *</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Product Name *</label>
                     <input
                       type="text"
                       value={formData.name || ''}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="e.g., BPC-157 5mg"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Description *</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Description *</label>
                     <textarea
                       value={formData.description || ''}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="Detailed product description..."
                       rows={3}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Category *</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Category *</label>
                     <select
                       value={formData.category || ''}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                     >
                       {categories.map(cat => (
                         <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -608,13 +608,13 @@ const AdminDashboard: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Base Price (₱) *</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Base Price (₱) *</label>
                     <input
                       type="number"
                       step="1"
                       value={formData.base_price || ''}
                       onChange={(e) => setFormData({ ...formData, base_price: Number(e.target.value) })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="0"
                     />
                     {editingProduct && editingProduct.variations && editingProduct.variations.length > 0 && (
@@ -629,63 +629,63 @@ const AdminDashboard: React.FC = () => {
 
               {/* Scientific Details */}
               <div>
-                <h3 className="text-sm md:text-base font-bold text-white mb-2 md:mb-3 flex items-center gap-1.5">
+                <h3 className="text-sm md:text-base font-bold text-charcoal-800 mb-2 md:mb-3 flex items-center gap-1.5">
                   <span className="text-base md:text-lg">🧪</span>
                   Scientific Details
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Purity (%)</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Purity (%)</label>
                     <input
                       type="number"
                       step="0.1"
                       value={formData.purity_percentage || ''}
                       onChange={(e) => setFormData({ ...formData, purity_percentage: Number(e.target.value) })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="99.0"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Molecular Weight</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Molecular Weight</label>
                     <input
                       type="text"
                       value={formData.molecular_weight || ''}
                       onChange={(e) => setFormData({ ...formData, molecular_weight: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="e.g., 1419.55 g/mol"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">CAS Number</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">CAS Number</label>
                     <input
                       type="text"
                       value={formData.cas_number || ''}
                       onChange={(e) => setFormData({ ...formData, cas_number: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="e.g., 137525-51-0"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Storage Conditions</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Storage Conditions</label>
                     <input
                       type="text"
                       value={formData.storage_conditions || ''}
                       onChange={(e) => setFormData({ ...formData, storage_conditions: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="Store at -20°C"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Sequence</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Sequence</label>
                     <input
                       type="text"
                       value={formData.sequence || ''}
                       onChange={(e) => setFormData({ ...formData, sequence: e.target.value })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="e.g., GEPPPGKPADDAGLV"
                     />
                   </div>
@@ -700,10 +700,10 @@ const AdminDashboard: React.FC = () => {
                         className="w-5 h-5 text-purple-600 rounded focus:ring-purple-500"
                       />
                       <div>
-                        <span className="font-bold text-white flex items-center gap-2">
+                        <span className="font-bold text-charcoal-800 flex items-center gap-2">
                           📋 {editingProduct ? 'Generate/Update Protocol' : 'Auto-Generate Protocol'}
                         </span>
-                        <p className="text-xs text-charcoal-300">
+                        <p className="text-xs text-charcoal-600">
                           {editingProduct
                             ? 'Create or update the dosage protocol for this product.'
                             : 'Automatically create a dosage protocol based on the product category.'}
@@ -715,9 +715,9 @@ const AdminDashboard: React.FC = () => {
               </div>
 
               {/* Complete Set Inclusions */}
-              <div className="bg-gradient-to-r from-gold-50 to-gray-50 border border-charcoal-700/50 rounded-lg p-3 md:p-4">
+              <div className="bg-gradient-to-r from-gold-50 to-gray-50 border border-gray-200 rounded-lg p-3 md:p-4">
                 <div className="flex items-center justify-between mb-2 md:mb-3">
-                  <h3 className="text-sm md:text-base font-bold text-white flex items-center gap-1.5">
+                  <h3 className="text-sm md:text-base font-bold text-charcoal-800 flex items-center gap-1.5">
                     <span className="text-base md:text-lg">📦</span>
                     Complete Set Inclusions
                   </h3>
@@ -736,12 +736,12 @@ const AdminDashboard: React.FC = () => {
                       }}
                       className="w-4 h-4 text-theme-accent rounded focus:ring-theme-accent"
                     />
-                    <span className="text-xs font-semibold text-charcoal-200">This is a SET product</span>
+                    <span className="text-xs font-semibold text-charcoal-700">This is a SET product</span>
                   </label>
                 </div>
                 {formData.inclusions !== null && formData.inclusions !== undefined ? (
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">
                       What's included in this set? (One item per line)
                     </label>
                     <textarea
@@ -751,7 +751,7 @@ const AdminDashboard: React.FC = () => {
                         const items = e.target.value.split('\n').filter(item => item.trim() !== '');
                         setFormData({ ...formData, inclusions: items.length > 0 ? items : null });
                       }}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400 min-h-[80px]"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400 min-h-[80px]"
                       placeholder="Xpeptide Kit Inclusion:&#10;1 Peptide Vial&#10;1 Bacteriostatic Water&#10;6 Insulin Syringes&#10;1 3ml Syringe&#10;Alcohol Pads&#10;Xpeptide Manual Guide"
                       rows={6}
                     />
@@ -809,18 +809,18 @@ const AdminDashboard: React.FC = () => {
 
               {/* Inventory */}
               <div>
-                <h3 className="text-sm md:text-base font-bold text-white mb-2 md:mb-3 flex items-center gap-1.5">
+                <h3 className="text-sm md:text-base font-bold text-charcoal-800 mb-2 md:mb-3 flex items-center gap-1.5">
                   <span className="text-base md:text-lg">📦</span>
                   Inventory & Availability
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Stock Quantity</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Stock Quantity</label>
                     <input
                       type="number"
                       value={formData.stock_quantity || ''}
                       onChange={(e) => setFormData({ ...formData, stock_quantity: Number(e.target.value) })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="0"
                     />
                   </div>
@@ -833,7 +833,7 @@ const AdminDashboard: React.FC = () => {
                         onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                         className="w-4 h-4 text-theme-accent rounded focus:ring-theme-accent"
                       />
-                      <span className="text-xs font-semibold text-charcoal-200">⭐ Featured</span>
+                      <span className="text-xs font-semibold text-charcoal-700">⭐ Featured</span>
                     </label>
 
                     <label className="flex items-center gap-1.5 cursor-pointer">
@@ -843,7 +843,7 @@ const AdminDashboard: React.FC = () => {
                         onChange={(e) => setFormData({ ...formData, available: e.target.checked })}
                         className="w-4 h-4 text-green-600 rounded focus:ring-green-500"
                       />
-                      <span className="text-xs font-semibold text-charcoal-200">✅ Available</span>
+                      <span className="text-xs font-semibold text-charcoal-700">✅ Available</span>
                     </label>
                   </div>
                 </div>
@@ -851,19 +851,19 @@ const AdminDashboard: React.FC = () => {
 
               {/* Discount */}
               <div>
-                <h3 className="text-sm md:text-base font-bold text-white mb-2 md:mb-3 flex items-center gap-1.5">
+                <h3 className="text-sm md:text-base font-bold text-charcoal-800 mb-2 md:mb-3 flex items-center gap-1.5">
                   <span className="text-base md:text-lg">💰</span>
                   Discount Pricing
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-200 mb-1">Discount Price (₱)</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Discount Price (₱)</label>
                     <input
                       type="number"
                       step="1"
                       value={formData.discount_price || ''}
                       onChange={(e) => setFormData({ ...formData, discount_price: Number(e.target.value) || null })}
-                      className="w-full px-4 py-2 border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent transition-all bg-white text-charcoal-800 placeholder-gray-400"
                       placeholder="0"
                     />
                   </div>
@@ -876,7 +876,7 @@ const AdminDashboard: React.FC = () => {
                         onChange={(e) => setFormData({ ...formData, discount_active: e.target.checked })}
                         className="w-4 h-4 text-red-600 rounded focus:ring-theme-accent"
                       />
-                      <span className="text-xs font-semibold text-charcoal-200">🏷️ Enable Discount</span>
+                      <span className="text-xs font-semibold text-charcoal-700">🏷️ Enable Discount</span>
                     </label>
                   </div>
                 </div>
@@ -884,7 +884,7 @@ const AdminDashboard: React.FC = () => {
 
               {/* Product Image */}
               <div>
-                <h3 className="text-sm md:text-base font-bold text-white mb-2 md:mb-3 flex items-center gap-1.5">
+                <h3 className="text-sm md:text-base font-bold text-charcoal-800 mb-2 md:mb-3 flex items-center gap-1.5">
                   <span className="text-base md:text-lg">🖼️</span>
                   Product Image
                 </h3>
@@ -927,18 +927,18 @@ const AdminDashboard: React.FC = () => {
       <>
         {variationManagerModal}
         <div className="min-h-screen bg-theme-bg">
-          <div className="bg-charcoal-900/40 backdrop-blur-md shadow-sm border-b border-charcoal-700/50">
+          <div className="bg-white shadow-sm border-b border-gray-200">
             <div className="max-w-6xl mx-auto px-3 sm:px-4">
               <div className="flex items-center justify-between h-12 md:h-14">
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setCurrentView('dashboard')}
-                    className="text-charcoal-200 hover:text-theme-accent transition-colors flex items-center gap-1 group"
+                    className="text-charcoal-700 hover:text-theme-accent transition-colors flex items-center gap-1 group"
                   >
                     <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
                     <span className="text-xs md:text-sm">Dashboard</span>
                   </button>
-                  <h1 className="text-sm md:text-base font-bold text-white">Products</h1>
+                  <h1 className="text-sm md:text-base font-bold text-charcoal-800">Products</h1>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -977,9 +977,9 @@ const AdminDashboard: React.FC = () => {
           <div className="max-w-6xl mx-auto px-3 sm:px-4 py-3 md:py-4">
             {/* Selection Info Banner */}
             {selectedProducts.size > 0 && (
-              <div className="mb-3 bg-theme-bg border border-charcoal-700/50 rounded-lg p-2 md:p-3 flex items-center justify-between">
+              <div className="mb-3 bg-theme-bg border border-gray-200 rounded-lg p-2 md:p-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs md:text-sm font-semibold text-white">
+                  <span className="text-xs md:text-sm font-semibold text-charcoal-800">
                     {selectedProducts.size} product{selectedProducts.size !== 1 ? 's' : ''} selected
                   </span>
                 </div>
@@ -995,7 +995,7 @@ const AdminDashboard: React.FC = () => {
             {/* Mobile Card View */}
             <div className="md:hidden space-y-3">
               {products.map((product) => (
-                <div key={product.id} className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-lg border border-charcoal-700/50 p-3">
+                <div key={product.id} className="bg-white rounded-xl shadow-lg border border-gray-200 p-3">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <div className="flex items-start gap-2 flex-1 min-w-0">
                       <input
@@ -1005,7 +1005,7 @@ const AdminDashboard: React.FC = () => {
                         className="mt-0.5 w-4 h-4 text-theme-accent rounded focus:ring-theme-accent cursor-pointer shrink-0"
                       />
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-bold text-white truncate">{product.name}</h3>
+                        <h3 className="text-sm font-bold text-charcoal-800 truncate">{product.name}</h3>
                         <p className="text-xs text-charcoal-400 line-clamp-2">{product.description}</p>
                       </div>
                     </div>
@@ -1020,7 +1020,7 @@ const AdminDashboard: React.FC = () => {
                         disabled={isProcessing}
                         className={`p - 1.5 rounded - lg transition - all disabled: opacity - 50 disabled: cursor - not - allowed ${product.variations && product.variations.length > 0
                           ? 'bg-gold-500 text-white hover:bg-gold-600 shadow-md cursor-pointer'
-                          : 'text-theme-accent hover:bg-charcoal-800/50 cursor-pointer'
+                          : 'text-theme-accent hover:bg-gray-100 cursor-pointer'
                           } `}
                         title="Manage Sizes - Click to edit prices!"
                       >
@@ -1029,7 +1029,7 @@ const AdminDashboard: React.FC = () => {
                       <button
                         onClick={() => handleEditProduct(product)}
                         disabled={isProcessing}
-                        className="p-1.5 text-charcoal-200 hover:bg-charcoal-800/50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                        className="p-1.5 text-charcoal-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
@@ -1046,13 +1046,13 @@ const AdminDashboard: React.FC = () => {
                     <div className="flex items-center gap-3">
                       <div>
                         <div className="text-[10px] text-charcoal-400">Price</div>
-                        <div className="text-sm font-bold text-white">
+                        <div className="text-sm font-bold text-charcoal-800">
                           ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                         </div>
                       </div>
                       <div>
                         <div className="text-[10px] text-charcoal-400">Stock</div>
-                        <div className="text-sm font-semibold text-white">{product.stock_quantity}</div>
+                        <div className="text-sm font-semibold text-charcoal-800">{product.stock_quantity}</div>
                       </div>
                       <div>
                         <div className="text-[10px] text-charcoal-400">Sizes</div>
@@ -1074,10 +1074,10 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Desktop Table View */}
-            <div className="hidden md:block bg-charcoal-900/40 backdrop-blur-md rounded-lg md:rounded-xl shadow-lg overflow-hidden border border-charcoal-700/50">
+            <div className="hidden md:block bg-white rounded-lg md:rounded-xl shadow-lg overflow-hidden border border-gray-200">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gradient-to-r from-gray-50 to-white border-b border-charcoal-700/50">
+                  <thead className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
                     <tr>
                       <th className="px-3 py-2 text-center w-10">
                         <input
@@ -1088,14 +1088,14 @@ const AdminDashboard: React.FC = () => {
                           title="Select All"
                         />
                       </th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Product</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white hidden lg:table-cell">Category</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Price</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Sizes</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Purity</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Stock</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white hidden xl:table-cell">Status</th>
-                      <th className="px-4 py-2 text-left text-xs font-bold text-white">Actions</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Product</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800 hidden lg:table-cell">Category</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Price</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Sizes</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Purity</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Stock</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800 hidden xl:table-cell">Status</th>
+                      <th className="px-4 py-2 text-left text-xs font-bold text-charcoal-800">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
@@ -1110,13 +1110,13 @@ const AdminDashboard: React.FC = () => {
                           />
                         </td>
                         <td className="px-4 py-2">
-                          <div className="text-xs font-semibold text-white">{product.name}</div>
+                          <div className="text-xs font-semibold text-charcoal-800">{product.name}</div>
                           <div className="text-[10px] text-charcoal-400 truncate max-w-xs">{product.description}</div>
                         </td>
-                        <td className="px-4 py-2 text-xs text-charcoal-300 hidden lg:table-cell">
+                        <td className="px-4 py-2 text-xs text-charcoal-600 hidden lg:table-cell">
                           {categories.find(cat => cat.id === product.category)?.name}
                         </td>
-                        <td className="px-4 py-2 text-xs font-bold text-white">
+                        <td className="px-4 py-2 text-xs font-bold text-charcoal-800">
                           ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                           {product.variations && product.variations.length > 0 && (
                             <div className="text-[9px] text-theme-accent font-medium mt-0.5">
@@ -1143,7 +1143,7 @@ const AdminDashboard: React.FC = () => {
                             {product.purity_percentage}%
                           </span>
                         </td>
-                        <td className="px-4 py-2 text-xs font-medium text-white">
+                        <td className="px-4 py-2 text-xs font-medium text-charcoal-800">
                           {product.stock_quantity}
                         </td>
                         <td className="px-4 py-2 hidden xl:table-cell">
@@ -1171,7 +1171,7 @@ const AdminDashboard: React.FC = () => {
                               disabled={isProcessing}
                               className={`p-1.5 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${product.variations && product.variations.length > 0
                                 ? 'bg-amber-500 text-white hover:bg-amber-600 shadow-md hover:shadow-lg cursor-pointer'
-                                : 'text-charcoal-500 hover:bg-charcoal-800/50 cursor-pointer'
+                                : 'text-charcoal-500 hover:bg-gray-100 cursor-pointer'
                                 } `}
                               title="Manage Sizes - Click here to edit prices!"
                             >
@@ -1180,7 +1180,7 @@ const AdminDashboard: React.FC = () => {
                             <button
                               onClick={() => handleEditProduct(product)}
                               disabled={isProcessing}
-                              className="p-1.5 text-charcoal-200 hover:bg-charcoal-800/50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                              className="p-1.5 text-charcoal-700 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                             >
                               <Edit className="h-3.5 w-3.5" />
                             </button>
@@ -1277,7 +1277,7 @@ const AdminDashboard: React.FC = () => {
             <button
               onClick={handleBulkGenerateProtocols}
               disabled={isProcessing}
-              className="bg-charcoal-900/40 backdrop-blur-md text-purple-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-purple-50 transition-colors disabled:opacity-50"
+              className="bg-white text-purple-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-purple-50 transition-colors disabled:opacity-50 border border-gray-200"
             >
               {isProcessing ? 'Generating...' : '🤖 Bulk Generate All Protocols'}
             </button>
@@ -1314,7 +1314,7 @@ const AdminDashboard: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => setCurrentView('dashboard')}
-            className="mb-4 text-charcoal-400 hover:text-white flex items-center gap-2 font-medium"
+            className="mb-4 text-charcoal-400 hover:text-charcoal-800 flex items-center gap-2 font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
@@ -1352,7 +1352,7 @@ const AdminDashboard: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => setCurrentView('dashboard')}
-            className="mb-4 text-charcoal-400 hover:text-white flex items-center gap-2 font-medium"
+            className="mb-4 text-charcoal-400 hover:text-charcoal-800 flex items-center gap-2 font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
@@ -1368,7 +1368,7 @@ const AdminDashboard: React.FC = () => {
     <>
       {variationManagerModal}
       <div className="min-h-screen bg-theme-bg font-outfit">
-        <div className="bg-charcoal-900/40 backdrop-blur-md shadow-sm border-b border-charcoal-700/50 sticky top-0 z-50">
+        <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-4">
@@ -1382,7 +1382,7 @@ const AdminDashboard: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <p className="text-xs text-charcoal-400 font-medium tracking-wide border px-1.5 py-0.5 rounded-full border-charcoal-700/50 bg-theme-bg">
+                    <p className="text-xs text-charcoal-400 font-medium tracking-wide border px-1.5 py-0.5 rounded-full border-gray-200 bg-theme-bg">
                       ADMIN DASHBOARD
                     </p>
                   </div>
@@ -1393,7 +1393,7 @@ const AdminDashboard: React.FC = () => {
                   href="/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-charcoal-400 hover:text-white transition-colors font-medium text-sm hidden sm:block"
+                  className="text-charcoal-400 hover:text-charcoal-800 transition-colors font-medium text-sm hidden sm:block"
                 >
                   View Website
                 </a>
@@ -1413,23 +1413,23 @@ const AdminDashboard: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <button
               onClick={() => setCurrentView('products')}
-              className="group relative overflow-hidden bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-5 border border-charcoal-700/50 hover:border-blue-500 hover:shadow-lg transition-all duration-300 text-left"
+              className="group relative overflow-hidden bg-white rounded-2xl p-5 border border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all duration-300 text-left"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Package className="w-24 h-24 text-blue-600" />
               </div>
               <div className="relative z-10">
-                <div className="w-10 h-10 rounded-lg bg-charcoal-900/40 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
                   <Package className="h-5 w-5 text-blue-600" />
                 </div>
                 <p className="text-sm font-medium text-charcoal-400 mb-1">Total Products</p>
-                <p className="text-3xl font-bold text-white tracking-tight">{totalProducts}</p>
+                <p className="text-3xl font-bold text-charcoal-800 tracking-tight">{totalProducts}</p>
               </div>
             </button>
 
             <button
               onClick={() => setCurrentView('products')}
-              className="group relative overflow-hidden bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-5 border border-charcoal-700/50 hover:border-green-500 hover:shadow-lg transition-all duration-300 text-left"
+              className="group relative overflow-hidden bg-white rounded-2xl p-5 border border-gray-200 hover:border-green-500 hover:shadow-lg transition-all duration-300 text-left"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <TrendingUp className="w-24 h-24 text-green-600" />
@@ -1439,13 +1439,13 @@ const AdminDashboard: React.FC = () => {
                   <TrendingUp className="h-5 w-5 text-green-600" />
                 </div>
                 <p className="text-sm font-medium text-charcoal-400 mb-1">Available Stock</p>
-                <p className="text-3xl font-bold text-white tracking-tight">{availableProducts}</p>
+                <p className="text-3xl font-bold text-charcoal-800 tracking-tight">{availableProducts}</p>
               </div>
             </button>
 
             <button
               onClick={() => setCurrentView('products')}
-              className="group relative overflow-hidden bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-5 border border-charcoal-700/50 hover:border-amber-500 hover:shadow-lg transition-all duration-300 text-left"
+              className="group relative overflow-hidden bg-white rounded-2xl p-5 border border-gray-200 hover:border-amber-500 hover:shadow-lg transition-all duration-300 text-left"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Sparkles className="w-24 h-24 text-amber-600" />
@@ -1455,13 +1455,13 @@ const AdminDashboard: React.FC = () => {
                   <Sparkles className="h-5 w-5 text-amber-600" />
                 </div>
                 <p className="text-sm font-medium text-charcoal-400 mb-1">Featured Items</p>
-                <p className="text-3xl font-bold text-white tracking-tight">{featuredProducts}</p>
+                <p className="text-3xl font-bold text-charcoal-800 tracking-tight">{featuredProducts}</p>
               </div>
             </button>
 
             <button
               onClick={() => setCurrentView('categories')}
-              className="group relative overflow-hidden bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-5 border border-charcoal-700/50 hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-left"
+              className="group relative overflow-hidden bg-white rounded-2xl p-5 border border-gray-200 hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-left"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                 <Users className="w-24 h-24 text-purple-600" />
@@ -1471,168 +1471,168 @@ const AdminDashboard: React.FC = () => {
                   <Users className="h-5 w-5 text-purple-600" />
                 </div>
                 <p className="text-sm font-medium text-charcoal-400 mb-1">Categories</p>
-                <p className="text-3xl font-bold text-white tracking-tight">{categories.length}</p>
+                <p className="text-3xl font-bold text-charcoal-800 tracking-tight">{categories.length}</p>
               </div>
             </button>
           </div>
 
           {/* Quick Actions & Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-6 border border-charcoal-700/50 shadow-sm">
-              <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+              <h3 className="text-lg font-bold text-charcoal-800 mb-5 flex items-center gap-2">
                 <div className="w-1 h-6 bg-blue-600 rounded-full"></div>
                 Quick Actions
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   onClick={handleAddProduct}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-charcoal-900/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Plus className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-blue-600 transition-colors">Add Product</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-blue-600 transition-colors">Add Product</span>
                     <span className="text-xs text-charcoal-400">Create new item</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('products')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Package className="h-5 w-5 text-emerald-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-emerald-600 transition-colors">Manage Products</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-emerald-600 transition-colors">Manage Products</span>
                     <span className="text-xs text-charcoal-400">Edit existing items</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('categories')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-pink-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <FolderOpen className="h-5 w-5 text-pink-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-pink-600 transition-colors">Categories</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-pink-600 transition-colors">Categories</span>
                     <span className="text-xs text-charcoal-400">Organize items</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('orders')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <ShoppingCart className="h-5 w-5 text-amber-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-amber-600 transition-colors">Orders</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-amber-600 transition-colors">Orders</span>
                     <span className="text-xs text-charcoal-400">View transactions</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('inventory')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Warehouse className="h-5 w-5 text-orange-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-orange-600 transition-colors">Inventory</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-orange-600 transition-colors">Inventory</span>
                     <span className="text-xs text-charcoal-400">Track stock</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('shipping')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-charcoal-900/40 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <MapPin className="h-5 w-5 text-cyan-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-cyan-600 transition-colors">Shipping</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-cyan-600 transition-colors">Shipping</span>
                     <span className="text-xs text-charcoal-400">Manage rates</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('couriers')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Truck className="h-5 w-5 text-teal-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-teal-600 transition-colors">Couriers</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-teal-600 transition-colors">Couriers</span>
                     <span className="text-xs text-charcoal-400">Manage couriers</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('coa')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Shield className="h-5 w-5 text-indigo-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-indigo-600 transition-colors">Lab Results</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-indigo-600 transition-colors">Lab Results</span>
                     <span className="text-xs text-charcoal-400">Manage COAs</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('promo-codes')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Tag className="h-5 w-5 text-rose-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-rose-600 transition-colors">Promo Codes</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-rose-600 transition-colors">Promo Codes</span>
                     <span className="text-xs text-charcoal-400">Manage discounts</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('payments')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-violet-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <CreditCard className="h-5 w-5 text-violet-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-violet-600 transition-colors">Payments</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-violet-600 transition-colors">Payments</span>
                     <span className="text-xs text-charcoal-400">Manage methods</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('faq')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <HelpCircle className="h-5 w-5 text-teal-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-teal-600 transition-colors">FAQ</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-teal-600 transition-colors">FAQ</span>
                     <span className="text-xs text-charcoal-400">Manage content</span>
                   </div>
                 </button>
                 <button
                   onClick={() => setCurrentView('protocols')}
-                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-charcoal-700/50"
+                  className="group flex items-center gap-3 p-3 text-left hover:bg-theme-bg rounded-xl transition-all border border-transparent hover:border-gray-200"
                 >
                   <div className="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Shield className="h-5 w-5 text-rose-600" />
                   </div>
                   <div>
-                    <span className="block text-sm font-semibold text-white group-hover:text-rose-600 transition-colors">Protocols</span>
+                    <span className="block text-sm font-semibold text-charcoal-800 group-hover:text-rose-600 transition-colors">Protocols</span>
                     <span className="text-xs text-charcoal-400">Peptide guides</span>
                   </div>
                 </button>
               </div>
             </div>
 
-            <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-6 border border-charcoal-700/50 shadow-sm">
-              <h3 className="text-lg font-bold text-white mb-5 flex items-center gap-2">
+            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+              <h3 className="text-lg font-bold text-charcoal-800 mb-5 flex items-center gap-2">
                 <div className="w-1 h-6 bg-purple-600 rounded-full"></div>
                 Categories
               </h3>
@@ -1648,7 +1648,7 @@ const AdminDashboard: React.FC = () => {
                   ];
                   return (
                     <div key={category.id} className="group flex items-center justify-between py-2.5 px-3 hover:bg-theme-bg rounded-lg transition-all cursor-default">
-                      <span className="text-sm font-medium text-charcoal-300 group-hover:text-white transition-colors">{category.name}</span>
+                      <span className="text-sm font-medium text-charcoal-600 group-hover:text-charcoal-800 transition-colors">{category.name}</span>
                       <span className={`text-[10px] font-bold ${bgColors[index % bgColors.length]} px-2.5 py-1 rounded-full`}>
                         {category.count}
                       </span>
@@ -1656,7 +1656,7 @@ const AdminDashboard: React.FC = () => {
                   );
                 })}
               </div>
-              <div className="mt-6 p-4 bg-charcoal-900/40 rounded-xl border border-blue-100">
+              <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
                 <p className="text-xs text-blue-700 text-center leading-relaxed font-medium">
                   Tip: Manage your categories inventory and product distribution from the "Categories" tab.
                 </p>

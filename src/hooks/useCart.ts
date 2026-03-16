@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { CartItem, Product, ProductVariation, PenType } from '../types';
+import type { CartItem, Product, ProductVariation, PenType, PurchaseMode, FulfillmentType, CurrencyCode } from '../types';
 
 export function useCart() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -21,7 +21,16 @@ export function useCart() {
     localStorage.setItem('peptide_cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (product: Product, variation?: ProductVariation, quantity: number = 1, penType?: PenType) => {
+  const addToCart = (
+    product: Product,
+    variation?: ProductVariation,
+    quantity: number = 1,
+    penType?: PenType,
+    purchaseMode?: PurchaseMode,
+    fulfillmentType?: FulfillmentType,
+    price?: number,
+    currency?: CurrencyCode
+  ) => {
     // Check stock availability
     const availableStock = variation ? variation.stock_quantity : product.stock_quantity;
 
@@ -30,7 +39,8 @@ export function useCart() {
       return;
     }
 
-    const price = (() => {
+    // Calculate price: use provided price (from multi-pricing) or fall back to legacy logic
+    const finalPrice = price ?? (() => {
       if (penType === 'disposable' && variation?.disposable_pen_price) {
         return variation.disposable_pen_price;
       }
@@ -40,15 +50,17 @@ export function useCart() {
       return variation ? variation.price : (product.discount_active && product.discount_price ? product.discount_price : product.base_price);
     })();
 
-    // Find existing item matching product, variation, AND pen type
+    // Find existing item matching product, variation, pen type, purchase mode, and fulfillment type
     const existingItemIndex = cartItems.findIndex(
       item => item.product.id === product.id &&
         (variation ? item.variation?.id === variation.id : !item.variation) &&
-        item.penType === penType
+        item.penType === penType &&
+        item.purchaseMode === purchaseMode &&
+        item.fulfillmentType === fulfillmentType &&
+        item.currency === (currency || 'PHP')
     );
 
     if (existingItemIndex > -1) {
-      // Update existing item - check if new total exceeds stock
       const currentQuantity = cartItems[existingItemIndex].quantity;
       const newQuantity = currentQuantity + quantity;
 
@@ -67,7 +79,6 @@ export function useCart() {
       updatedItems[existingItemIndex].quantity += quantity;
       setCartItems(updatedItems);
     } else {
-      // Add new item - check if quantity exceeds stock
       if (quantity > availableStock) {
         alert(`Only ${availableStock} item(s) available in stock. Added ${availableStock} to your cart.`);
         quantity = availableStock;
@@ -77,8 +88,11 @@ export function useCart() {
         product,
         variation,
         quantity,
-        price,
-        penType
+        price: finalPrice,
+        penType,
+        purchaseMode,
+        fulfillmentType,
+        currency: currency || 'PHP'
       };
       setCartItems([...cartItems, newItem]);
     }
@@ -90,7 +104,6 @@ export function useCart() {
       return;
     }
 
-    // Check stock availability
     const item = cartItems[index];
     const availableStock = item.variation ? item.variation.stock_quantity : item.product.stock_quantity;
 
@@ -115,9 +128,16 @@ export function useCart() {
   };
 
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => {
-      return total + (item.price * item.quantity);
-    }, 0);
+    // Only sum PHP items for the main total (USD items shown separately)
+    return cartItems
+      .filter(item => (item.currency || 'PHP') === 'PHP')
+      .reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
+
+  const getTotalUSD = () => {
+    return cartItems
+      .filter(item => item.currency === 'USD')
+      .reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
   const getTotalItems = () => {
@@ -131,6 +151,7 @@ export function useCart() {
     removeFromCart,
     clearCart,
     getTotalPrice,
+    getTotalUSD,
     getTotalItems
   };
 }

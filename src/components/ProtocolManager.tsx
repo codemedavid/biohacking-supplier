@@ -120,17 +120,17 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
     return (
         <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-charcoal-900/40 backdrop-blur-md shadow-sm border-b border-charcoal-700/50">
+            <div className="bg-white backdrop-blur-md shadow-sm border-b border-charcoal-200">
                 <div className="max-w-4xl mx-auto px-4 py-4">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={onBack}
-                                className="text-charcoal-400 hover:text-white transition-colors"
+                                className="text-charcoal-400 hover:text-charcoal-800 transition-colors"
                             >
                                 <ArrowLeft className="w-5 h-5" />
                             </button>
-                            <h1 className="text-xl font-bold text-white">📋 Protocol Manager</h1>
+                            <h1 className="text-xl font-bold text-charcoal-800">📋 Protocol Manager</h1>
                         </div>
                         {!isAdding && !editingId && (
                             <button
@@ -148,14 +148,14 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
             <div className="max-w-4xl mx-auto px-4 py-6">
                 {/* Add/Edit Form */}
                 {(isAdding || editingId) && (
-                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border border-charcoal-700/50 p-6 mb-6">
-                        <h2 className="text-lg font-bold text-white mb-4">
+                    <div className="bg-white backdrop-blur-md rounded-xl shadow-sm border border-charcoal-200 p-6 mb-6">
+                        <h2 className="text-lg font-bold text-charcoal-800 mb-4">
                             {isAdding ? '➕ Add New Protocol' : '✏️ Edit Protocol'}
                         </h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Name *</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Name *</label>
                                 <input
                                     type="text"
                                     value={formData.name}
@@ -165,7 +165,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Category *</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Category *</label>
                                 <input
                                     type="text"
                                     value={formData.category}
@@ -175,7 +175,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Dosage *</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Dosage *</label>
                                 <input
                                     type="text"
                                     value={formData.dosage}
@@ -185,7 +185,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Frequency</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Frequency</label>
                                 <input
                                     type="text"
                                     value={formData.frequency}
@@ -195,7 +195,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Duration</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Duration</label>
                                 <input
                                     type="text"
                                     value={formData.duration}
@@ -205,7 +205,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-charcoal-200 mb-1">Sort Order</label>
+                                <label className="block text-sm font-medium text-charcoal-700 mb-1">Sort Order</label>
                                 <input
                                     type="number"
                                     value={formData.sort_order}
@@ -216,7 +216,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-charcoal-200 mb-1">Storage Instructions</label>
+                            <label className="block text-sm font-medium text-charcoal-700 mb-1">Storage Instructions</label>
                             <input
                                 type="text"
                                 value={formData.storage}
@@ -227,7 +227,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block text-sm font-medium text-charcoal-200 mb-1">Protocol Notes (one per line)</label>
+                            <label className="block text-sm font-medium text-charcoal-700 mb-1">Protocol Notes (one per line)</label>
                             <textarea
                                 value={notesText}
                                 onChange={(e) => setNotesText(e.target.value)}
@@ -243,9 +243,9 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                 id="active"
                                 checked={formData.active}
                                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                                className="w-4 h-4 text-white rounded focus:ring-gray-900"
+                                className="w-4 h-4 text-charcoal-800 rounded focus:ring-gray-900"
                             />
-                            <label htmlFor="active" className="text-sm font-medium text-charcoal-200">Active (visible on website)</label>
+                            <label htmlFor="active" className="text-sm font-medium text-charcoal-700">Active (visible on website)</label>
                         </div>
 
                         <div className="flex items-center gap-3">
@@ -259,7 +259,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                             </button>
                             <button
                                 onClick={handleCancel}
-                                className="flex items-center gap-2 px-4 py-2 border border-charcoal-600/50 text-charcoal-200 rounded-lg hover:bg-theme-bg transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 border border-charcoal-600/50 text-charcoal-700 rounded-lg hover:bg-theme-bg transition-colors"
                             >
                                 <X className="w-4 h-4" />
                                 Cancel
@@ -271,14 +271,14 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                 {/* Protocols List */}
                 <div className="space-y-3">
                     {protocols.length === 0 ? (
-                        <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border border-charcoal-700/50 p-8 text-center">
+                        <div className="bg-white backdrop-blur-md rounded-xl shadow-sm border border-charcoal-200 p-8 text-center">
                             <p className="text-charcoal-400">No protocols yet. Add your first protocol!</p>
                         </div>
                     ) : (
                         protocols.map((protocol) => (
                             <div
                                 key={protocol.id}
-                                className={`bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm border ${protocol.active ? 'border-charcoal-700/50' : 'border-red-200 bg-red-50/30'} p-4`}
+                                className={`bg-white backdrop-blur-md rounded-xl shadow-sm border ${protocol.active ? 'border-charcoal-200' : 'border-red-200 bg-red-50/30'} p-4`}
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">
@@ -288,8 +288,8 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                                 <span className="text-xs font-medium text-red-500 bg-red-100 px-2 py-0.5 rounded">Hidden</span>
                                             )}
                                         </div>
-                                        <h3 className="font-semibold text-white">{protocol.name}</h3>
-                                        <p className="text-sm text-charcoal-300 mt-1">
+                                        <h3 className="font-semibold text-charcoal-800">{protocol.name}</h3>
+                                        <p className="text-sm text-charcoal-600 mt-1">
                                             {protocol.dosage} • {protocol.frequency}
                                         </p>
                                     </div>
@@ -305,7 +305,7 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                                         </button>
                                         <button
                                             onClick={() => handleEdit(protocol)}
-                                            className="p-2 text-blue-600 hover:bg-charcoal-900/40 rounded-lg transition-colors"
+                                            className="p-2 text-blue-600 hover:bg-white rounded-lg transition-colors"
                                             title="Edit"
                                         >
                                             <Edit className="w-4 h-4" />

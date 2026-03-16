@@ -13,17 +13,16 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
   return (
     <>
-      <header className="bg-charcoal-900/95 backdrop-blur-sm sticky top-0 z-50 border-b border-charcoal-700/50">
+      <header className="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-charcoal-100">
         <div className="container mx-auto px-4 md:px-6 py-3">
           <div className="flex items-center justify-between gap-4">
-            {/* Logo - Rectangular */}
+            {/* Logo */}
             <button
               onClick={() => { onMenuClick(); setMobileMenuOpen(false); }}
               className="flex items-center hover:opacity-90 transition-opacity"
             >
-
-              <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-blush-600 tracking-tight">
-                Nexus sample Peptide website
+              <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-glow-teal-600 tracking-tight">
+                Biohacking Supplier
               </span>
             </button>
 
@@ -33,35 +32,35 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <nav className="hidden md:flex items-center gap-1 lg:gap-2">
                 <button
                   onClick={onMenuClick}
-                  className={`text-sm font-medium ${currentPath === '/' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'} hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2`}
+                  className={`text-sm font-medium ${currentPath === '/' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
                 >
                   <FlaskConical className="w-4 h-4" />
                   Products
                 </button>
                 <a
                   href="/calculator"
-                  className={`text-sm font-medium ${currentPath === '/calculator' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'} hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2`}
+                  className={`text-sm font-medium ${currentPath === '/calculator' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
                 >
                   <Calculator className="w-4 h-4" />
                   Calculator
                 </a>
                 <a
                   href="/protocols"
-                  className={`text-sm font-medium ${currentPath === '/protocols' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'} hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2`}
+                  className={`text-sm font-medium ${currentPath === '/protocols' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
                 >
                   <FlaskConical className="w-4 h-4" />
                   Protocols
                 </a>
                 <a
                   href="/track-order"
-                  className={`text-sm font-medium ${currentPath === '/track-order' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'} hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2`}
+                  className={`text-sm font-medium ${currentPath === '/track-order' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
                 >
                   <Truck className="w-4 h-4" />
                   Track
                 </a>
                 <a
                   href="/faq"
-                  className={`text-sm font-medium ${currentPath === '/faq' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'} hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2`}
+                  className={`text-sm font-medium ${currentPath === '/faq' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
                 >
                   <HelpCircle className="w-4 h-4" />
                   FAQ
@@ -71,11 +70,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               {/* Cart Button */}
               <button
                 onClick={onCartClick}
-                className="relative p-2.5 text-charcoal-200 hover:bg-charcoal-800/60 rounded-xl transition-colors"
+                className="relative p-2.5 text-charcoal-600 hover:bg-glow-teal-50 rounded-xl transition-colors"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-blush-600 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                  <span className="absolute -top-1 -right-1 bg-glow-teal-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
                     {cartItemsCount > 99 ? '99+' : cartItemsCount}
                   </span>
                 )}
@@ -84,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2.5 text-charcoal-200 hover:bg-charcoal-800/60 rounded-xl transition-colors"
+                className="md:hidden p-2.5 text-charcoal-600 hover:bg-glow-teal-50 rounded-xl transition-colors"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? (
@@ -103,26 +102,25 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
         <div className="md:hidden fixed inset-0 z-[60]">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-charcoal-900/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-charcoal-800/20 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Sidebar Drawer */}
           <div
-            className="absolute top-0 right-0 bottom-0 w-[300px] bg-charcoal-900/40 backdrop-blur-md shadow-2xl border-l border-charcoal-700/50 flex flex-col"
+            className="absolute top-0 right-0 bottom-0 w-[300px] bg-white shadow-2xl border-l border-charcoal-100 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer Header */}
-            <div className="flex items-center justify-between p-5 border-b border-charcoal-700/50">
+            <div className="flex items-center justify-between p-5 border-b border-charcoal-100">
               <div className="flex items-center gap-3">
-
-                <span className="text-lg font-heading font-bold text-blush-600">
-                  Nexus sample Peptide website
+                <span className="text-lg font-heading font-bold text-glow-teal-600">
+                  Biohacking Supplier
                 </span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 text-charcoal-500 hover:text-rose-500 transition-colors rounded-lg hover:bg-charcoal-800/60"
+                className="p-2 text-charcoal-400 hover:text-glow-teal-500 transition-colors rounded-lg hover:bg-glow-teal-50"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -136,9 +134,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                     onMenuClick();
                     setMobileMenuOpen(false);
                   }}
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-charcoal-800/60 transition-colors ${currentPath === '/' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
                 >
-                  <div className="p-2 rounded-lg bg-charcoal-800/60 text-blush-600">
+                  <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
                     <FlaskConical className="w-[18px] h-[18px]" />
                   </div>
                   Products
@@ -146,9 +144,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
                 <a
                   href="/calculator"
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-charcoal-800/60 transition-colors ${currentPath === '/calculator' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/calculator' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
                 >
-                  <div className="p-2 rounded-lg bg-charcoal-800/60 text-blush-600">
+                  <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
                     <Calculator className="w-[18px] h-[18px]" />
                   </div>
                   Calculator
@@ -156,9 +154,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
                 <a
                   href="/protocols"
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-charcoal-800/60 transition-colors ${currentPath === '/protocols' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/protocols' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
                 >
-                  <div className="p-2 rounded-lg bg-charcoal-800/60 text-blush-600">
+                  <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
                     <FlaskConical className="w-[18px] h-[18px]" />
                   </div>
                   Protocols
@@ -166,9 +164,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
                 <a
                   href="/track-order"
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-charcoal-800/60 transition-colors ${currentPath === '/track-order' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/track-order' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
                 >
-                  <div className="p-2 rounded-lg bg-charcoal-800/60 text-blush-600">
+                  <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
                     <Truck className="w-[18px] h-[18px]" />
                   </div>
                   Track Order
@@ -176,9 +174,9 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
 
                 <a
                   href="/faq"
-                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-charcoal-800/60 transition-colors ${currentPath === '/faq' ? 'text-white bg-charcoal-800/40' : 'text-charcoal-400'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/faq' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
                 >
-                  <div className="p-2 rounded-lg bg-charcoal-800/60 text-blush-600">
+                  <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
                     <HelpCircle className="w-[18px] h-[18px]" />
                   </div>
                   FAQ

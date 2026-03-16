@@ -50,7 +50,7 @@ export default function ArticleDetail() {
     if (loading) {
         return (
             <div className="min-h-screen bg-theme-bg flex items-center justify-center">
-                <div className="animate-spin w-8 h-8 border-2 border-charcoal-700/50 border-t-transparent rounded-full" />
+                <div className="animate-spin w-8 h-8 border-2 border-charcoal-200 border-t-transparent rounded-full" />
             </div>
         );
     }
@@ -59,7 +59,7 @@ export default function ArticleDetail() {
         return (
             <div className="min-h-screen bg-theme-bg flex items-center justify-center">
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-white mb-4">Article Not Found</h2>
+                    <h2 className="text-2xl font-bold text-charcoal-800 mb-4">Article Not Found</h2>
                     <button
                         onClick={() => navigate('/peptalk')}
                         className="text-theme-accent hover:underline"
@@ -74,11 +74,11 @@ export default function ArticleDetail() {
     return (
         <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-charcoal-900/40 backdrop-blur-md border-b border-charcoal-700/50 sticky top-0 z-10 shadow-sm">
+            <div className="bg-white backdrop-blur-md border-b border-charcoal-200 sticky top-0 z-10 shadow-sm">
                 <div className="container mx-auto px-4 py-4">
                     <button
                         onClick={() => navigate('/peptalk')}
-                        className="flex items-center gap-2 text-charcoal-300 hover:text-white transition-colors group"
+                        className="flex items-center gap-2 text-charcoal-600 hover:text-charcoal-800 transition-colors group"
                     >
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                         <span className="font-medium">Back to Peptalk</span>
@@ -100,15 +100,15 @@ export default function ArticleDetail() {
 
             {/* Article Content */}
             <div className="container mx-auto px-4 py-8 max-w-4xl">
-                <article className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden">
+                <article className="bg-white backdrop-blur-md rounded-2xl shadow-lg overflow-hidden">
                     {/* Article Header */}
-                    <div className="p-8 md:p-12 border-b border-charcoal-700/50">
-                        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                    <div className="p-8 md:p-12 border-b border-charcoal-200">
+                        <h1 className="text-3xl md:text-4xl font-bold text-charcoal-800 mb-6 leading-tight">
                             {article.title}
                         </h1>
 
                         {/* Meta Information */}
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-charcoal-300">
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-charcoal-600">
                             <div className="flex items-center gap-2">
                                 <User className="w-4 h-4 text-gold-500" />
                                 <span>By {article.author}</span>
@@ -127,7 +127,7 @@ export default function ArticleDetail() {
                     {/* Article Body */}
                     <div className="p-8 md:p-12">
                         <div className="prose prose-lg max-w-none">
-                            <p className="text-charcoal-200 leading-relaxed whitespace-pre-line text-base md:text-lg">
+                            <p className="text-charcoal-700 leading-relaxed whitespace-pre-line text-base md:text-lg">
                                 {article.content}
                             </p>
                         </div>

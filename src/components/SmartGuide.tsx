@@ -46,7 +46,7 @@ export default function SmartGuide() {
     if (loading) {
         return (
             <div className="min-h-screen bg-theme-bg flex items-center justify-center">
-                <div className="animate-spin w-8 h-8 border-2 border-charcoal-700/50 border-t-transparent rounded-full" />
+                <div className="animate-spin w-8 h-8 border-2 border-charcoal-200 border-t-transparent rounded-full" />
             </div>
         );
     }
@@ -54,18 +54,18 @@ export default function SmartGuide() {
     return (
         <div className="min-h-screen bg-theme-bg">
             {/* Header */}
-            <div className="bg-charcoal-900/40 backdrop-blur-md border-b-4 border-charcoal-700/50 sticky top-0 z-10 shadow-sm">
+            <div className="bg-white backdrop-blur-md border-b-4 border-charcoal-200 sticky top-0 z-10 shadow-sm">
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex items-center gap-4">
                         <a
                             href="/"
                             className="p-2 hover:bg-charcoal-800/50 rounded-lg transition-colors group"
                         >
-                            <ArrowLeft className="w-5 h-5 text-charcoal-300 group-hover:text-white" />
+                            <ArrowLeft className="w-5 h-5 text-charcoal-600 group-hover:text-charcoal-800" />
                         </a>
                         <div className="flex items-center gap-2">
                             <BookOpen className="w-6 h-6 text-gold-500" />
-                            <h1 className="text-xl md:text-2xl font-bold text-white">Peptalk</h1>
+                            <h1 className="text-xl md:text-2xl font-bold text-charcoal-800">Peptalk</h1>
                         </div>
                     </div>
                 </div>
@@ -73,12 +73,12 @@ export default function SmartGuide() {
 
             <div className="container mx-auto px-4 py-8 max-w-6xl">
                 {articles.length === 0 ? (
-                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-2xl p-12 text-center shadow-xl border border-charcoal-800/50">
+                    <div className="bg-white backdrop-blur-md rounded-2xl p-12 text-center shadow-xl border border-charcoal-800/50">
                         <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                        <h3 className="text-2xl font-semibold text-white mb-2">
+                        <h3 className="text-2xl font-semibold text-charcoal-800 mb-2">
                             No Articles Available Yet
                         </h3>
-                        <p className="text-charcoal-300">
+                        <p className="text-charcoal-600">
                             Check back soon for educational content about peptides.
                         </p>
                     </div>
@@ -88,7 +88,7 @@ export default function SmartGuide() {
                             <div
                                 key={article.id}
                                 onClick={() => navigate(`/peptalk/${article.id}`)}
-                                className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden group border border-charcoal-800/50"
+                                className="bg-white backdrop-blur-md rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden group border border-charcoal-800/50"
                             >
                                 {/* Cover Image */}
                                 {article.cover_image ? (
@@ -108,12 +108,12 @@ export default function SmartGuide() {
 
                                 {/* Card Content */}
                                 <div className="p-6">
-                                    <h3 className="text-lg font-bold text-white mb-3 line-clamp-2 group-hover:text-theme-accent transition-colors">
+                                    <h3 className="text-lg font-bold text-charcoal-800 mb-3 line-clamp-2 group-hover:text-theme-accent transition-colors">
                                         {article.title}
                                     </h3>
 
                                     {article.preview && (
-                                        <p className="text-charcoal-300 text-sm mb-4 line-clamp-3">
+                                        <p className="text-charcoal-600 text-sm mb-4 line-clamp-3">
                                             {article.preview}
                                         </p>
                                     )}

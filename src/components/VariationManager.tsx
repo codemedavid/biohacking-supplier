@@ -130,7 +130,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4">
-      <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
+      <div className="bg-white backdrop-blur-md rounded-xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-gray-900 text-white p-4 sm:p-6">
           <div className="flex items-start justify-between gap-3">
@@ -157,7 +157,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
         <div className="p-3 sm:p-6 overflow-y-auto max-h-[calc(95vh-200px)] sm:max-h-[calc(90vh-180px)]">
           {/* Current Variations */}
           <div className="mb-4 sm:mb-6">
-            <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+            <h3 className="text-base sm:text-lg font-bold text-charcoal-800 mb-3 sm:mb-4 flex items-center gap-2">
               Current Sizes
               <span className="text-xs sm:text-sm font-normal text-charcoal-400">
                 ({product.variations?.length || 0} variations)
@@ -167,7 +167,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
             {!product.variations || product.variations.length === 0 ? (
               <div className="bg-theme-bg border-2 border-dashed border-charcoal-600/50 rounded-xl p-6 sm:p-8 text-center">
                 <Package className="w-10 h-10 sm:w-12 sm:h-12 text-charcoal-500 mx-auto mb-3" />
-                <p className="text-charcoal-300 font-medium text-sm sm:text-base">No size variations yet</p>
+                <p className="text-charcoal-600 font-medium text-sm sm:text-base">No size variations yet</p>
                 <p className="text-xs sm:text-sm text-charcoal-400 mt-1">Add your first size option below</p>
               </div>
             ) : (
@@ -176,24 +176,24 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                   <div key={variation.id}>
                     {editingId === variation.id ? (
                       // Edit Mode
-                      <div className="bg-charcoal-900/40 backdrop-blur-md border-2 border-gray-900 rounded-xl p-3 sm:p-4 space-y-4">
-                        <h4 className="font-bold text-white text-sm sm:text-base mb-3 sm:mb-4">Edit Variation</h4>
+                      <div className="bg-white backdrop-blur-md border-2 border-gray-900 rounded-xl p-3 sm:p-4 space-y-4">
+                        <h4 className="font-bold text-charcoal-800 text-sm sm:text-base mb-3 sm:mb-4">Edit Variation</h4>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                           <div>
-                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                               Size Name *
                             </label>
                             <input
                               type="text"
                               value={editingVariation.name}
                               onChange={(e) => setEditingVariation({ ...editingVariation, name: e.target.value })}
-                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                               Quantity (mg) *
                             </label>
                             <input
@@ -201,12 +201,12 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                               step="0.1"
                               value={editingVariation.quantity_mg}
                               onChange={(e) => setEditingVariation({ ...editingVariation, quantity_mg: parseFloat(e.target.value) || 0 })}
-                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                               Price (₱) *
                             </label>
                             <input
@@ -214,24 +214,24 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                               step="0.01"
                               value={editingVariation.price}
                               onChange={(e) => setEditingVariation({ ...editingVariation, price: parseFloat(e.target.value) || 0 })}
-                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                               Stock Quantity *
                             </label>
                             <input
                               type="number"
                               value={editingVariation.stock_quantity}
                               onChange={(e) => setEditingVariation({ ...editingVariation, stock_quantity: parseInt(e.target.value) || 0 })}
-                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                            <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                               Discount Price (₱)
                             </label>
                             <input
@@ -239,7 +239,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                               step="0.01"
                               value={editingVariation.discount_price || ''}
                               onChange={(e) => setEditingVariation({ ...editingVariation, discount_price: parseFloat(e.target.value) || null })}
-                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                               placeholder="Leave empty for no discount"
                             />
                           </div>
@@ -254,9 +254,9 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                                   discount_active: e.target.checked,
                                   discount_price: e.target.checked ? editingVariation.discount_price : null
                                 })}
-                                className="w-4 h-4 text-white rounded focus:ring-gray-900"
+                                className="w-4 h-4 text-charcoal-800 rounded focus:ring-gray-900"
                               />
-                              <span className="text-xs sm:text-sm font-semibold text-charcoal-200">🏷️ Enable Discount</span>
+                              <span className="text-xs sm:text-sm font-semibold text-charcoal-700">🏷️ Enable Discount</span>
                             </label>
                           </div>
                         </div>
@@ -273,7 +273,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                           <button
                             onClick={() => setEditingId(null)}
                             disabled={isProcessing}
-                            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-200 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
+                            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-700 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
                           >
                             Cancel
                           </button>
@@ -281,33 +281,33 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                       </div>
                     ) : (
                       // View Mode - Responsive Card
-                      <div className="bg-theme-bg border border-charcoal-700/50 rounded-xl p-3 sm:p-4">
+                      <div className="bg-theme-bg border border-charcoal-200 rounded-xl p-3 sm:p-4">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                           {/* Mobile: Stack layout, Desktop: Grid layout */}
                           <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Size Name</div>
-                              <div className="font-bold text-white text-sm sm:text-base">{variation.name}</div>
+                              <div className="font-bold text-charcoal-800 text-sm sm:text-base">{variation.name}</div>
                             </div>
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Quantity</div>
-                              <div className="font-semibold text-charcoal-200 text-sm sm:text-base">{variation.quantity_mg}mg</div>
+                              <div className="font-semibold text-charcoal-700 text-sm sm:text-base">{variation.quantity_mg}mg</div>
                             </div>
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Price</div>
-                              <div className="font-semibold text-white text-sm sm:text-base">₱{variation.price.toLocaleString()}</div>
+                              <div className="font-semibold text-charcoal-800 text-sm sm:text-base">₱{variation.price.toLocaleString()}</div>
                             </div>
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Stock</div>
-                              <div className="font-semibold text-charcoal-200 text-sm sm:text-base">{variation.stock_quantity} units</div>
+                              <div className="font-semibold text-charcoal-700 text-sm sm:text-base">{variation.stock_quantity} units</div>
                             </div>
                           </div>
                           {/* Action buttons */}
-                          <div className="flex gap-2 justify-end sm:justify-start pt-2 sm:pt-0 border-t sm:border-t-0 border-charcoal-700/50 sm:ml-auto">
+                          <div className="flex gap-2 justify-end sm:justify-start pt-2 sm:pt-0 border-t sm:border-t-0 border-charcoal-200 sm:ml-auto">
                             <button
                               onClick={() => handleEditVariation(variation)}
                               disabled={isProcessing}
-                              className="p-2 text-charcoal-300 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 border border-charcoal-600/50"
+                              className="p-2 text-charcoal-600 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 border border-charcoal-600/50"
                               title="Edit variation"
                             >
                               <Edit className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -331,7 +331,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
           </div>
 
           {/* Add New Variation */}
-          <div className="border-t-2 border-charcoal-700/50 pt-4 sm:pt-6">
+          <div className="border-t-2 border-charcoal-200 pt-4 sm:pt-6">
             <button
               onClick={() => {
                 setIsAdding(!isAdding);
@@ -344,12 +344,12 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
             </button>
 
             {isAdding && (
-              <div className="bg-charcoal-900/40 backdrop-blur-md border-2 border-gray-900 rounded-xl p-3 sm:p-6 space-y-4">
-                <h4 className="font-bold text-white text-sm sm:text-base mb-3 sm:mb-4">New Size Variation</h4>
+              <div className="bg-white backdrop-blur-md border-2 border-gray-900 rounded-xl p-3 sm:p-6 space-y-4">
+                <h4 className="font-bold text-charcoal-800 text-sm sm:text-base mb-3 sm:mb-4">New Size Variation</h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                       Size Name *
                     </label>
                     <input
@@ -357,12 +357,12 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                       value={newVariation.name}
                       onChange={(e) => setNewVariation({ ...newVariation, name: e.target.value })}
                       placeholder="e.g., 5mg, 10mg, 20mg"
-                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                       Quantity (mg) *
                     </label>
                     <input
@@ -370,12 +370,12 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                       step="0.1"
                       value={newVariation.quantity_mg}
                       onChange={(e) => setNewVariation({ ...newVariation, quantity_mg: parseFloat(e.target.value) || 0 })}
-                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                       Price (₱) *
                     </label>
                     <input
@@ -383,24 +383,24 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                       step="0.01"
                       value={newVariation.price}
                       onChange={(e) => setNewVariation({ ...newVariation, price: parseFloat(e.target.value) || 0 })}
-                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                       Stock Quantity *
                     </label>
                     <input
                       type="number"
                       value={newVariation.stock_quantity}
                       onChange={(e) => setNewVariation({ ...newVariation, stock_quantity: parseInt(e.target.value) || 0 })}
-                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-200 mb-1 sm:mb-2">
+                    <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
                       Discount Price (₱)
                     </label>
                     <input
@@ -408,7 +408,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                       step="0.01"
                       value={newVariation.discount_price || ''}
                       onChange={(e) => setNewVariation({ ...newVariation, discount_price: parseFloat(e.target.value) || null })}
-                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-charcoal-900/40 backdrop-blur-md text-white placeholder-gray-400"
+                      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-charcoal-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white backdrop-blur-md text-charcoal-800 placeholder-gray-400"
                       placeholder="Leave empty for no discount"
                     />
                   </div>
@@ -423,9 +423,9 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                           discount_active: e.target.checked,
                           discount_price: e.target.checked ? newVariation.discount_price : null
                         })}
-                        className="w-4 h-4 text-white rounded focus:ring-gray-900"
+                        className="w-4 h-4 text-charcoal-800 rounded focus:ring-gray-900"
                       />
-                      <span className="text-xs sm:text-sm font-semibold text-charcoal-200">🏷️ Enable Discount</span>
+                      <span className="text-xs sm:text-sm font-semibold text-charcoal-700">🏷️ Enable Discount</span>
                     </label>
                   </div>
                 </div>
@@ -442,7 +442,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                   <button
                     onClick={() => setIsAdding(false)}
                     disabled={isProcessing}
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-200 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-700 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
                   >
                     Cancel
                   </button>
@@ -453,10 +453,10 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
         </div>
 
         {/* Footer */}
-        <div className="bg-charcoal-800/50 border-t border-charcoal-700/50 p-3 sm:p-4 flex justify-end">
+        <div className="bg-charcoal-800/50 border-t border-charcoal-200 p-3 sm:p-4 flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-200 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-200 hover:bg-gray-300 text-charcoal-700 rounded-lg sm:rounded-xl font-medium transition-all text-sm sm:text-base"
           >
             Close
           </button>

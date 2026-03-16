@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed</title>
+</head>
+<body style="margin:0;padding:0;background-color:#FDF8FF;font-family:'Poppins',Arial,sans-serif;">
+  <div style="background-color:#FDF8FF;padding:30px 15px;">
+    <div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #EDE6F2;">
+
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,#E8A0BF,#B08DD4);padding:30px 24px;text-align:center;">
+        <h1 style="color:#ffffff;font-size:22px;margin:0;font-weight:700;">Biohacking Supplier</h1>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:32px 28px;">
+        <div style="text-align:center;margin-bottom:20px;">
+          <div style="display:inline-block;background:#F0E8F8;border-radius:50%;width:56px;height:56px;line-height:56px;font-size:28px;text-align:center;">&#10003;</div>
+        </div>
+        <h2 style="color:#3D2B4A;font-size:20px;margin:0 0 12px;text-align:center;">Order Confirmed!</h2>
+        <div style="width:50px;height:3px;background:linear-gradient(90deg,#E8A0BF,#B08DD4);border-radius:3px;margin:0 auto 20px;"></div>
+        <p style="color:#5E4672;font-size:14px;line-height:1.7;margin:0 0 16px;text-align:center;">
+          Hi {{ event.properties.customer_name }}, your payment has been verified and your order is now confirmed.
+        </p>
+        <p style="color:#5E4672;font-size:14px;line-height:1.7;margin:0;text-align:center;">
+          We're preparing it now. You'll get another update once it ships.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:20px 28px;border-top:1px solid #F0E8F8;text-align:center;">
+        <p style="color:#9980AD;font-size:11px;margin:0;">Biohacking Supplier &bull; Quality peptides for your wellness journey</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

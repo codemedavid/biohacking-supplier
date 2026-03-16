@@ -116,7 +116,7 @@ const SiteSettingsManager: React.FC = () => {
     <div className="space-y-8 pb-12">
       {/* General Site Settings Card */}
       <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl shadow-sm p-6 border border-charcoal-800/50">
-        <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+        <h2 className="text-xl font-bold text-charcoal-800 mb-6 flex items-center gap-2">
           <Layout className="w-5 h-5 text-charcoal-400" />
           General Site Settings
         </h2>
@@ -125,12 +125,12 @@ const SiteSettingsManager: React.FC = () => {
           {/* Logo & Name Row */}
           <div className="flex flex-col md:flex-row gap-6">
             <div className="shrink-0">
-              <label className="block text-sm font-medium text-charcoal-200 mb-2">Site Logo</label>
+              <label className="block text-sm font-medium text-charcoal-700 mb-2">Site Logo</label>
               <div className="flex items-center gap-4">
                 <div className="w-20 h-20 rounded-full overflow-hidden bg-charcoal-800/50 border border-charcoal-700/50">
                   <img src={logoPreview || '/rs-peptides-logo.png'} alt="Logo" className="w-full h-full object-cover" />
                 </div>
-                <label className="cursor-pointer bg-charcoal-900/40 backdrop-blur-md border border-charcoal-600/50 hover:bg-theme-bg text-charcoal-200 px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+                <label className="cursor-pointer bg-charcoal-900/40 backdrop-blur-md border border-charcoal-600/50 hover:bg-theme-bg text-charcoal-700 px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
                   Change
                   <input type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
                 </label>
@@ -138,35 +138,35 @@ const SiteSettingsManager: React.FC = () => {
             </div>
             <div className="flex-1 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-charcoal-200 mb-1">Site Name</label>
+                <label className="block text-sm font-medium text-charcoal-700 mb-1">Site Name</label>
                 <input
                   type="text"
                   name="site_name"
                   value={formData.site_name}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-shadow text-white"
+                  className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-shadow text-charcoal-800"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-charcoal-200 mb-1">Site Description</label>
+                <label className="block text-sm font-medium text-charcoal-700 mb-1">Site Description</label>
                 <textarea
                   name="site_description"
                   value={formData.site_description}
                   onChange={handleInputChange}
                   rows={2}
-                  className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-shadow text-white"
+                  className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-shadow text-charcoal-800"
                 />
               </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-charcoal-200 mb-1">Currency Symbol</label>
-              <input type="text" name="currency" value={formData.currency} onChange={handleInputChange} className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-white" />
+              <label className="block text-sm font-medium text-charcoal-700 mb-1">Currency Symbol</label>
+              <input type="text" name="currency" value={formData.currency} onChange={handleInputChange} className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-charcoal-800" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-charcoal-200 mb-1">Currency Code</label>
-              <input type="text" name="currency_code" value={formData.currency_code} onChange={handleInputChange} className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-white" />
+              <label className="block text-sm font-medium text-charcoal-700 mb-1">Currency Code</label>
+              <input type="text" name="currency_code" value={formData.currency_code} onChange={handleInputChange} className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg text-charcoal-800" />
             </div>
           </div>
           <div className="flex justify-end">
@@ -185,7 +185,7 @@ const SiteSettingsManager: React.FC = () => {
               <Home className="w-6 h-6 text-orange-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Homepage Content</h2>
+              <h2 className="text-xl font-bold text-charcoal-800">Homepage Content</h2>
               <p className="text-sm text-charcoal-400 mt-1">Customize the landing page text.</p>
             </div>
           </div>
@@ -201,13 +201,13 @@ const SiteSettingsManager: React.FC = () => {
         <div className="p-6 space-y-6">
           {/* Badge Text */}
           <div>
-            <label className="block text-sm font-bold text-charcoal-200 mb-2">Badge Text</label>
+            <label className="block text-sm font-bold text-charcoal-700 mb-2">Badge Text</label>
             <input
               type="text"
               name="hero_badge_text"
               value={formData.hero_badge_text}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 placeholder-gray-400 focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
               placeholder="e.g. Premium Peptide Solutions"
             />
           </div>
@@ -215,18 +215,18 @@ const SiteSettingsManager: React.FC = () => {
           {/* Title Row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-bold text-charcoal-200 mb-2">Title Prefix</label>
+              <label className="block text-sm font-bold text-charcoal-700 mb-2">Title Prefix</label>
               <input
                 type="text"
                 name="hero_title_prefix"
                 value={formData.hero_title_prefix}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white focus:ring-2 focus:ring-gray-900 transition-all"
+                className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 focus:ring-2 focus:ring-gray-900 transition-all"
                 placeholder="e.g. Premium"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-charcoal-200 mb-2">Highlight (Color)</label>
+              <label className="block text-sm font-bold text-charcoal-700 mb-2">Highlight (Color)</label>
               <input
                 type="text"
                 name="hero_title_highlight"
@@ -237,13 +237,13 @@ const SiteSettingsManager: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-charcoal-200 mb-2">Title Suffix</label>
+              <label className="block text-sm font-bold text-charcoal-700 mb-2">Title Suffix</label>
               <input
                 type="text"
                 name="hero_title_suffix"
                 value={formData.hero_title_suffix}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white focus:ring-2 focus:ring-gray-900 transition-all"
+                className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 focus:ring-2 focus:ring-gray-900 transition-all"
                 placeholder="e.g. & Essentials"
               />
             </div>
@@ -251,39 +251,39 @@ const SiteSettingsManager: React.FC = () => {
 
           {/* Subtext */}
           <div>
-            <label className="block text-sm font-bold text-charcoal-200 mb-2">Subtext (Next to Title)</label>
+            <label className="block text-sm font-bold text-charcoal-700 mb-2">Subtext (Next to Title)</label>
             <input
               type="text"
               name="hero_subtext"
               value={formData.hero_subtext}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white focus:ring-2 focus:ring-gray-900 transition-all"
+              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 focus:ring-2 focus:ring-gray-900 transition-all"
               placeholder="e.g. — Trusted Quality for Your Journey."
             />
           </div>
 
           {/* Hero Tagline */}
           <div>
-            <label className="block text-sm font-bold text-charcoal-200 mb-2">Hero Tagline</label>
+            <label className="block text-sm font-bold text-charcoal-700 mb-2">Hero Tagline</label>
             <textarea
               name="hero_tagline"
               value={formData.hero_tagline}
               onChange={handleInputChange}
               rows={2}
-              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white focus:ring-2 focus:ring-gray-900 transition-all resize-none"
+              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 focus:ring-2 focus:ring-gray-900 transition-all resize-none"
               placeholder="e.g. Quality-tested products. Reliable performance..."
             />
           </div>
 
           {/* Main Description */}
           <div>
-            <label className="block text-sm font-bold text-charcoal-200 mb-2">Main Description</label>
+            <label className="block text-sm font-bold text-charcoal-700 mb-2">Main Description</label>
             <textarea
               name="hero_description"
               value={formData.hero_description}
               onChange={handleInputChange}
               rows={4}
-              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-white focus:ring-2 focus:ring-gray-900 transition-all resize-none"
+              className="w-full px-4 py-3 border border-charcoal-700/50 rounded-xl text-charcoal-800 focus:ring-2 focus:ring-gray-900 transition-all resize-none"
               placeholder="e.g. Explore our carefully curated selection..."
             />
           </div>

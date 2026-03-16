@@ -45,7 +45,7 @@ function MainApp() {
         : menuItems.filter(item => item.category === selectedCategory);
 
     return (
-        <div className="min-h-screen bg-theme-bg font-inter flex flex-col">
+        <div className="min-h-screen bg-theme-bg font-sans flex flex-col">
             <Header
                 cartItemsCount={cart.getTotalItems()}
                 onCartClick={() => handleViewChange('cart')}
@@ -75,6 +75,7 @@ function MainApp() {
                         removeFromCart={cart.removeFromCart}
                         clearCart={cart.clearCart}
                         getTotalPrice={cart.getTotalPrice}
+                        getTotalUSD={cart.getTotalUSD}
                         onContinueShopping={() => handleViewChange('menu')}
                         onCheckout={() => handleViewChange('checkout')}
                     />

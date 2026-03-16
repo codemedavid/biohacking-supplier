@@ -59,7 +59,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           <img
             src={currentImage}
             alt="Preview"
-            className="w-full max-w-2xl object-contain rounded-2xl border-2 border-charcoal-700/50 shadow-lg hover:shadow-xl transition-all"
+            className="w-full max-w-2xl object-contain rounded-2xl border-2 border-charcoal-200 shadow-lg hover:shadow-xl transition-all"
             loading="lazy"
             decoding="async"
             onError={(e) => {
@@ -87,7 +87,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           {uploading ? (
             <div className="text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600 mx-auto mb-2"></div>
-              <p className="text-sm text-charcoal-300">Uploading... {uploadProgress}%</p>
+              <p className="text-sm text-charcoal-600">Uploading... {uploadProgress}%</p>
               <div className="w-32 bg-gray-200 rounded-full h-2 mt-2">
                 <div
                   className="bg-sky-600 h-2 rounded-full transition-all duration-300"
@@ -98,7 +98,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           ) : (
             <>
               <ImageIcon className="h-16 w-16 text-sky-400 mb-4" />
-              <p className="text-lg font-medium text-charcoal-200 mb-2">Click to upload product image</p>
+              <p className="text-lg font-medium text-charcoal-700 mb-2">Click to upload product image</p>
               <p className="text-sm text-charcoal-400 mb-1">or drag and drop</p>
               <p className="text-xs text-charcoal-500">All image formats (JPG, PNG, WebP, GIF, BMP, TIFF, SVG, HEIC) - max 10MB</p>
             </>
@@ -132,12 +132,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
       {/* URL Input as fallback */}
       <div>
-        <label className="block text-sm font-medium text-charcoal-200 mb-2">Or enter image URL</label>
+        <label className="block text-sm font-medium text-charcoal-700 mb-2">Or enter image URL</label>
         <input
           type="url"
           value={currentImage || ''}
           onChange={(e) => onImageChange(e.target.value || undefined)}
-          className="w-full px-4 py-3 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent text-white"
+          className="w-full px-4 py-3 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent text-charcoal-800"
           placeholder="https://example.com/image.jpg"
           disabled={uploading}
         />

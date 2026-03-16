@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import type { Product, ProductVariation } from '../types';
+import type { Product, ProductVariation, ProductPrice } from '../types';
 
 export function useMenu() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -23,7 +23,7 @@ export function useMenu() {
         },
         (payload) => {
           console.log('✅ Product changed:', payload);
-          fetchProducts(); // Refetch all products when any change occurs
+          fetchProducts();
         }
       )
       .on(
@@ -35,7 +35,19 @@ export function useMenu() {
         },
         (payload) => {
           console.log('✅ Variation changed:', payload);
-          fetchProducts(); // Refetch all products when variations change
+          fetchProducts();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'product_prices'
+        },
+        (payload) => {
+          console.log('✅ Product price changed:', payload);
+          fetchProducts();
         }
       )
       .subscribe((status) => {
@@ -111,7 +123,7 @@ export function useMenu() {
       const timestamp = Date.now();
       const { data, error } = await supabase
         .from('products')
-        .select('id, name, description, category, base_price, discount_price, discount_start_date, discount_end_date, discount_active, purity_percentage, molecular_weight, cas_number, sequence, storage_conditions, inclusions, stock_quantity, available, featured, image_url, safety_sheet_url, created_at, updated_at')
+        .select('id, name, description, category, base_price, discount_price, discount_start_date, discount_end_date, discount_active, purity_percentage, molecular_weight, cas_number, sequence, storage_conditions, inclusions, stock_quantity, available, featured, image_url, safety_sheet_url, created_at, updated_at, code, spec, units_per_pack, unit_type, region_restriction, onhand_available, preorder_available, notes')
         .eq('available', true)
         .order('featured', { ascending: false })
         .order('name', { ascending: true });
@@ -144,27 +156,47 @@ export function useMenu() {
         );
       }
 
-      // Fetch variations for each product
+      // Fetch variations and prices for each product
       const productsWithVariations = await Promise.all(
         (data || []).map(async (product) => {
-          const { data: variations } = await supabase
-            .from('product_variations')
-            .select('*')
-            .eq('product_id', product.id)
-            .order('quantity_mg', { ascending: true });
+          const [{ data: variations }, { data: prices }] = await Promise.all([
+            supabase
+              .from('product_variations')
+              .select('*')
+              .eq('product_id', product.id)
+              .order('quantity_mg', { ascending: true }),
+            supabase
+              .from('product_prices')
+              .select('*')
+              .eq('product_id', product.id)
+              .order('price_type', { ascending: true })
+          ]);
 
           if (variations && variations.length > 0) {
             console.log(`  └─ ${product.name}: ${variations.length} variations, prices:`, variations.map(v => `${v.name}:₱${v.price}`));
           }
 
-          // Log if product has image_url
+          if (prices && prices.length > 0) {
+            console.log(`  💰 ${product.name}: ${prices.length} price entries`);
+          }
+
           if (product.image_url) {
             console.log(`  🖼️ ${product.name} has image: ${product.image_url.substring(0, 60)}...`);
           }
 
           return {
             ...product,
-            variations: variations || []
+            // Default new fields for backward compatibility
+            code: product.code || null,
+            spec: product.spec || null,
+            units_per_pack: product.units_per_pack ?? 10,
+            unit_type: product.unit_type || 'vials',
+            region_restriction: product.region_restriction || null,
+            onhand_available: product.onhand_available ?? false,
+            preorder_available: product.preorder_available ?? true,
+            notes: product.notes || null,
+            variations: variations || [],
+            prices: prices || []
           };
         })
       );

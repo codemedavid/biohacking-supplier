@@ -103,8 +103,8 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
         return (
             <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-charcoal-700/50 border-t-tech-teal rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-charcoal-300 font-medium">Loading couriers...</p>
+                    <div className="w-16 h-16 border-4 border-charcoal-200 border-t-tech-teal rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-charcoal-600 font-medium">Loading couriers...</p>
                 </div>
             </div>
         );
@@ -114,25 +114,25 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
     if (currentView === 'add' || currentView === 'edit') {
         return (
             <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white">
-                <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
+                <div className="bg-white backdrop-blur-md shadow-md border-b border-charcoal-200">
                     <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 py-3 sm:py-0 sm:h-16">
                             <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
                                 <button
                                     onClick={handleCancel}
-                                    className="flex items-center space-x-1 sm:space-x-2 text-charcoal-200 hover:text-tech-teal transition-colors duration-200"
+                                    className="flex items-center space-x-1 sm:space-x-2 text-charcoal-700 hover:text-tech-teal transition-colors duration-200"
                                 >
                                     <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                                     <span className="text-sm sm:text-base">Back</span>
                                 </button>
-                                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+                                <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal-800">
                                     {currentView === 'add' ? 'Add Courier' : 'Edit Courier'}
                                 </h1>
                             </div>
                             <div className="flex space-x-2 sm:space-x-3 w-full sm:w-auto">
                                 <button
                                     onClick={handleCancel}
-                                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-charcoal-700/50 rounded-lg hover:bg-theme-bg transition-colors duration-200 flex items-center justify-center space-x-1 sm:space-x-2 text-sm sm:text-base"
+                                    className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-charcoal-200 rounded-lg hover:bg-theme-bg transition-colors duration-200 flex items-center justify-center space-x-1 sm:space-x-2 text-sm sm:text-base"
                                 >
                                     <X className="h-4 w-4" />
                                     <span className="hidden sm:inline">Cancel</span>
@@ -151,26 +151,26 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                 </div>
 
                 <div className="max-w-2xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
-                    <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-700/50 p-4 sm:p-6 md:p-8">
+                    <div className="bg-white backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-200 p-4 sm:p-6 md:p-8">
                         <div className="space-y-4 sm:space-y-6">
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Courier Name *</label>
+                                <label className="block text-xs sm:text-sm font-medium text-charcoal-800 mb-1.5 sm:mb-2">Courier Name *</label>
                                 <input
                                     type="text"
                                     value={formData.name}
                                     onChange={(e) => handleNameChange(e.target.value)}
-                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-white"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-200 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-charcoal-800"
                                     placeholder="e.g., LBC Express, J&T Express"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Courier Code *</label>
+                                <label className="block text-xs sm:text-sm font-medium text-charcoal-800 mb-1.5 sm:mb-2">Courier Code *</label>
                                 <input
                                     type="text"
                                     value={formData.code}
                                     onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-white disabled:bg-theme-bg"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-200 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-charcoal-800 disabled:bg-theme-bg"
                                     placeholder="lbc-express"
                                     disabled={currentView === 'edit'}
                                 />
@@ -180,7 +180,7 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                             </div>
 
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">
+                                <label className="block text-xs sm:text-sm font-medium text-charcoal-800 mb-1.5 sm:mb-2">
                                     <Link className="w-4 h-4 inline mr-1" />
                                     Tracking URL Template
                                 </label>
@@ -188,7 +188,7 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                                     type="text"
                                     value={formData.tracking_url_template}
                                     onChange={(e) => setFormData({ ...formData, tracking_url_template: e.target.value })}
-                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-white"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-200 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-charcoal-800"
                                     placeholder="https://tracking.example.com/?tracking_no={tracking}"
                                 />
                                 <p className="text-xs text-charcoal-400 mt-1">
@@ -197,12 +197,12 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                             </div>
 
                             <div>
-                                <label className="block text-xs sm:text-sm font-medium text-white mb-1.5 sm:mb-2">Sort Order</label>
+                                <label className="block text-xs sm:text-sm font-medium text-charcoal-800 mb-1.5 sm:mb-2">Sort Order</label>
                                 <input
                                     type="number"
                                     value={formData.sort_order}
                                     onChange={(e) => setFormData({ ...formData, sort_order: Number(e.target.value) })}
-                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-700/50 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-white"
+                                    className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-charcoal-200 rounded-lg focus:ring-2 focus:ring-tech-teal focus:border-tech-teal transition-colors text-charcoal-800"
                                     placeholder="0"
                                 />
                                 <p className="text-xs text-charcoal-400 mt-1">Lower numbers appear first in the dropdown</p>
@@ -216,7 +216,7 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                                         onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
                                         className="w-4 h-4 rounded border-charcoal-600/50 text-tech-teal focus:ring-tech-teal cursor-pointer"
                                     />
-                                    <span className="text-xs sm:text-sm font-medium text-white">Active Courier</span>
+                                    <span className="text-xs sm:text-sm font-medium text-charcoal-800">Active Courier</span>
                                 </label>
                             </div>
                         </div>
@@ -229,18 +229,18 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
     // List View
     return (
         <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-white">
-            <div className="bg-charcoal-900/40 backdrop-blur-md shadow-md border-b border-charcoal-700/50">
+            <div className="bg-white backdrop-blur-md shadow-md border-b border-charcoal-200">
                 <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 py-3 sm:py-0 sm:h-16">
                         <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto">
                             <button
                                 onClick={onBack}
-                                className="flex items-center space-x-1 sm:space-x-2 text-charcoal-200 hover:text-tech-teal transition-colors duration-200"
+                                className="flex items-center space-x-1 sm:space-x-2 text-charcoal-700 hover:text-tech-teal transition-colors duration-200"
                             >
                                 <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                                 <span className="text-sm sm:text-base">Dashboard</span>
                             </button>
-                            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+                            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal-800">
                                 Courier Management
                             </h1>
                         </div>
@@ -256,9 +256,9 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
             </div>
 
             <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
-                <div className="bg-charcoal-900/40 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-700/50 overflow-hidden">
+                <div className="bg-white backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border-2 border-charcoal-200 overflow-hidden">
                     <div className="p-4 sm:p-6">
-                        <h2 className="text-base sm:text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <h2 className="text-base sm:text-lg font-bold text-charcoal-800 mb-4 flex items-center gap-2">
                             <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-tech-teal" />
                             Couriers / Shipping Providers
                         </h2>
@@ -279,14 +279,14 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                                 {couriers.map((courier) => (
                                     <div
                                         key={courier.id}
-                                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 p-3 sm:p-4 border-2 border-charcoal-700/50 rounded-lg hover:bg-theme-bg transition-all duration-200"
+                                        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 p-3 sm:p-4 border-2 border-charcoal-200 rounded-lg hover:bg-theme-bg transition-all duration-200"
                                     >
                                         <div className="flex items-center space-x-3 sm:space-x-4 w-full sm:w-auto">
                                             <div className="p-2 bg-tech-teal/10 rounded-lg">
                                                 <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-tech-teal" />
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <h3 className="font-bold text-sm sm:text-base text-white mb-1">{courier.name}</h3>
+                                                <h3 className="font-bold text-sm sm:text-base text-charcoal-800 mb-1">{courier.name}</h3>
                                                 <p className="text-xs sm:text-sm text-charcoal-400">Code: {courier.code}</p>
                                                 {courier.tracking_url_template && (
                                                     <p className="text-xs text-charcoal-500 truncate">Has tracking URL</p>
@@ -297,14 +297,14 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                                         <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-end sm:justify-start">
                                             <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${courier.is_active
                                                 ? 'bg-green-100 text-green-800 border border-green-200'
-                                                : 'bg-charcoal-800/50 text-charcoal-300 border border-charcoal-600/50'
+                                                : 'bg-charcoal-800/50 text-charcoal-600 border border-charcoal-600/50'
                                                 }`}>
                                                 {courier.is_active ? 'Active' : 'Inactive'}
                                             </span>
 
                                             <button
                                                 onClick={() => handleEditCourier(courier)}
-                                                className="p-2 text-blue-600 hover:text-blue-700 hover:bg-charcoal-900/40 rounded-lg transition-colors duration-200 border border-blue-200"
+                                                className="p-2 text-blue-600 hover:text-blue-700 hover:bg-white rounded-lg transition-colors duration-200 border border-blue-200"
                                                 aria-label="Edit"
                                             >
                                                 <Edit className="h-4 w-4" />
@@ -327,7 +327,7 @@ const CourierManager: React.FC<CourierManagerProps> = ({ onBack }) => {
                 </div>
 
                 {/* Info Box */}
-                <div className="bg-charcoal-900/40 rounded-xl p-4 mt-6 border border-blue-100">
+                <div className="bg-white rounded-xl p-4 mt-6 border border-blue-100">
                     <h3 className="font-bold text-blue-900 mb-2 flex items-center gap-2">
                         <Truck className="w-4 h-4" />
                         How it works
