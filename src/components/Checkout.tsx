@@ -286,6 +286,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                     payment_proof_url: paymentProofUrl,
                     contact_method: contactMethod || null,
                     notes: notes.trim() || null,
+                    order_number: customOrderNumber,
                     order_status: 'new',
                     payment_status: 'pending',
                     promo_code_id: appliedPromo?.id || null,

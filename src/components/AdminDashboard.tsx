@@ -1373,11 +1373,9 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-4">
                 <div className="h-10 flex items-center">
-                  <img
-                    src="/glow-logo.jpg"
-                    alt="Glow with Joo"
-                    className="h-10 w-auto object-contain"
-                  />
+                  <span className="text-lg font-heading font-bold text-glow-teal-600 tracking-tight">
+                    Biohacking Supplier
+                  </span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">

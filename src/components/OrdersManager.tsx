@@ -43,6 +43,7 @@ interface Order {
   tracking_number: string | null;
   shipping_provider: string | null;
   shipping_note: string | null;
+  order_number: string | null;
   promo_code: string | null;
   discount_applied: number | null;
 }
@@ -203,6 +204,7 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
 
       posthog.capture('BS_order_confirmed', {
         order_id: order.id,
+        order_number: order.order_number || order.id,
         customer_email: order.customer_email,
         customer_name: order.customer_name,
         total_price: order.total_price,
@@ -658,27 +660,60 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
         <div className="bg-white backdrop-blur-md rounded-lg md:rounded-xl shadow-lg p-4 md:p-6 border border-charcoal-200 space-y-4 md:space-y-6">
           {/* Order Status */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-4">
-            <div>
-              <span className={`inline-flex items-center px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold border ${order.order_status === 'new' ? 'bg-yellow-100 text-yellow-800 border-yellow-400' :
-                order.order_status === 'confirmed' ? 'bg-blue-100 text-blue-800 border-blue-300' :
-                  order.order_status === 'processing' ? 'bg-purple-100 text-purple-800 border-purple-300' :
-                    order.order_status === 'shipped' ? 'bg-indigo-100 text-indigo-800 border-indigo-300' :
-                      order.order_status === 'delivered' ? 'bg-green-100 text-green-800 border-green-300' :
-                        'bg-red-100 text-red-800 border-red-300'
-                }`}>
-                {order.order_status.charAt(0).toUpperCase() + order.order_status.slice(1)}
-              </span>
-            </div>
-            {order.order_status === 'new' && (
-              <button
-                onClick={onConfirm}
-                disabled={isProcessing}
-                className="w-full sm:w-auto px-4 md:px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-colors font-medium text-xs md:text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md hover:shadow-lg"
+            <div className="flex items-center gap-3 flex-wrap">
+              <label htmlFor="order-status-select" className="font-semibold text-charcoal-700 text-xs md:text-sm">Order Status:</label>
+              <select
+                id="order-status-select"
+                aria-label="Order Status"
+                value={order.order_status}
+                onChange={(e) => {
+                  const newStatus = e.target.value;
+                  if (newStatus === order.order_status) return;
+                  if (newStatus === 'confirmed' && order.order_status === 'new') {
+                    onConfirm();
+                  } else if (newStatus === 'cancelled') {
+                    if (confirm('Are you sure you want to cancel this order?')) {
+                      onUpdateStatus(order.id, newStatus);
+                    }
+                  } else {
+                    if (confirm(`Change order status from "${order.order_status}" to "${newStatus}"?`)) {
+                      onUpdateStatus(order.id, newStatus);
+                    }
+                  }
+                }}
+                disabled={isProcessing || order.order_status === 'delivered' || order.order_status === 'cancelled'}
+                className={`px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-semibold border-2 outline-none focus:ring-2 focus:ring-gold-500/20 transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
+                  order.order_status === 'new' ? 'bg-yellow-50 text-yellow-800 border-yellow-400' :
+                  order.order_status === 'confirmed' ? 'bg-blue-50 text-blue-800 border-blue-300' :
+                  order.order_status === 'processing' ? 'bg-purple-50 text-purple-800 border-purple-300' :
+                  order.order_status === 'shipped' ? 'bg-indigo-50 text-indigo-800 border-indigo-300' :
+                  order.order_status === 'delivered' ? 'bg-green-50 text-green-800 border-green-300' :
+                  'bg-red-50 text-red-800 border-red-300'
+                }`}
               >
-                <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />
-                <span className="hidden sm:inline">{isProcessing ? 'Processing...' : 'Confirm Order & Deduct Stock'}</span>
-                <span className="sm:hidden">{isProcessing ? 'Processing...' : 'Confirm Order'}</span>
-              </button>
+                <option value="new">New</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              {order.order_status === 'new' && (
+                <span className="text-[10px] md:text-xs text-amber-600 font-medium">
+                  Selecting "Confirmed" will deduct stock
+                </span>
+              )}
+              {(order.order_status === 'delivered' || order.order_status === 'cancelled') && (
+                <span className="text-[10px] md:text-xs text-charcoal-400 italic">
+                  Status is final
+                </span>
+              )}
+            </div>
+            {isProcessing && (
+              <div className="flex items-center gap-2 text-charcoal-500 text-xs md:text-sm">
+                <RefreshCw className="w-4 h-4 animate-spin" />
+                Updating...
+              </div>
             )}
           </div>
 
@@ -875,54 +910,6 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
             </div>
           )}
 
-          {/* Status Update Buttons */}
-          {order.order_status !== 'new' && order.order_status !== 'cancelled' && order.order_status !== 'delivered' && (
-            <div className="border-t-2 border-charcoal-200 pt-3 md:pt-4">
-              <h3 className="font-bold text-charcoal-800 mb-2 md:mb-3 text-sm md:text-base">Update Status</h3>
-              <div className="flex flex-wrap gap-2">
-                {order.order_status === 'confirmed' && (
-                  <button
-                    onClick={() => onUpdateStatus(order.id, 'processing')}
-                    disabled={isProcessing}
-                    className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-gray-800 to-black hover:from-gray-900 hover:to-black text-white rounded-lg transition-colors disabled:opacity-50 text-xs md:text-sm font-medium shadow-md hover:shadow-lg border border-charcoal-200/20"
-                  >
-                    Mark as Processing
-                  </button>
-                )}
-                {order.order_status === 'processing' && (
-                  <button
-                    onClick={() => onUpdateStatus(order.id, 'shipped')}
-                    disabled={isProcessing}
-                    className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-gray-800 to-black hover:from-gray-900 hover:to-black text-white rounded-lg transition-colors disabled:opacity-50 text-xs md:text-sm font-medium shadow-md hover:shadow-lg border border-charcoal-200/20"
-                  >
-                    Mark as Shipped
-                  </button>
-                )}
-                {order.order_status === 'shipped' && (
-                  <button
-                    onClick={() => onUpdateStatus(order.id, 'delivered')}
-                    disabled={isProcessing}
-                    className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-colors disabled:opacity-50 text-xs md:text-sm font-medium shadow-md hover:shadow-lg"
-                  >
-                    Mark as Delivered
-                  </button>
-                )}
-                {(order.order_status === 'new' || order.order_status === 'confirmed' || order.order_status === 'processing') && (
-                  <button
-                    onClick={() => {
-                      if (confirm('Are you sure you want to cancel this order?')) {
-                        onUpdateStatus(order.id, 'cancelled');
-                      }
-                    }}
-                    disabled={isProcessing}
-                    className="px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-colors disabled:opacity-50 text-xs md:text-sm font-medium shadow-md hover:shadow-lg"
-                  >
-                    Cancel Order
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
