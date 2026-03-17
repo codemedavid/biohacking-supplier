@@ -311,7 +311,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
             // Generate custom order number
             const randomDigits = Math.floor(Math.random() * 9000 + 1000);
-            const customOrderNumber = `GWJ-${randomDigits}`;
+            const customOrderNumber = `BS-${randomDigits}`;
             setOrderNumber(customOrderNumber);
 
             const now = new Date();
