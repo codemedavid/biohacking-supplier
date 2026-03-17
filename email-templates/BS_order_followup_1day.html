@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How's Your Order?</title>
+  <style>
+    @media only screen and (max-width: 480px) {
+      .container { width: 100% !important; padding: 12px !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #ffffff; font-family: Arial, Helvetica, sans-serif;">
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" style="padding: 20px 12px;">
+        <table role="presentation" class="container" width="520" cellpadding="0" cellspacing="0">
+
+          <tr>
+            <td style="padding: 0 0 20px;">
+              <p style="margin: 0; font-size: 18px; font-weight: 700; color: #B08DD4;">Biohacking <span style="color: #E8A0BF;">Supplier</span></p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding: 0 0 14px;">
+              <p style="margin: 0; font-size: 15px; color: #333; line-height: 1.7;">Hi {{ event.properties.customer_name }},</p>
+              <p style="margin: 14px 0 0; font-size: 15px; color: #333; line-height: 1.7;">Your order <strong>{{ event.properties.order_number }}</strong> was delivered recently. We hope everything arrived in perfect condition!</p>
+            </td>
+          </tr>
+
+          <tr><td style="padding: 4px 0;"><div style="height: 1px; background-color: #F0E8F8;"></div></td></tr>
+
+          <tr>
+            <td style="padding: 14px 0;">
+              <p style="margin: 0 0 8px; font-size: 15px; font-weight: 700; color: #B08DD4;">How was your experience?</p>
+              <p style="margin: 0; font-size: 14px; color: #555; line-height: 1.8;">
+                We'd love to hear your feedback! Your experience matters to us and helps us improve our service for everyone.
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding: 14px 0;">
+              <p style="margin: 0; font-size: 14px; color: #555; line-height: 1.8;">
+                If you have any questions about your products or need assistance, don't hesitate to reach out. We're always happy to help!
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding: 14px 0;">
+              <p style="margin: 0; font-size: 14px; color: #555; line-height: 1.7;">
+                Message us on <a href="https://wa.me/639121241164" style="color: #E8A0BF; text-decoration: none;">WhatsApp</a> — we'd love to hear from you!
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td style="padding: 14px 0 0;">
+              <p style="margin: 0; font-size: 15px; color: #333; line-height: 1.7;">
+                Thank you for choosing us,<br>
+                Biohacking Supplier Team
+              </p>
+            </td>
+          </tr>
+
+          <tr><td style="padding: 12px 0;"><div style="height: 1px; background-color: #F0E8F8;"></div></td></tr>
+
+          <tr>
+            <td style="padding: 0 0 8px;">
+              <p style="margin: 0; font-size: 12px; color: #aaa;">Biohacking Supplier - biohackingsupplier.com</p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
