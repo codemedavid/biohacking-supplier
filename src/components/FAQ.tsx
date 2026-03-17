@@ -37,8 +37,7 @@ const FAQ: React.FC = () => {
         ? faqs.filter(faq => faq.category === activeCategory)
         : faqs;
 
-    const viberUrl = 'viber://chat?number=%2B639989747336';
-    const whatsappUrl = 'https://wa.me/639989747336';
+    const whatsappUrl = 'https://wa.me/639121241164';
 
     if (loading) {
         return (
@@ -149,16 +148,9 @@ const FAQ: React.FC = () => {
                         Still have questions?
                     </h3>
                     <p className="text-charcoal-600 mb-6">
-                        We're here to help! Reach out to us via Viber or WhatsApp for quick assistance.
+                        We're here to help! Reach out to us via WhatsApp for quick assistance.
                     </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <a
-                            href={viberUrl}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#7360f2] text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-all shadow-md hover:shadow-lg"
-                        >
-                            <MessageCircle className="w-5 h-5" />
-                            Message us on Viber
-                        </a>
+                    <div className="flex items-center justify-center">
                         <a
                             href={whatsappUrl}
                             target="_blank"
