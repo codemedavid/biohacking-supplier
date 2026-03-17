@@ -264,6 +264,11 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                 purity_percentage: item.product.purity_percentage
             }));
 
+            // Generate custom order number
+            const randomDigits = Math.floor(Math.random() * 9000 + 1000);
+            const customOrderNumber = `BS-${randomDigits}`;
+            setOrderNumber(customOrderNumber);
+
             // Save order to database
             const { data: orderData, error: orderError } = await supabase
                 .from('orders')
@@ -309,11 +314,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                     .update({ usage_count: appliedPromo.usage_count + 1 })
                     .eq('id', appliedPromo.id);
             }
-
-            // Generate custom order number
-            const randomDigits = Math.floor(Math.random() * 9000 + 1000);
-            const customOrderNumber = `BS-${randomDigits}`;
-            setOrderNumber(customOrderNumber);
 
             const now = new Date();
             const dateTimeStamp = now.toLocaleString('en-PH', {
