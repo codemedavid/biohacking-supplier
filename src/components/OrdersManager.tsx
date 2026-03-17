@@ -247,9 +247,11 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
         const order = orders.find(o => o.id === orderId);
         posthog.capture(eventName, {
           order_id: orderId,
+          order_number: order?.order_number || orderId,
           customer_email: order?.customer_email,
           customer_name: order?.customer_name,
           total_price: order?.total_price,
+          items_count: order?.order_items.length,
         });
       }
 
