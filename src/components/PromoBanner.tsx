@@ -4,22 +4,19 @@ import posthog from '../lib/posthog';
 import { identifyWithEmail } from '../lib/posthog';
 
 const PromoBanner: React.FC = () => {
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [dismissed, setDismissed] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (name.trim() && email.trim() && email.toLowerCase().includes('@gmail.com')) {
-            identifyWithEmail(email, { name: name.trim() });
-            posthog.capture('BS_banner_subscribed', { email, name: name.trim(), source: 'banner' });
+        if (email.trim() && email.toLowerCase().includes('@gmail.com')) {
+            identifyWithEmail(email);
+            posthog.capture('BS_banner_subscribed', { email, source: 'banner' });
             setSubmitted(true);
             setTimeout(() => {
                 setDismissed(true);
             }, 3000);
-        } else if (!name.trim()) {
-            alert('Please enter your name.');
         } else {
             alert('Please enter a valid @gmail.com address.');
         }
@@ -51,19 +48,11 @@ const PromoBanner: React.FC = () => {
                         <span className="text-sm font-medium text-charcoal-600 pr-6 sm:pr-0">Get exclusive deals</span>
                         <form onSubmit={handleSubmit} className="flex items-center gap-2 w-full sm:w-auto pr-6 sm:pr-0">
                             <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Name"
-                                className="px-3 py-1.5 text-sm bg-white border border-charcoal-200 rounded-lg text-charcoal-700 placeholder-charcoal-400 focus:ring-1 focus:ring-glow-teal-300 focus:border-glow-teal-300 outline-none transition-all w-28 sm:w-32"
-                                required
-                            />
-                            <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@gmail.com"
-                                className="px-3 py-1.5 text-sm bg-white border border-charcoal-200 rounded-lg text-charcoal-700 placeholder-charcoal-400 focus:ring-1 focus:ring-glow-teal-300 focus:border-glow-teal-300 outline-none transition-all flex-1 sm:w-44"
+                                className="px-3 py-1.5 text-sm bg-white border border-charcoal-200 rounded-lg text-charcoal-700 placeholder-charcoal-400 focus:ring-1 focus:ring-glow-teal-300 focus:border-glow-teal-300 outline-none transition-all flex-1 sm:w-52"
                                 required
                             />
                             <button

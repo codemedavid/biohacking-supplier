@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { X, Mail, User } from 'lucide-react';
+import { X, Mail } from 'lucide-react';
 import posthog from '../lib/posthog';
 import { identifyWithEmail } from '../lib/posthog';
 
 const PromoPopup: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
@@ -26,19 +25,16 @@ const PromoPopup: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (name.trim() && email.trim() && email.toLowerCase().includes('@gmail.com')) {
-            identifyWithEmail(email, { name: name.trim() });
+        if (email.trim() && email.toLowerCase().includes('@gmail.com')) {
+            identifyWithEmail(email);
             posthog.capture('BS_popup_subscribed', {
                 email,
-                name: name.trim(),
                 source: 'popup',
             });
             setSubmitted(true);
             setTimeout(() => {
                 handleClose();
             }, 3000);
-        } else if (!name.trim()) {
-            alert('Please enter your name.');
         } else {
             alert('Please enter a valid Gmail address.');
         }
@@ -75,17 +71,6 @@ const PromoPopup: React.FC = () => {
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-3">
-                            <div className="relative">
-                                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal-400 w-4 h-4" />
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Your name"
-                                    className="w-full pl-10 pr-4 py-2.5 text-sm bg-charcoal-50 border border-charcoal-200 rounded-lg focus:ring-2 focus:ring-glow-teal-200 focus:border-glow-teal-300 text-charcoal-700 placeholder-charcoal-400 transition-all outline-none"
-                                    required
-                                />
-                            </div>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal-400 w-4 h-4" />
                                 <input
