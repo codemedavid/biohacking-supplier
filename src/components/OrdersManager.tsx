@@ -203,6 +203,8 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
       window.dispatchEvent(new CustomEvent('orderConfirmed'));
 
       posthog.capture('BS_order_confirmed', {
+        distinct_id: order.customer_email,
+        $email: order.customer_email,
         order_id: order.id,
         order_number: order.order_number || order.id,
         customer_email: order.customer_email,
@@ -246,6 +248,8 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
       if (eventName) {
         const order = orders.find(o => o.id === orderId);
         posthog.capture(eventName, {
+          distinct_id: order?.customer_email,
+          $email: order?.customer_email,
           order_id: orderId,
           order_number: order?.order_number || orderId,
           customer_email: order?.customer_email,
