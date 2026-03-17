@@ -4,13 +4,15 @@ import { useCart } from './hooks/useCart';
 import Header from './components/Header';
 import SubNav from './components/SubNav';
 import Menu from './components/Menu';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
 import FloatingCartButton from './components/FloatingCartButton';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
-import PromoPopup from './components/PromoPopup';
 import PromoBanner from './components/PromoBanner';
+
+// Lazy load view components (not needed on initial render)
+const Cart = lazy(() => import('./components/Cart'));
+const Checkout = lazy(() => import('./components/Checkout'));
+const PromoPopup = lazy(() => import(/* webpackChunkName: "promo-popup" */ './components/PromoPopup'));
 
 // Lazy load route components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
@@ -58,7 +60,9 @@ function MainApp() {
             )}
 
             <main className="flex-grow">
-                <PromoPopup />
+                <Suspense fallback={null}>
+                    <PromoPopup />
+                </Suspense>
                 {currentView === 'menu' && (
                     <Menu
                         menuItems={filteredProducts}
@@ -69,24 +73,28 @@ function MainApp() {
                 )}
 
                 {currentView === 'cart' && (
-                    <Cart
-                        cartItems={cart.cartItems}
-                        updateQuantity={cart.updateQuantity}
-                        removeFromCart={cart.removeFromCart}
-                        clearCart={cart.clearCart}
-                        getTotalPrice={cart.getTotalPrice}
-                        getTotalUSD={cart.getTotalUSD}
-                        onContinueShopping={() => handleViewChange('menu')}
-                        onCheckout={() => handleViewChange('checkout')}
-                    />
+                    <Suspense fallback={<LoadingSpinner />}>
+                        <Cart
+                            cartItems={cart.cartItems}
+                            updateQuantity={cart.updateQuantity}
+                            removeFromCart={cart.removeFromCart}
+                            clearCart={cart.clearCart}
+                            getTotalPrice={cart.getTotalPrice}
+                            getTotalUSD={cart.getTotalUSD}
+                            onContinueShopping={() => handleViewChange('menu')}
+                            onCheckout={() => handleViewChange('checkout')}
+                        />
+                    </Suspense>
                 )}
 
                 {currentView === 'checkout' && (
-                    <Checkout
-                        cartItems={cart.cartItems}
-                        totalPrice={cart.getTotalPrice()}
-                        onBack={() => handleViewChange('cart')}
-                    />
+                    <Suspense fallback={<LoadingSpinner />}>
+                        <Checkout
+                            cartItems={cart.cartItems}
+                            totalPrice={cart.getTotalPrice()}
+                            onBack={() => handleViewChange('cart')}
+                        />
+                    </Suspense>
                 )}
             </main>
 

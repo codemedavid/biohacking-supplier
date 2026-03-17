@@ -126,7 +126,7 @@ CREATE TRIGGER update_site_settings_updated_at
 -- 2.5 Payment Methods
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.payment_methods (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     account_number TEXT,
     account_name TEXT,
@@ -380,9 +380,9 @@ ON CONFLICT (id) DO UPDATE SET fee = EXCLUDED.fee;
 
 -- 4.5 Payment Methods
 INSERT INTO public.payment_methods (id, name, account_number, account_name, active, sort_order) VALUES
-('0a0b0001-0001-4e78-94f8-585d77059001', 'GCash', '', 'Peptide Pulse', true, 1),
-('0a0b0002-0002-4e78-94f8-585d77059002', 'BDO', '', 'Peptide Pulse', true, 2),
-('0a0b0003-0003-4e78-94f8-585d77059003', 'Security Bank', '', 'Peptide Pulse', true, 3)
+('gcash', 'GCash', '', 'Biohacking Supplier', true, 1),
+('bdo', 'BDO', '', 'Biohacking Supplier', true, 2),
+('security-bank', 'Security Bank', '', 'Biohacking Supplier', true, 3)
 ON CONFLICT (id) DO NOTHING;
 
 -- 4.6 Seed Products (Sample Tirzepatide)
