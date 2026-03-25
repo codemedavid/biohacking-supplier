@@ -306,12 +306,12 @@ const OrderTracking: React.FC = () => {
                                             </div>
                                             <div className="flex justify-between items-center pt-2 border-t border-charcoal-200 font-bold text-lg text-charcoal-800">
                                                 <span>Total</span>
-                                                <span>₱{(order.total_price + (order.shipping_fee || 0)).toLocaleString()}</span>
+                                                <span>${(order.total_price + (order.shipping_fee || 0)).toLocaleString()}</span>
                                             </div>
                                             {order.discount_applied && order.discount_applied > 0 && (
                                                 <div className="flex justify-between items-center pt-2 text-sm text-green-600 font-medium">
                                                     <span>Discount ({order.promo_code || 'Promo'}):</span>
-                                                    <span>-₱{order.discount_applied.toLocaleString()}</span>
+                                                    <span>-${order.discount_applied.toLocaleString()}</span>
                                                 </div>
                                             )}
                                         </div>

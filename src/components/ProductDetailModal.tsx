@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { X, Package, Beaker, ShoppingCart, Plus, Minus, Sparkles, ArrowLeft, Pen, Globe, MapPin, Truck, Box, TestTube } from 'lucide-react';
+import { X, Package, Beaker, ShoppingCart, Plus, Minus, Sparkles, ArrowLeft, Pen } from 'lucide-react';
 import type { Product, ProductVariation, PenType, PurchaseMode, FulfillmentType, CurrencyCode } from '../types';
-import { hasMultiPricing, getAvailablePurchaseModes, getAvailableFulfillmentTypes, getPriceForSelection, getPurchaseModeLabel, getFulfillmentTypeLabel } from '../utils/pricing';
+import { hasMultiPricing, getAvailablePurchaseModes, getAvailableFulfillmentTypes, getPriceForSelection, getPurchaseModeLabel } from '../utils/pricing';
 import { formatCurrency } from '../utils/currency';
 
 interface ProductDetailModalProps {
@@ -54,7 +54,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
   const calculatePrice = () => {
     if (isMultiPriced && multiPrices) {
-      return multiPrices.php ?? multiPrices.usd ?? 0;
+      return multiPrices.usd ?? 0;
     }
     if (!selectedVariation) return product.base_price;
     if (selectedPenType === 'disposable' && selectedVariation.disposable_pen_price) {
@@ -67,7 +67,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
   };
 
   const currentPrice = calculatePrice();
-  const displayCurrency: CurrencyCode = (isMultiPriced && multiPrices && !multiPrices.php && multiPrices.usd) ? 'USD' : 'PHP';
+  const displayCurrency: CurrencyCode = 'USD';
   const showPurity = Boolean(product.purity_percentage);
 
   const hasAnyStock = product.variations && product.variations.length > 0
@@ -79,8 +79,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
   const handleAddToCart = () => {
     if (isMultiPriced) {
-      const priceToUse = displayCurrency === 'USD' ? multiPrices?.usd : multiPrices?.php;
-      onAddToCart(product, selectedVariation, quantity, null, selectedPurchaseMode, selectedFulfillment, priceToUse, displayCurrency);
+      onAddToCart(product, selectedVariation, quantity, null, selectedPurchaseMode, selectedFulfillment, multiPrices?.usd, 'USD');
     } else {
       onAddToCart(product, selectedVariation, quantity, isInjectableProduct ? selectedPenType : null);
     }
@@ -129,20 +128,8 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
               )}
             </div>
 
-            {/* Availability Badges */}
+            {/* Product Info Badges */}
             <div className="flex items-center gap-1.5 mt-2 flex-wrap">
-              {product.onhand_available && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs font-bold bg-emerald-50 border border-emerald-200 text-emerald-700">
-                  <MapPin className="w-3 h-3" />
-                  On-hand PH
-                </span>
-              )}
-              {product.preorder_available && !product.region_restriction && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs font-bold bg-blue-50 border border-blue-200 text-blue-700">
-                  <Globe className="w-3 h-3" />
-                  Pre-order
-                </span>
-              )}
               {product.region_restriction === 'PH' && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] sm:text-xs font-bold bg-amber-50 border border-amber-200 text-amber-700">
                   Philippines Only
@@ -255,97 +242,21 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                 {/* MULTI-PRICING PURCHASE FLOW */}
                 {isMultiPriced ? (
                   <>
-                    {/* Step 1: Purchase Mode */}
-                    {availableModes.length > 0 && (
-                      <div className="mb-4">
-                        <label className="block text-xs sm:text-sm font-bold text-charcoal-700 mb-2 uppercase tracking-wide flex items-center gap-2">
-                          <Box className="w-4 h-4 text-glow-teal-400" />
-                          Purchase Type
-                        </label>
-                        <div className="grid grid-cols-1 gap-2">
-                          {availableModes.map((mode) => (
-                            <button
-                              key={mode}
-                              onClick={() => handlePurchaseModeChange(mode)}
-                              className={`
-                                p-3 rounded-xl border text-sm text-left transition-all flex items-center gap-3
-                                ${selectedPurchaseMode === mode
-                                  ? 'border-glow-teal-300 bg-glow-teal-50 text-charcoal-800 ring-1 ring-glow-teal-300'
-                                  : 'border-charcoal-200 hover:border-glow-teal-200 text-charcoal-600 bg-white'
-                                }
-                              `}
-                            >
-                              {mode === 'box' && <Box className="w-5 h-5 text-glow-teal-400" />}
-                              {mode === 'vial' && <TestTube className="w-5 h-5 text-glow-teal-400" />}
-                              {mode === 'complete_set' && <Package className="w-5 h-5 text-glow-teal-400" />}
-                              <div>
-                                <div className="font-bold">{getPurchaseModeLabel(mode)}</div>
-                                <div className="text-xs opacity-70">
-                                  {mode === 'box' && `${product.units_per_pack} ${product.unit_type} per box`}
-                                  {mode === 'vial' && 'Individual unit pricing'}
-                                  {mode === 'complete_set' && 'Ready-to-use with accessories'}
-                                </div>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Step 2: Fulfillment Type */}
-                    {selectedPurchaseMode !== 'complete_set' && availableFulfillments.length > 0 && (
-                      <div className="mb-4">
-                        <label className="block text-xs sm:text-sm font-bold text-charcoal-700 mb-2 uppercase tracking-wide flex items-center gap-2">
-                          <Truck className="w-4 h-4 text-glow-teal-400" />
-                          Fulfillment
-                        </label>
-                        <div className="grid grid-cols-1 gap-2">
-                          {availableFulfillments.map((ft) => (
-                            <button
-                              key={ft}
-                              onClick={() => setSelectedFulfillment(ft)}
-                              className={`
-                                p-3 rounded-xl border text-sm text-left transition-all flex items-center gap-3
-                                ${selectedFulfillment === ft
-                                  ? 'border-blue-300 bg-blue-50 text-charcoal-800 ring-1 ring-blue-300'
-                                  : 'border-charcoal-200 hover:border-blue-200 text-charcoal-600 bg-white'
-                                }
-                              `}
-                            >
-                              {ft === 'preorder' ? <Globe className="w-5 h-5 text-blue-500" /> : <MapPin className="w-5 h-5 text-emerald-500" />}
-                              <div>
-                                <div className="font-bold">{getFulfillmentTypeLabel(ft)}</div>
-                                <div className="text-xs opacity-70">
-                                  {ft === 'preorder' ? 'International shipping available' : 'Ready to ship from PH warehouse'}
-                                </div>
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Price Display */}
+                    {/* Price Display - Per Box */}
                     <div className="text-center mb-4 bg-charcoal-50 rounded-xl p-4 border border-charcoal-100">
-                      {multiPrices && (multiPrices.php !== undefined || multiPrices.usd !== undefined) ? (
+                      {multiPrices && multiPrices.usd !== undefined ? (
                         <>
-                          {multiPrices.php !== undefined && (
-                            <div className="text-3xl sm:text-4xl font-bold text-charcoal-800 mb-1">
-                              {formatCurrency(multiPrices.php, 'PHP')}
-                            </div>
-                          )}
-                          {multiPrices.usd !== undefined && (
-                            <div className={`font-bold ${multiPrices.php ? 'text-lg text-blue-600' : 'text-3xl sm:text-4xl text-charcoal-800'}`}>
-                              {formatCurrency(multiPrices.usd, 'USD')}
-                            </div>
-                          )}
+                          <div className="text-3xl sm:text-4xl font-bold text-charcoal-800 mb-1">
+                            {formatCurrency(multiPrices.usd)}
+                          </div>
                           <div className="text-xs text-charcoal-400 mt-1">
-                            {getPurchaseModeLabel(selectedPurchaseMode)} &middot; {getFulfillmentTypeLabel(selectedFulfillment)}
+                            {getPurchaseModeLabel(selectedPurchaseMode)}
+                            {product.units_per_pack && product.unit_type && ` · ${product.units_per_pack} ${product.unit_type} per box`}
                           </div>
                         </>
                       ) : (
                         <div className="text-charcoal-400 text-sm py-2">
-                          Price not available for this combination
+                          Price not available
                         </div>
                       )}
                     </div>
@@ -358,22 +269,22 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                         <>
                           <div className="flex items-center justify-center gap-2 mb-1">
                             <span className="text-base sm:text-lg md:text-xl lg:text-2xl text-charcoal-400 line-through font-medium">
-                              ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                              {formatCurrency(product.base_price)}
                             </span>
                             <span className="text-xs sm:text-sm font-bold text-glow-teal-700 bg-glow-teal-50 px-2 py-1 rounded-lg border border-glow-teal-200">
                               {Math.round((1 - product.discount_price! / product.base_price) * 100)}% OFF
                             </span>
                           </div>
                           <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal-800 mb-2">
-                            ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                            {formatCurrency(currentPrice)}
                           </div>
                           <div className="inline-block bg-glow-teal-50 text-glow-teal-700 px-2 py-0.5 sm:px-2.5 sm:py-1 md:px-3 md:py-1 rounded-lg text-[10px] sm:text-xs md:text-sm font-bold border border-glow-teal-200">
-                            Savings: ₱{(product.base_price - product.discount_price!).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                            Savings: {formatCurrency(product.base_price - product.discount_price!)}
                           </div>
                         </>
                       ) : (
                         <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-800">
-                          ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                          {formatCurrency(currentPrice)}
                         </div>
                       )}
                     </div>
@@ -406,7 +317,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                                 `}
                               >
                                 <div className="font-bold">{variation.name}</div>
-                                <div className="text-xs opacity-80">₱{variation.price.toLocaleString('en-PH')}</div>
+                                <div className="text-xs opacity-80">{formatCurrency(variation.price)}</div>
                                 {isOutOfStock && <div className="text-xs text-red-400 font-bold mt-1">Out of Stock</div>}
                               </button>
                             );
@@ -442,7 +353,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                               <div className="text-xs opacity-80">With insulin syringes & alcohol swabs</div>
                             </div>
                             <div className="font-bold text-charcoal-800">
-                              ₱{selectedVariation?.price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                              {selectedVariation ? formatCurrency(selectedVariation.price) : ''}
                             </div>
                           </button>
 
@@ -464,7 +375,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                             </div>
                             <div className="font-bold text-charcoal-800">
                               {selectedVariation?.disposable_pen_price
-                                ? `₱${selectedVariation.disposable_pen_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}`
+                                ? formatCurrency(selectedVariation.disposable_pen_price)
                                 : 'N/A'}
                             </div>
                           </button>
@@ -487,7 +398,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
                             </div>
                             <div className="font-bold text-charcoal-800">
                               {selectedVariation?.reusable_pen_price
-                                ? `₱${selectedVariation.reusable_pen_price.toLocaleString('en-PH', { minimumFractionDigits: 0 })}`
+                                ? formatCurrency(selectedVariation.reusable_pen_price)
                                 : 'N/A'}
                             </div>
                           </button>
@@ -541,7 +452,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product, onClos
 
                 <button
                   onClick={handleAddToCart}
-                  disabled={!product.available || !hasAnyStock || (selectedVariation && selectedVariation.stock_quantity === 0) || (!selectedVariation && product.stock_quantity === 0) || (isMultiPriced && !multiPrices?.php && !multiPrices?.usd)}
+                  disabled={!product.available || !hasAnyStock || (selectedVariation && selectedVariation.stock_quantity === 0) || (!selectedVariation && product.stock_quantity === 0) || (isMultiPriced && !multiPrices?.usd)}
                   className="w-full btn-primary py-3 md:py-4 text-sm md:text-base flex items-center justify-center gap-2"
                 >
                   <ShoppingCart className="w-5 h-5" />

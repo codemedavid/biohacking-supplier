@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, Minus, ShoppingCart, Package, Pen, Globe, MapPin, Truck } from 'lucide-react';
+import { Plus, Minus, ShoppingCart, Package, Pen } from 'lucide-react';
 import type { Product, ProductVariation, PenType, PurchaseMode, FulfillmentType, CurrencyCode } from '../types';
-import { hasMultiPricing, getAvailablePurchaseModes, getAvailableFulfillmentTypes, getPriceForSelection, getPurchaseModeLabel } from '../utils/pricing';
+import { hasMultiPricing, getAvailablePurchaseModes, getAvailableFulfillmentTypes, getPriceForSelection } from '../utils/pricing';
 import { formatCurrency } from '../utils/currency';
 
 interface MenuItemCardProps {
@@ -55,7 +55,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   const currentPrice = (() => {
     if (isMultiPriced && multiPrices) {
-      return multiPrices.php ?? multiPrices.usd ?? 0;
+      return multiPrices.usd ?? 0;
     }
     if (selectedPenType === 'disposable' && selectedVariation?.disposable_pen_price) {
       return selectedVariation.disposable_pen_price;
@@ -72,7 +72,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
         : product.base_price;
   })();
 
-  const displayCurrency: CurrencyCode = (isMultiPriced && multiPrices && !multiPrices.php && multiPrices.usd) ? 'USD' : 'PHP';
+  const displayCurrency: CurrencyCode = 'USD';
 
   const hasDiscount = !isMultiPriced && (selectedVariation
     ? (selectedVariation.discount_active && selectedVariation.discount_price !== null)
@@ -82,8 +82,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   const handleAddToCart = () => {
     if (isMultiPriced) {
-      const priceToUse = displayCurrency === 'USD' ? multiPrices?.usd : multiPrices?.php;
-      onAddToCart(product, selectedVariation, quantity, null, selectedPurchaseMode, selectedFulfillment, priceToUse, displayCurrency);
+      onAddToCart(product, selectedVariation, quantity, null, selectedPurchaseMode, selectedFulfillment, multiPrices?.usd, 'USD');
     } else {
       onAddToCart(product, selectedVariation, quantity, isInjectableProduct ? selectedPenType : null);
     }
@@ -146,20 +145,8 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
           )}
         </div>
 
-        {/* Availability Badges - Top Right */}
+        {/* Info Badges - Top Right */}
         <div className="absolute top-3 right-3 flex flex-col gap-1 pointer-events-none z-20">
-          {product.onhand_available && (
-            <span className="px-1.5 py-0.5 bg-emerald-500 text-white text-[8px] sm:text-[9px] font-bold rounded-md shadow-sm flex items-center gap-0.5">
-              <MapPin className="w-2 h-2" />
-              On-hand
-            </span>
-          )}
-          {product.preorder_available && !product.region_restriction && (
-            <span className="px-1.5 py-0.5 bg-blue-500 text-white text-[8px] sm:text-[9px] font-bold rounded-md shadow-sm flex items-center gap-0.5">
-              <Globe className="w-2 h-2" />
-              Pre-order
-            </span>
-          )}
           {product.region_restriction === 'PH' && (
             <span className="px-1.5 py-0.5 bg-amber-500 text-white text-[8px] sm:text-[9px] font-bold rounded-md shadow-sm">
               PH Only
@@ -203,52 +190,6 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
           {product.description}
         </p>
 
-        {/* Multi-Pricing: Purchase Mode Selector */}
-        {isMultiPriced && availableModes.length > 0 && (
-          <div className="mb-2 sm:mb-3">
-            <div className="flex flex-wrap gap-1">
-              {availableModes.map((mode) => (
-                <button
-                  key={mode}
-                  onClick={(e) => { e.stopPropagation(); handlePurchaseModeChange(mode); }}
-                  className={`
-                    px-1.5 py-0.5 text-[8px] sm:text-[9px] font-medium rounded-lg border transition-all relative z-20
-                    ${selectedPurchaseMode === mode
-                      ? 'bg-glow-teal-50 border-glow-teal-300 text-glow-teal-700'
-                      : 'bg-white text-charcoal-400 border-charcoal-200 hover:border-glow-teal-300 hover:text-glow-teal-600'
-                    }
-                  `}
-                >
-                  {getPurchaseModeLabel(mode)}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Multi-Pricing: Fulfillment Selector */}
-        {isMultiPriced && availableFulfillments.length > 1 && selectedPurchaseMode !== 'complete_set' && (
-          <div className="mb-2 sm:mb-3">
-            <div className="flex flex-wrap gap-1">
-              {availableFulfillments.map((ft) => (
-                <button
-                  key={ft}
-                  onClick={(e) => { e.stopPropagation(); setSelectedFulfillment(ft); }}
-                  className={`
-                    px-1.5 py-0.5 text-[8px] sm:text-[9px] font-medium rounded-lg border transition-all relative z-20 flex items-center gap-0.5
-                    ${selectedFulfillment === ft
-                      ? 'bg-blue-50 border-blue-300 text-blue-700'
-                      : 'bg-white text-charcoal-400 border-charcoal-200 hover:border-blue-300 hover:text-blue-600'
-                    }
-                  `}
-                >
-                  {ft === 'preorder' ? <Globe className="w-2 h-2" /> : <Truck className="w-2 h-2" />}
-                  {ft === 'preorder' ? 'Pre-order' : 'On-hand'}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Legacy: Variations (Sizes) - only show if no multi-pricing */}
         {!isMultiPriced && (
@@ -362,33 +303,27 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
           {/* Multi-pricing display */}
           {isMultiPriced && multiPrices ? (
             <div className="flex flex-col gap-0.5">
-              {multiPrices.php !== undefined && (
+              {multiPrices.usd !== undefined ? (
                 <span className="text-sm sm:text-lg font-bold text-charcoal-800">
-                  {formatCurrency(multiPrices.php, 'PHP')}
+                  {formatCurrency(multiPrices.usd)}
                 </span>
-              )}
-              {multiPrices.usd !== undefined && (
-                <span className={`text-[10px] sm:text-xs font-semibold ${multiPrices.php ? 'text-blue-600' : 'text-charcoal-800 text-sm sm:text-lg'}`}>
-                  {formatCurrency(multiPrices.usd, 'USD')}
-                </span>
-              )}
-              {!multiPrices.php && !multiPrices.usd && (
+              ) : (
                 <span className="text-[10px] sm:text-xs text-charcoal-400 italic">Price not available</span>
               )}
             </div>
           ) : hasDiscount ? (
             <div className="flex items-baseline gap-1 sm:gap-2">
               <span className="text-sm sm:text-lg font-bold text-charcoal-800">
-                ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                {formatCurrency(currentPrice)}
               </span>
               <span className="text-[10px] sm:text-xs text-charcoal-400 line-through">
-                ₱{originalPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                {formatCurrency(originalPrice)}
               </span>
             </div>
           ) : (
             <div className="flex items-baseline">
               <span className="text-sm sm:text-lg font-bold text-charcoal-800">
-                ₱{currentPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                {formatCurrency(currentPrice)}
               </span>
             </div>
           )}
@@ -432,7 +367,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                 }
                 handleAddToCart();
               }}
-              disabled={!hasAnyStock || availableStock === 0 || !product.available || (isMultiPriced && !multiPrices?.php && !multiPrices?.usd)}
+              disabled={!hasAnyStock || availableStock === 0 || !product.available || (isMultiPriced && !multiPrices?.usd)}
               className="flex-1 btn-primary py-1.5 sm:py-2 text-[10px] sm:text-xs flex items-center justify-center gap-1 sm:gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
             >
               <ShoppingCart className="w-3 h-3" />

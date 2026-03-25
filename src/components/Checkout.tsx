@@ -139,7 +139,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
             // Check minimum purchase
             if (totalPrice < promo.min_purchase_amount) {
-                setPromoError(`Minimum purchase of ₱${promo.min_purchase_amount} required`);
+                setPromoError(`Minimum purchase of $${promo.min_purchase_amount} required`);
                 setIsApplyingPromo(false);
                 return;
             }
@@ -159,7 +159,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
             setDiscountAmount(discount);
             setAppliedPromo(promo);
-            setPromoSuccess(`Promo code applied! You saved ₱${discount.toLocaleString()}`);
+            setPromoSuccess(`Promo code applied! You saved $${discount.toLocaleString()}`);
         } catch (err) {
             console.error('Error applying promo:', err);
             setPromoError('Failed to apply promo code');
@@ -316,7 +316,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
             }
 
             const now = new Date();
-            const dateTimeStamp = now.toLocaleString('en-PH', {
+            const dateTimeStamp = now.toLocaleString('en-US', {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
                 hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
             });
@@ -346,15 +346,15 @@ ${cartItems.map(item => {
                 if (item.penType) line += ` [${item.penType === 'disposable' ? 'Disposable Pen' : 'Reusable Pen'}]`;
                 if (item.purchaseMode) line += ` | ${getPurchaseModeLabel(item.purchaseMode)}`;
                 if (item.fulfillmentType) line += ` | ${getFulfillmentTypeLabel(item.fulfillmentType)}`;
-                line += ` x${item.quantity} - ${formatCurrency(item.price * item.quantity, item.currency || 'PHP')}`;
+                line += ` x${item.quantity} - ${formatCurrency(item.price * item.quantity)}`;
                 if (item.product.purity_percentage && item.product.purity_percentage > 0) line += `\n  Purity: ${item.product.purity_percentage}%`;
                 return line;
             }).join('\n\n')}
 
 💰 PRICING
-Product Total: ₱${totalPrice.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
-Shipping Fee: ₱${shippingFee.toLocaleString('en-PH', { minimumFractionDigits: 0 })} (${shippingLocation.replace('_', ' & ')})
-${discountAmount > 0 ? `Discount (${appliedPromo?.code}): -₱${discountAmount.toLocaleString('en-PH', { minimumFractionDigits: 0 })}\n` : ''}Grand Total: ₱${finalTotal.toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+Product Total: $${totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+Shipping Fee: $${shippingFee.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${shippingLocation.replace('_', ' & ')})
+${discountAmount > 0 ? `Discount (${appliedPromo?.code}): -$${discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}\n` : ''}Grand Total: $${finalTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}
 
 💳 PAYMENT METHOD
 ${paymentMethod?.name || 'N/A'}
@@ -660,28 +660,28 @@ Please confirm this order. Thank you!
                                     {cartItems.map((item, idx) => (
                                         <div key={idx} className="flex justify-between text-sm">
                                             <span className="text-charcoal-600">{item.quantity}x {item.product.name}</span>
-                                            <span className="font-medium">₱{(item.price * item.quantity).toLocaleString()}</span>
+                                            <span className="font-medium">${(item.price * item.quantity).toLocaleString()}</span>
                                         </div>
                                     ))}
                                 </div>
                                 <div className="border-t border-charcoal-100 pt-3 space-y-2 text-sm">
                                     <div className="flex justify-between">
                                         <span className="text-charcoal-600">Subtotal</span>
-                                        <span>₱{totalPrice.toLocaleString()}</span>
+                                        <span>${totalPrice.toLocaleString()}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-charcoal-600">Shipping</span>
-                                        <span>₱{shippingFee.toLocaleString()}</span>
+                                        <span>${shippingFee.toLocaleString()}</span>
                                     </div>
                                     {discountAmount > 0 && (
                                         <div className="flex justify-between text-glow-teal-600 font-medium">
                                             <span>Discount</span>
-                                            <span>-₱{discountAmount.toLocaleString()}</span>
+                                            <span>-${discountAmount.toLocaleString()}</span>
                                         </div>
                                     )}
                                     <div className="flex justify-between font-bold text-charcoal-800 text-lg pt-2">
                                         <span>Total</span>
-                                        <span>₱{finalTotal.toLocaleString()}</span>
+                                        <span>${finalTotal.toLocaleString()}</span>
                                     </div>
                                 </div>
                             </div>
@@ -932,7 +932,7 @@ Please confirm this order. Thank you!
                                             }`}
                                     >
                                         <p className="font-bold text-charcoal-800 text-sm mb-1">{loc.name || loc.id.replace('_', ' & ')}</p>
-                                        <p className="text-xs text-glow-teal-600 font-medium">₱{loc.fee}</p>
+                                        <p className="text-xs text-glow-teal-600 font-medium">${loc.fee}</p>
                                     </button>
                                 ))}
                         </div>
@@ -969,7 +969,7 @@ Please confirm this order. Thank you!
                                             )}
                                         </div>
                                         <span className="font-bold text-charcoal-800 text-sm">
-                                            ₱{(item.price * item.quantity).toLocaleString('en-PH', { minimumFractionDigits: 0 })}
+                                            ${(item.price * item.quantity).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                                         </span>
                                     </div>
                                     <p className="text-xs text-charcoal-500">Qty: {item.quantity}</p>
@@ -1022,17 +1022,17 @@ Please confirm this order. Thank you!
                         <div className="space-y-2 text-sm text-charcoal-600 border-t border-charcoal-100 pt-4">
                             <div className="flex justify-between">
                                 <span>Subtotal</span>
-                                <span>₱{totalPrice.toLocaleString()}</span>
+                                <span>${totalPrice.toLocaleString()}</span>
                             </div>
                             {discountAmount > 0 && (
                                 <div className="flex justify-between text-glow-teal-600 font-medium">
                                     <span>Discount</span>
-                                    <span>-₱{discountAmount.toLocaleString()}</span>
+                                    <span>-${discountAmount.toLocaleString()}</span>
                                 </div>
                             )}
                             <div className="flex justify-between font-bold text-charcoal-800 text-base pt-2">
                                 <span>Total Estimate</span>
-                                <span>₱{Math.max(0, totalPrice - discountAmount).toLocaleString()}</span>
+                                <span>${Math.max(0, totalPrice - discountAmount).toLocaleString()}</span>
                             </div>
                             <p className="text-xs text-charcoal-500 text-right italic">+ Shipping fee added at payment</p>
                         </div>

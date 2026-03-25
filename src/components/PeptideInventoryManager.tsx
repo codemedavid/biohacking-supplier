@@ -269,7 +269,7 @@ const PeptideInventoryManager: React.FC<PeptideInventoryManagerProps> = ({ onBac
               <h3 className="text-xs md:text-sm font-medium text-charcoal-600">Total Sales Income</h3>
               <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-gold-600" />
             </div>
-            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-charcoal-800">₱{stats.totalSales.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-charcoal-800">${stats.totalSales.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             <p className="text-xs text-charcoal-400 mt-1">Vials Sold: {stats.totalVialsSold}</p>
           </div>
 
@@ -279,7 +279,7 @@ const PeptideInventoryManager: React.FC<PeptideInventoryManagerProps> = ({ onBac
               <h3 className="text-xs md:text-sm font-medium text-charcoal-600">Inventory Value</h3>
               <Package className="w-4 h-4 md:w-5 md:h-5 text-gold-600" />
             </div>
-            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-charcoal-800">₱{stats.totalInventoryValue.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-charcoal-800">${stats.totalInventoryValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             <p className="text-xs text-charcoal-400 mt-1">Total Items: {stats.totalItems}</p>
           </div>
 
@@ -412,7 +412,7 @@ const InventoryItemCard: React.FC<InventoryItemCardProps> = ({ product, categori
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-xs md:text-sm">
                     <div>
                       <span className="text-charcoal-400 text-[10px] md:text-xs">Price per Vial</span>
-                      <p className="font-semibold text-charcoal-800">₱{variation.price.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</p>
+                      <p className="font-semibold text-charcoal-800">${variation.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                     </div>
                     <div>
                       <span className="text-charcoal-400 text-[10px] md:text-xs">Quantity</span>
@@ -421,7 +421,7 @@ const InventoryItemCard: React.FC<InventoryItemCardProps> = ({ product, categori
                     <div>
                       <span className="text-charcoal-400 text-[10px] md:text-xs">Total Value</span>
                       <p className="font-semibold text-gold-600">
-                        ₱{(variation.stock_quantity * variation.price).toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                        ${(variation.stock_quantity * variation.price).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </p>
                     </div>
                     <div>
@@ -521,7 +521,7 @@ const InventoryItemCard: React.FC<InventoryItemCardProps> = ({ product, categori
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 text-xs md:text-sm">
             <div>
               <span className="text-charcoal-400 text-[10px] md:text-xs">Price per Vial</span>
-              <p className="font-semibold text-charcoal-800">₱{price.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</p>
+              <p className="font-semibold text-charcoal-800">${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
             </div>
             <div>
               <span className="text-charcoal-400 text-[10px] md:text-xs">Quantity</span>
@@ -530,7 +530,7 @@ const InventoryItemCard: React.FC<InventoryItemCardProps> = ({ product, categori
             <div>
               <span className="text-charcoal-400 text-[10px] md:text-xs">Total Value</span>
               <p className="font-semibold text-gold-600">
-                ₱{(product.stock_quantity * price).toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                ${(product.stock_quantity * price).toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div>

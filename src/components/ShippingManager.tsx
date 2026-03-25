@@ -155,7 +155,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-charcoal-700 mb-1">Fee (₱)</label>
+                                <label className="block text-xs font-medium text-charcoal-700 mb-1">Fee ($)</label>
                                 <input
                                     type="number"
                                     value={newLocation.fee}
@@ -202,7 +202,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                         />
                                     </div>
                                     <div className="w-32">
-                                        <label className="block text-xs font-medium text-charcoal-700 mb-1">Fee (₱)</label>
+                                        <label className="block text-xs font-medium text-charcoal-700 mb-1">Fee ($)</label>
                                         <input
                                             type="number"
                                             value={editFee}
@@ -245,7 +245,7 @@ const ShippingManager: React.FC<ShippingManagerProps> = ({ onBack }) => {
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <span className="text-lg font-bold text-theme-accent">
-                                            ₱{location.fee.toLocaleString()}
+                                            ${location.fee.toLocaleString()}
                                         </span>
                                         <div className="flex items-center gap-1">
                                             <button

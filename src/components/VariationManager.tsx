@@ -207,7 +207,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
 
                           <div>
                             <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
-                              Price (₱) *
+                              Price ($) *
                             </label>
                             <input
                               type="number"
@@ -232,7 +232,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
 
                           <div>
                             <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
-                              Discount Price (₱)
+                              Discount Price ($)
                             </label>
                             <input
                               type="number"
@@ -295,7 +295,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
                             </div>
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Price</div>
-                              <div className="font-semibold text-charcoal-800 text-sm sm:text-base">₱{variation.price.toLocaleString()}</div>
+                              <div className="font-semibold text-charcoal-800 text-sm sm:text-base">${variation.price.toLocaleString()}</div>
                             </div>
                             <div>
                               <div className="text-[10px] sm:text-xs text-charcoal-400 mb-0.5 sm:mb-1">Stock</div>
@@ -376,7 +376,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
 
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
-                      Price (₱) *
+                      Price ($) *
                     </label>
                     <input
                       type="number"
@@ -401,7 +401,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose, o
 
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-charcoal-700 mb-1 sm:mb-2">
-                      Discount Price (₱)
+                      Discount Price ($)
                     </label>
                     <input
                       type="number"

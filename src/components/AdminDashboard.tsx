@@ -608,7 +608,7 @@ const AdminDashboard: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Base Price (₱) *</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Base Price ($) *</label>
                     <input
                       type="number"
                       step="1"
@@ -857,7 +857,7 @@ const AdminDashboard: React.FC = () => {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Discount Price (₱)</label>
+                    <label className="block text-xs font-semibold text-charcoal-700 mb-1">Discount Price ($)</label>
                     <input
                       type="number"
                       step="1"
@@ -1047,7 +1047,7 @@ const AdminDashboard: React.FC = () => {
                       <div>
                         <div className="text-[10px] text-charcoal-400">Price</div>
                         <div className="text-sm font-bold text-charcoal-800">
-                          ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                          ${product.base_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </div>
                       </div>
                       <div>
@@ -1117,7 +1117,7 @@ const AdminDashboard: React.FC = () => {
                           {categories.find(cat => cat.id === product.category)?.name}
                         </td>
                         <td className="px-4 py-2 text-xs font-bold text-charcoal-800">
-                          ₱{product.base_price.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                          ${product.base_price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           {product.variations && product.variations.length > 0 && (
                             <div className="text-[9px] text-theme-accent font-medium mt-0.5">
                               Not used (has sizes)

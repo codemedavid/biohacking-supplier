@@ -1,8 +1,8 @@
 import React from 'react';
-import { Trash2, ShoppingBag, ArrowLeft, CreditCard, Plus, Minus, Sparkles, Activity, Globe, MapPin, Box, TestTube, Package } from 'lucide-react';
+import { Trash2, ShoppingBag, ArrowLeft, CreditCard, Plus, Minus, Sparkles, Activity, Box } from 'lucide-react';
 import type { CartItem } from '../types';
 import { formatCurrency } from '../utils/currency';
-import { getPurchaseModeLabel, getFulfillmentTypeLabel } from '../utils/pricing';
+import { getPurchaseModeLabel } from '../utils/pricing';
 
 interface CartProps {
   cartItems: CartItem[];
@@ -10,7 +10,6 @@ interface CartProps {
   removeFromCart: (index: number) => void;
   clearCart: () => void;
   getTotalPrice: () => number;
-  getTotalUSD?: () => number;
   onContinueShopping: () => void;
   onCheckout: () => void;
 }
@@ -21,7 +20,6 @@ const Cart: React.FC<CartProps> = ({
   removeFromCart,
   clearCart,
   getTotalPrice,
-  getTotalUSD,
   onContinueShopping,
   onCheckout,
 }) => {
@@ -52,9 +50,7 @@ const Cart: React.FC<CartProps> = ({
     );
   }
 
-  const totalPHP = getTotalPrice();
-  const totalUSD = getTotalUSD ? getTotalUSD() : 0;
-  const hasUSDItems = totalUSD > 0;
+  const total = getTotalPrice();
 
   return (
     <div className="min-h-screen bg-theme-bg py-6 md:py-8">
@@ -140,28 +136,11 @@ const Cart: React.FC<CartProps> = ({
                               {item.penType === 'disposable' ? 'Disposable Pen' : 'Reusable Pen'}
                             </span>
                           )}
-                          {/* Multi-pricing badges */}
+                          {/* Purchase mode badge */}
                           {item.purchaseMode && (
                             <span className="text-charcoal-600 font-medium bg-charcoal-50 px-2 py-0.5 rounded-lg border border-charcoal-200 flex items-center gap-1">
-                              {item.purchaseMode === 'box' && <Box className="w-3 h-3" />}
-                              {item.purchaseMode === 'vial' && <TestTube className="w-3 h-3" />}
-                              {item.purchaseMode === 'complete_set' && <Package className="w-3 h-3" />}
+                              <Box className="w-3 h-3" />
                               {getPurchaseModeLabel(item.purchaseMode)}
-                            </span>
-                          )}
-                          {item.fulfillmentType && (
-                            <span className={`font-medium px-2 py-0.5 rounded-lg border flex items-center gap-1 ${
-                              item.fulfillmentType === 'preorder'
-                                ? 'text-blue-600 bg-blue-50 border-blue-200'
-                                : 'text-emerald-600 bg-emerald-50 border-emerald-200'
-                            }`}>
-                              {item.fulfillmentType === 'preorder' ? <Globe className="w-3 h-3" /> : <MapPin className="w-3 h-3" />}
-                              {getFulfillmentTypeLabel(item.fulfillmentType)}
-                            </span>
-                          )}
-                          {item.currency === 'USD' && (
-                            <span className="text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">
-                              USD
                             </span>
                           )}
                         </div>
@@ -208,10 +187,10 @@ const Cart: React.FC<CartProps> = ({
 
                       <div className="text-right">
                         <div className="text-lg md:text-xl font-bold text-charcoal-800">
-                          {formatCurrency(item.price * item.quantity, item.currency || 'PHP')}
+                          {formatCurrency(item.price * item.quantity)}
                         </div>
                         <div className="text-xs text-charcoal-500">
-                          {formatCurrency(item.price, item.currency || 'PHP')} / unit
+                          {formatCurrency(item.price)} / unit
                         </div>
                       </div>
                     </div>
@@ -231,41 +210,21 @@ const Cart: React.FC<CartProps> = ({
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-charcoal-500 text-sm">
-                  <span>Subtotal (PHP)</span>
-                  <span className="font-semibold text-charcoal-800">{formatCurrency(totalPHP, 'PHP')}</span>
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-charcoal-800">{formatCurrency(total)}</span>
                 </div>
-
-                {hasUSDItems && (
-                  <div className="flex justify-between text-blue-600 text-sm">
-                    <span>Subtotal (USD)</span>
-                    <span className="font-semibold">{formatCurrency(totalUSD, 'USD')}</span>
-                  </div>
-                )}
 
                 <div className="pt-3 border-t border-charcoal-100">
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-base font-bold text-charcoal-800">Total Estimate</span>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-charcoal-800">
-                        {formatCurrency(totalPHP, 'PHP')}
+                        {formatCurrency(total)}
                       </div>
-                      {hasUSDItems && (
-                        <div className="text-sm font-bold text-blue-600">
-                          + {formatCurrency(totalUSD, 'USD')}
-                        </div>
-                      )}
                     </div>
                   </div>
                   <p className="text-xs text-charcoal-400 text-right font-normal">+ Shipping calculated at checkout</p>
                 </div>
-              </div>
-
-              <div className="bg-glow-teal-50 rounded-xl p-4 mb-6 border border-glow-teal-100">
-                <p className="text-xs text-glow-teal-700 font-medium mb-2">Shipping Information:</p>
-                <ul className="text-xs text-charcoal-600 space-y-1">
-                  <li className="flex justify-between"><span>Metro Manila</span> <span className="font-medium">₱150</span></li>
-                  <li className="flex justify-between"><span>Provincial</span> <span className="font-medium">₱200</span></li>
-                </ul>
               </div>
 
               <button

@@ -7,28 +7,26 @@ export function buildStructuredPricing(prices: ProductPrice[]): StructuredPricin
   const structured: StructuredPricing = {};
 
   for (const p of prices) {
-    const currencyKey = p.currency.toLowerCase() as 'usd' | 'php';
-
     switch (p.price_type) {
       case 'preorder_box':
         if (!structured.preorder_box) structured.preorder_box = {};
-        structured.preorder_box[currencyKey] = p.amount;
+        structured.preorder_box.usd = p.amount;
         break;
       case 'preorder_vial':
         if (!structured.preorder_vial) structured.preorder_vial = {};
-        (structured.preorder_vial as Record<string, number>)[currencyKey] = p.amount;
+        structured.preorder_vial.usd = p.amount;
         break;
       case 'onhand_box':
         if (!structured.onhand_box) structured.onhand_box = {};
-        (structured.onhand_box as Record<string, number>)[currencyKey] = p.amount;
+        structured.onhand_box.usd = p.amount;
         break;
       case 'onhand_vial':
         if (!structured.onhand_vial) structured.onhand_vial = {};
-        (structured.onhand_vial as Record<string, number>)[currencyKey] = p.amount;
+        structured.onhand_vial.usd = p.amount;
         break;
       case 'complete_set':
         if (!structured.complete_set) structured.complete_set = {};
-        (structured.complete_set as Record<string, number>)[currencyKey] = p.amount;
+        structured.complete_set.usd = p.amount;
         break;
     }
   }
@@ -57,14 +55,8 @@ export function hasMultiPricing(product: Product): boolean {
 export function getAvailablePurchaseModes(product: Product): PurchaseMode[] {
   if (!product.prices || product.prices.length === 0) return [];
 
-  const modes: Set<PurchaseMode> = new Set();
-  for (const p of product.prices) {
-    if (p.price_type.endsWith('_box')) modes.add('box');
-    if (p.price_type.endsWith('_vial')) modes.add('vial');
-    if (p.price_type === 'complete_set') modes.add('complete_set');
-  }
-
-  return Array.from(modes);
+  const hasBox = product.prices.some(p => p.price_type.endsWith('_box'));
+  return hasBox ? ['box'] : [];
 }
 
 /**
@@ -99,23 +91,22 @@ export function getAvailableFulfillmentTypes(product: Product, purchaseMode: Pur
 }
 
 /**
- * Get price(s) for a specific purchase mode + fulfillment type
- * Returns { usd?: number, php?: number }
+ * Get price for a specific purchase mode + fulfillment type
+ * Returns { usd?: number }
  */
 export function getPriceForSelection(
   product: Product,
   purchaseMode: PurchaseMode,
   fulfillmentType: FulfillmentType
-): { usd?: number; php?: number } {
+): { usd?: number } {
   if (!product.prices || product.prices.length === 0) return {};
 
   const priceType = getPriceType(purchaseMode, fulfillmentType);
-  const result: { usd?: number; php?: number } = {};
+  const result: { usd?: number } = {};
 
   for (const p of product.prices) {
     if (p.price_type === priceType) {
-      if (p.currency === 'USD') result.usd = p.amount;
-      if (p.currency === 'PHP') result.php = p.amount;
+      result.usd = p.amount;
     }
   }
 
@@ -123,7 +114,7 @@ export function getPriceForSelection(
 }
 
 /**
- * Get the primary display price (PHP preferred, falls back to USD)
+ * Get the primary display price (USD)
  */
 export function getPrimaryPrice(
   product: Product,
@@ -132,7 +123,6 @@ export function getPrimaryPrice(
 ): { amount: number; currency: CurrencyCode } | null {
   const prices = getPriceForSelection(product, purchaseMode, fulfillmentType);
 
-  if (prices.php !== undefined) return { amount: prices.php, currency: 'PHP' };
   if (prices.usd !== undefined) return { amount: prices.usd, currency: 'USD' };
   return null;
 }
@@ -143,8 +133,7 @@ export function getPrimaryPrice(
 export function getPurchaseModeLabel(mode: PurchaseMode): string {
   switch (mode) {
     case 'box': return 'Per Box';
-    case 'vial': return 'Per Vial';
-    case 'complete_set': return 'Complete Set';
+    default: return 'Per Box';
   }
 }
 

@@ -144,7 +144,7 @@ const defaultCartItems: CartItem[] = [
     product: mockProduct,
     quantity: 2,
     price: 2000,
-    currency: 'PHP',
+    currency: 'USD',
   },
 ];
 
@@ -511,7 +511,7 @@ describe('Checkout component', () => {
       await user.click(screen.getByText('APPLY'));
 
       await waitFor(() => {
-        expect(screen.getByText(/You saved ₱200/)).toBeInTheDocument();
+        expect(screen.getByText(/You saved \$200/)).toBeInTheDocument();
       });
     });
 

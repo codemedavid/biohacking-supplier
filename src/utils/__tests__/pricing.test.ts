@@ -23,11 +23,11 @@ describe('pricing utilities', () => {
     it('builds structured pricing from flat price rows', () => {
       const result = buildStructuredPricing(mockPrices);
 
-      expect(result.preorder_box).toEqual({ php: 2500, usd: 45 });
-      expect(result.onhand_box).toEqual({ php: 3000 });
-      expect(result.preorder_vial).toEqual({ php: 350 });
-      expect(result.onhand_vial).toEqual({ php: 400 });
-      expect(result.complete_set).toEqual({ php: 5000 });
+      expect(result.preorder_box).toEqual({ usd: 84.23 });
+      expect(result.onhand_box).toEqual({ usd: 100 });
+      expect(result.preorder_vial).toEqual({ usd: 10 });
+      expect(result.onhand_vial).toEqual({ usd: 12 });
+      expect(result.complete_set).toEqual({ usd: 150 });
     });
 
     it('returns empty object for empty price array', () => {
@@ -37,7 +37,7 @@ describe('pricing utilities', () => {
 
     it('handles single price type', () => {
       const result = buildStructuredPricing([mockPrices[0]]);
-      expect(result.preorder_box).toEqual({ php: 2500 });
+      expect(result.preorder_box).toEqual({ usd: 84.23 });
       expect(result.onhand_box).toBeUndefined();
     });
   });
@@ -151,19 +151,19 @@ describe('pricing utilities', () => {
   });
 
   describe('getPriceForSelection', () => {
-    it('returns PHP and USD prices for preorder box', () => {
+    it('returns USD price for preorder box', () => {
       const result = getPriceForSelection(mockProductWithPrices, 'box', 'preorder');
-      expect(result).toEqual({ php: 2500, usd: 45 });
+      expect(result).toEqual({ usd: 84.23 });
     });
 
-    it('returns only PHP for onhand box', () => {
+    it('returns USD for onhand box', () => {
       const result = getPriceForSelection(mockProductWithPrices, 'box', 'onhand');
-      expect(result).toEqual({ php: 3000 });
+      expect(result).toEqual({ usd: 100 });
     });
 
     it('returns complete_set price regardless of fulfillment type', () => {
       const result = getPriceForSelection(mockProductWithPrices, 'complete_set', 'onhand');
-      expect(result).toEqual({ php: 5000 });
+      expect(result).toEqual({ usd: 150 });
     });
 
     it('returns empty object when no prices', () => {
@@ -172,19 +172,9 @@ describe('pricing utilities', () => {
   });
 
   describe('getPrimaryPrice', () => {
-    it('prefers PHP price when available', () => {
+    it('returns USD price', () => {
       const result = getPrimaryPrice(mockProductWithPrices, 'box', 'preorder');
-      expect(result).toEqual({ amount: 2500, currency: 'PHP' });
-    });
-
-    it('falls back to USD when PHP not available', () => {
-      // Create product with only USD pricing
-      const product = {
-        ...mockProduct,
-        prices: [mockPrices[1]], // only USD preorder_box
-      };
-      const result = getPrimaryPrice(product, 'box', 'preorder');
-      expect(result).toEqual({ amount: 45, currency: 'USD' });
+      expect(result).toEqual({ amount: 84.23, currency: 'USD' });
     });
 
     it('returns null when no matching price', () => {

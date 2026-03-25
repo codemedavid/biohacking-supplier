@@ -573,9 +573,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onView, getStatusColor, ge
             </div>
             <div>
               <span className="text-charcoal-400 text-[10px] md:text-xs">Total</span>
-              <p className="font-semibold text-gold-600">₱{finalTotal.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</p>
+              <p className="font-semibold text-gold-600">${finalTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
               {order.shipping_fee && order.shipping_fee > 0 && (
-                <p className="text-[10px] md:text-xs text-charcoal-400">+ ₱{order.shipping_fee} shipping</p>
+                <p className="text-[10px] md:text-xs text-charcoal-400">+ ${order.shipping_fee} shipping</p>
               )}
             </div>
             <div>
@@ -829,11 +829,11 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
                       {item.product_name} {item.variation_name ? `- ${item.variation_name}` : ''}
                     </p>
                     <p className="text-[10px] md:text-xs text-charcoal-400">
-                      Quantity: {item.quantity} × ₱{item.price.toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                      Quantity: {item.quantity} × ${item.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </p>
                   </div>
                   <p className="font-bold text-charcoal-800 text-xs md:text-sm sm:text-base">
-                    ₱{item.total.toLocaleString('en-PH', { minimumFractionDigits: 2 })}
+                    ${item.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
               ))}
@@ -885,23 +885,23 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
             <div className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span className="font-semibold">₱{(order.total_price + (order.discount_applied || 0)).toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span>
+                <span className="font-semibold">${(order.total_price + (order.discount_applied || 0)).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
               </div>
               {order.discount_applied && order.discount_applied > 0 && (
                 <div className="flex justify-between text-green-600">
                   <span>Discount ({order.promo_code || 'PROMO'}):</span>
-                  <span className="font-semibold">-₱{order.discount_applied.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span>
+                  <span className="font-semibold">-${order.discount_applied.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                 </div>
               )}
               {order.shipping_fee && order.shipping_fee > 0 && (
                 <div className="flex justify-between">
                   <span>Shipping Fee:</span>
-                  <span className="font-semibold">₱{order.shipping_fee.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span>
+                  <span className="font-semibold">${order.shipping_fee.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                 </div>
               )}
               <div className="flex justify-between text-base md:text-lg font-bold border-t-2 border-charcoal-200 pt-2">
                 <span>Total:</span>
-                <span className="text-gold-600">₱{finalTotal.toLocaleString('en-PH', { minimumFractionDigits: 2 })}</span>
+                <span className="text-gold-600">${finalTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
               </div>
             </div>
           </div>

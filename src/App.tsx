@@ -80,7 +80,6 @@ function MainApp() {
                             removeFromCart={cart.removeFromCart}
                             clearCart={cart.clearCart}
                             getTotalPrice={cart.getTotalPrice}
-                            getTotalUSD={cart.getTotalUSD}
                             onContinueShopping={() => handleViewChange('menu')}
                             onCheckout={() => handleViewChange('checkout')}
                         />

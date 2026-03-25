@@ -64,7 +64,7 @@ export interface ProductVariation {
 
 // Multi-pricing types
 export type PriceType = 'preorder_box' | 'preorder_vial' | 'onhand_box' | 'onhand_vial' | 'complete_set';
-export type CurrencyCode = 'USD' | 'PHP';
+export type CurrencyCode = 'USD';
 export type PurchaseMode = 'box' | 'vial' | 'complete_set';
 export type FulfillmentType = 'preorder' | 'onhand';
 
@@ -83,11 +83,11 @@ export interface ProductPrice {
 
 // Helper to get structured pricing from flat price rows
 export interface StructuredPricing {
-  preorder_box?: { usd?: number; php?: number };
-  preorder_vial?: { php?: number };
-  onhand_box?: { php?: number };
-  onhand_vial?: { php?: number };
-  complete_set?: { php?: number };
+  preorder_box?: { usd?: number };
+  preorder_vial?: { usd?: number };
+  onhand_box?: { usd?: number };
+  onhand_vial?: { usd?: number };
+  complete_set?: { usd?: number };
 }
 
 export interface Category {

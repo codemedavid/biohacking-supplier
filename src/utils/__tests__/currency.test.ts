@@ -10,35 +10,34 @@ import {
 
 describe('currency utilities', () => {
   describe('formatPrice', () => {
-    it('formats PHP price with peso sign and no decimals', () => {
-      expect(formatPrice(2500)).toBe('₱2,500');
+    it('formats USD price with dollar sign and two decimals', () => {
+      expect(formatPrice(2500)).toBe('$2,500.00');
     });
 
     it('formats zero price', () => {
-      expect(formatPrice(0)).toBe('₱0');
+      expect(formatPrice(0)).toBe('$0.00');
     });
 
     it('formats large prices with commas', () => {
-      expect(formatPrice(1000000)).toBe('₱1,000,000');
+      expect(formatPrice(1000000)).toBe('$1,000,000.00');
     });
 
-    it('truncates decimal portion', () => {
-      const result = formatPrice(2500.99);
-      expect(result).not.toContain('.99');
+    it('preserves decimal portion', () => {
+      expect(formatPrice(2500.99)).toBe('$2,500.99');
     });
   });
 
   describe('formatPriceWithDecimals', () => {
-    it('formats PHP price with two decimal places', () => {
-      expect(formatPriceWithDecimals(2500)).toBe('₱2,500.00');
+    it('formats USD price with two decimal places', () => {
+      expect(formatPriceWithDecimals(2500)).toBe('$2,500.00');
     });
 
     it('preserves decimal values', () => {
-      expect(formatPriceWithDecimals(99.5)).toBe('₱99.50');
+      expect(formatPriceWithDecimals(99.5)).toBe('$99.50');
     });
 
     it('formats zero with decimals', () => {
-      expect(formatPriceWithDecimals(0)).toBe('₱0.00');
+      expect(formatPriceWithDecimals(0)).toBe('$0.00');
     });
   });
 
@@ -61,22 +60,22 @@ describe('currency utilities', () => {
   });
 
   describe('formatCurrency', () => {
-    it('delegates to formatUSD for USD currency', () => {
+    it('formats as USD', () => {
       expect(formatCurrency(45, 'USD')).toBe('$45.00');
     });
 
-    it('delegates to formatPriceWithDecimals for PHP currency', () => {
-      expect(formatCurrency(2500, 'PHP')).toBe('₱2,500.00');
+    it('formats as USD when no currency specified', () => {
+      expect(formatCurrency(2500)).toBe('$2,500.00');
     });
   });
 
   describe('constants', () => {
     it('has correct currency symbol', () => {
-      expect(CURRENCY_SYMBOL).toBe('₱');
+      expect(CURRENCY_SYMBOL).toBe('$');
     });
 
     it('has correct currency code', () => {
-      expect(CURRENCY_CODE).toBe('PHP');
+      expect(CURRENCY_CODE).toBe('USD');
     });
   });
 });

@@ -187,11 +187,11 @@ const PromoCodeManager: React.FC = () => {
                                     <span className="inline-block bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-bold">
                                         {code.discount_type === 'percentage'
                                             ? `${code.discount_value}% OFF`
-                                            : `₱${code.discount_value.toLocaleString()} OFF`}
+                                            : `$${code.discount_value.toLocaleString()} OFF`}
                                     </span>
                                     {code.min_purchase_amount > 0 && (
                                         <span className="ml-2 text-xs text-charcoal-400">
-                                            Min: ₱{code.min_purchase_amount.toLocaleString()}
+                                            Min: ${code.min_purchase_amount.toLocaleString()}
                                         </span>
                                     )}
                                 </div>
@@ -262,7 +262,7 @@ const PromoCodeManager: React.FC = () => {
                                         value={formData.discount_type}
                                         onChange={e => setFormData({ ...formData, discount_type: e.target.value as any })}
                                     >
-                                        <option value="fixed">Fixed Amount (₱)</option>
+                                        <option value="fixed">Fixed Amount ($)</option>
                                         <option value="percentage">Percentage (%)</option>
                                     </select>
                                 </div>
@@ -281,7 +281,7 @@ const PromoCodeManager: React.FC = () => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-charcoal-700 mb-1">Min. Purchase (₱)</label>
+                                    <label className="block text-sm font-medium text-charcoal-700 mb-1">Min. Purchase ($)</label>
                                     <input
                                         type="number"
                                         min="0"

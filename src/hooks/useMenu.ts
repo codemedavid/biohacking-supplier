@@ -173,7 +173,7 @@ export function useMenu() {
           ]);
 
           if (variations && variations.length > 0) {
-            console.log(`  └─ ${product.name}: ${variations.length} variations, prices:`, variations.map(v => `${v.name}:₱${v.price}`));
+            console.log(`  └─ ${product.name}: ${variations.length} variations, prices:`, variations.map(v => `${v.name}:$${v.price}`));
           }
 
           if (prices && prices.length > 0) {

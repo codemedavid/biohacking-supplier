@@ -56,8 +56,7 @@ export function useCart() {
         (variation ? item.variation?.id === variation.id : !item.variation) &&
         item.penType === penType &&
         item.purchaseMode === purchaseMode &&
-        item.fulfillmentType === fulfillmentType &&
-        item.currency === (currency || 'PHP')
+        item.fulfillmentType === fulfillmentType
     );
 
     if (existingItemIndex > -1) {
@@ -92,7 +91,7 @@ export function useCart() {
         penType,
         purchaseMode,
         fulfillmentType,
-        currency: currency || 'PHP'
+        currency: 'USD'
       };
       setCartItems([...cartItems, newItem]);
     }
@@ -128,16 +127,7 @@ export function useCart() {
   };
 
   const getTotalPrice = () => {
-    // Only sum PHP items for the main total (USD items shown separately)
-    return cartItems
-      .filter(item => (item.currency || 'PHP') === 'PHP')
-      .reduce((total, item) => total + (item.price * item.quantity), 0);
-  };
-
-  const getTotalUSD = () => {
-    return cartItems
-      .filter(item => item.currency === 'USD')
-      .reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
   const getTotalItems = () => {
@@ -151,7 +141,6 @@ export function useCart() {
     removeFromCart,
     clearCart,
     getTotalPrice,
-    getTotalUSD,
     getTotalItems
   };
 }
