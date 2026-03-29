@@ -108,9 +108,11 @@ const PeptideInventoryManager: React.FC<PeptideInventoryManagerProps> = ({ onBac
   const filteredProducts = useMemo(() => {
     let filtered = products;
 
-    // Filter by category
+    // Filter by category (supports multi-category via junction table)
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(p => p.category === selectedCategory);
+      filtered = filtered.filter(p =>
+        p.categoryIds?.includes(selectedCategory) || p.category === selectedCategory
+      );
     }
 
     // Filter by search query

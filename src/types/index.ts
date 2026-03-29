@@ -45,6 +45,9 @@ export interface Product {
   // Relations
   variations?: ProductVariation[];
   prices?: ProductPrice[];
+
+  // Multi-category support (from product_categories junction table)
+  categoryIds?: string[];
 }
 
 export interface ProductVariation {

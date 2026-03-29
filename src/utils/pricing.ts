@@ -55,8 +55,16 @@ export function hasMultiPricing(product: Product): boolean {
 export function getAvailablePurchaseModes(product: Product): PurchaseMode[] {
   if (!product.prices || product.prices.length === 0) return [];
 
+  const modes: PurchaseMode[] = [];
   const hasBox = product.prices.some(p => p.price_type.endsWith('_box'));
-  return hasBox ? ['box'] : [];
+  const hasVial = product.prices.some(p => p.price_type.endsWith('_vial'));
+  const hasCompleteSet = product.prices.some(p => p.price_type === 'complete_set');
+
+  if (hasBox) modes.push('box');
+  if (hasVial) modes.push('vial');
+  if (hasCompleteSet) modes.push('complete_set');
+
+  return modes;
 }
 
 /**
@@ -133,7 +141,8 @@ export function getPrimaryPrice(
 export function getPurchaseModeLabel(mode: PurchaseMode): string {
   switch (mode) {
     case 'box': return 'Per Box';
-    default: return 'Per Box';
+    case 'vial': return 'Per Vial';
+    case 'complete_set': return 'Complete Set';
   }
 }
 

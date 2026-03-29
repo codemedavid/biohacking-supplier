@@ -50,6 +50,18 @@ export function useMenu() {
           fetchProducts();
         }
       )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'product_categories'
+        },
+        (payload) => {
+          console.log('✅ Product category mapping changed:', payload);
+          fetchProducts();
+        }
+      )
       .subscribe((status) => {
         console.log('📡 Real-time subscription status:', status);
       });
@@ -156,6 +168,18 @@ export function useMenu() {
         );
       }
 
+      // Fetch all product_categories in one query for multi-category support
+      const { data: allProductCategories } = await supabase
+        .from('product_categories')
+        .select('product_id, category_id');
+
+      // Build a map: product_id -> category_id[]
+      const categoryMap: Record<string, string[]> = {};
+      (allProductCategories || []).forEach((pc: { product_id: string; category_id: string }) => {
+        if (!categoryMap[pc.product_id]) categoryMap[pc.product_id] = [];
+        categoryMap[pc.product_id].push(pc.category_id);
+      });
+
       // Fetch variations and prices for each product
       const productsWithVariations = await Promise.all(
         (data || []).map(async (product) => {
@@ -196,7 +220,9 @@ export function useMenu() {
             preorder_available: product.preorder_available ?? true,
             notes: product.notes || null,
             variations: variations || [],
-            prices: prices || []
+            prices: prices || [],
+            // Multi-category: all categories this product belongs to
+            categoryIds: categoryMap[product.id] || [product.category]
           };
         })
       );

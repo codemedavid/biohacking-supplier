@@ -102,16 +102,16 @@ export const useCategories = () => {
 
   const deleteCategory = async (id: string) => {
     try {
-      // Check if category has products
-      const { data: products, error: checkError } = await supabase
-        .from('products')
-        .select('id')
-        .eq('category', id)
-        .limit(1);
+      // Check if category has products (via primary category or junction table)
+      const [{ data: primaryProducts, error: checkError }, { data: junctionProducts, error: junctionError }] = await Promise.all([
+        supabase.from('products').select('id').eq('category', id).limit(1),
+        supabase.from('product_categories').select('id').eq('category_id', id).limit(1)
+      ]);
 
       if (checkError) throw checkError;
+      if (junctionError) throw junctionError;
 
-      if (products && products.length > 0) {
+      if ((primaryProducts && primaryProducts.length > 0) || (junctionProducts && junctionProducts.length > 0)) {
         throw new Error('Cannot delete category that contains products. Please move or delete the products first.');
       }
 

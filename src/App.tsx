@@ -41,10 +41,12 @@ function MainApp() {
         setSelectedCategory(categoryId);
     };
 
-    // Filter products based on selected category
+    // Filter products based on selected category (supports multi-category via junction table)
     const filteredProducts = selectedCategory === 'all'
         ? menuItems
-        : menuItems.filter(item => item.category === selectedCategory);
+        : menuItems.filter(item =>
+            item.categoryIds?.includes(selectedCategory) || item.category === selectedCategory
+        );
 
     return (
         <div className="min-h-screen bg-theme-bg font-sans flex flex-col">
