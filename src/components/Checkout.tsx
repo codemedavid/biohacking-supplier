@@ -28,14 +28,13 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
     // Customer Details
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [countryCode, setCountryCode] = useState('+63');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [deliveryCountryCode, setDeliveryCountryCode] = useState('+63');
+    const [deliveryContactNumber, setDeliveryContactNumber] = useState('');
 
     // Shipping Details
     const [address, setAddress] = useState('');
-    const [barangay, setBarangay] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipCode, setZipCode] = useState('');
     const [selectedCourierId, setSelectedCourierId] = useState('');
     const [shippingLocation, setShippingLocation] = useState<string>('');
 
@@ -87,6 +86,8 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
     // Calculate final total (Subtotal + Shipping - Discount)
     const finalTotal = Math.max(0, totalPrice + shippingFee - discountAmount);
+    const fullPhone = `${countryCode}${phoneNumber ? ` ${phoneNumber}` : ''}`.trim();
+    const deliveryContactFull = `${deliveryCountryCode}${deliveryContactNumber ? ` ${deliveryContactNumber}` : ''}`.trim();
 
     // Handle Promo Code Application
     const handleApplyPromoCode = async () => {
@@ -172,14 +173,9 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
         fullName.trim() !== '' &&
         email.trim() !== '' &&
         email.toLowerCase().includes('@gmail.com') &&
-        phone.trim() !== '' &&
+        phoneNumber.trim() !== '' &&
+        deliveryContactNumber.trim() !== '' &&
         address.trim() !== '' &&
-        barangay.trim() !== '' &&
-        city.trim() !== '' &&
-        state.trim() !== '' &&
-        zipCode.trim() !== '' &&
-        state.trim() !== '' &&
-        zipCode.trim() !== '' &&
         selectedCourierId !== '' &&
         shippingLocation !== '';
 
@@ -188,13 +184,10 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
             // Identify user in PostHog with their email for messaging workflows
             identifyWithEmail(email, {
                 name: fullName,
-                phone: phone,
-                city: city,
-                state: state,
+                phone: fullPhone,
             });
             posthog.capture('BS_checkout_details_completed', {
                 email: email,
-                city: city,
                 shipping_location: shippingLocation,
             });
             setStep('payment');
@@ -207,7 +200,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
         posthog.capture('BS_order_attempted', {
             email: email,
             customer_name: fullName,
-            phone: phone,
+            phone: fullPhone,
             cart_items: cartItems.map(i => ({
                 name: i.product.name,
                 quantity: i.quantity,
@@ -275,12 +268,8 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                 .insert([{
                     customer_name: fullName,
                     customer_email: email,
-                    customer_phone: phone,
+                    customer_phone: fullPhone,
                     shipping_address: address,
-                    shipping_barangay: barangay,
-                    shipping_city: city,
-                    shipping_state: state,
-                    shipping_zip_code: zipCode,
                     order_items: orderItems,
                     total_price: Math.max(0, totalPrice - discountAmount),
                     shipping_fee: shippingFee,
@@ -290,7 +279,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                     payment_method_name: paymentMethod?.name || null,
                     payment_proof_url: paymentProofUrl,
                     contact_method: contactMethod || null,
-                    notes: notes.trim() || null,
+                    notes: [notes.trim(), `Delivery Contact: ${deliveryContactFull}`].filter(Boolean).join(' | ') || null,
                     order_number: customOrderNumber,
                     order_status: 'new',
                     payment_status: 'pending',
@@ -330,12 +319,11 @@ ${dateTimeStamp}
 👤 CUSTOMER INFORMATION
 Name: ${fullName}
 Email: ${email}
-Phone: ${phone}
+WhatsApp: ${fullPhone}
+Delivery Contact: ${deliveryContactFull}
 
 📦 SHIPPING ADDRESS
 ${address}
-${barangay}
-${city}, ${state} ${zipCode}
 Courier: ${couriers.find(c => c.id === selectedCourierId)?.name || 'N/A'}
 
 🛒 ORDER DETAILS
@@ -387,7 +375,7 @@ Please confirm this order. Thank you!
                 order_number: customOrderNumber,
                 email: email,
                 customer_name: fullName,
-                phone: phone,
+                phone: fullPhone,
                 cart_items: cartItems.map(i => ({ name: i.product.name, quantity: i.quantity, price: i.price })),
                 subtotal: totalPrice,
                 shipping_fee: shippingFee,
@@ -402,8 +390,8 @@ Please confirm this order. Thank you!
                 name: fullName,
                 email: email,
                 $email: email,
-                phone: phone,
-                address: `${address}, ${barangay}, ${city}, ${state} ${zipCode}`,
+                phone: fullPhone,
+                address: address,
                 last_order_number: customOrderNumber,
                 last_order_total: finalTotal,
                 last_order_date: new Date().toISOString(),
@@ -753,16 +741,86 @@ Please confirm this order. Thank you!
                                 </div>
                                 <div>
                                     <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                        Phone Number *
+                                        WhatsApp Number *
                                     </label>
-                                    <input
-                                        type="tel"
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        className="input-field"
-                                        placeholder="09XX XXX XXXX"
-                                        required
-                                    />
+                                    <div className="flex gap-2">
+                                        <select
+                                            value={countryCode}
+                                            onChange={(e) => setCountryCode(e.target.value)}
+                                            className="input-field w-32"
+                                            aria-label="WhatsApp country code"
+                                            required
+                                        >
+                                            <option value="+63">+63 (PH)</option>
+                                            <option value="+1">+1 (US/CA)</option>
+                                            <option value="+44">+44 (UK)</option>
+                                            <option value="+61">+61 (AU)</option>
+                                            <option value="+65">+65 (SG)</option>
+                                            <option value="+81">+81 (JP)</option>
+                                            <option value="+82">+82 (KR)</option>
+                                            <option value="+49">+49 (DE)</option>
+                                            <option value="+33">+33 (FR)</option>
+                                            <option value="+39">+39 (IT)</option>
+                                            <option value="+34">+34 (ES)</option>
+                                            <option value="+52">+52 (MX)</option>
+                                            <option value="+55">+55 (BR)</option>
+                                            <option value="+91">+91 (IN)</option>
+                                            <option value="+92">+92 (PK)</option>
+                                            <option value="+971">+971 (AE)</option>
+                                            <option value="+966">+966 (SA)</option>
+                                            <option value="+7">+7 (RU/KZ)</option>
+                                        </select>
+                                        <input
+                                            type="tel"
+                                            value={phoneNumber}
+                                            onChange={(e) => setPhoneNumber(e.target.value)}
+                                            className="input-field flex-1"
+                                            placeholder="e.g., 912 345 6789"
+                                            required
+                                        />
+                                    </div>
+                                    <p className="text-[10px] text-charcoal-500 mt-1">Include your full number without the leading 0.</p>
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
+                                        Delivery Contact Number *
+                                    </label>
+                                    <div className="flex gap-2">
+                                        <select
+                                            value={deliveryCountryCode}
+                                            onChange={(e) => setDeliveryCountryCode(e.target.value)}
+                                            className="input-field w-32"
+                                            aria-label="Delivery contact country code"
+                                            required
+                                        >
+                                            <option value="+63">+63 (PH)</option>
+                                            <option value="+1">+1 (US/CA)</option>
+                                            <option value="+44">+44 (UK)</option>
+                                            <option value="+61">+61 (AU)</option>
+                                            <option value="+65">+65 (SG)</option>
+                                            <option value="+81">+81 (JP)</option>
+                                            <option value="+82">+82 (KR)</option>
+                                            <option value="+49">+49 (DE)</option>
+                                            <option value="+33">+33 (FR)</option>
+                                            <option value="+39">+39 (IT)</option>
+                                            <option value="+34">+34 (ES)</option>
+                                            <option value="+52">+52 (MX)</option>
+                                            <option value="+55">+55 (BR)</option>
+                                            <option value="+91">+91 (IN)</option>
+                                            <option value="+92">+92 (PK)</option>
+                                            <option value="+971">+971 (AE)</option>
+                                            <option value="+966">+966 (SA)</option>
+                                            <option value="+7">+7 (RU/KZ)</option>
+                                        </select>
+                                        <input
+                                            type="tel"
+                                            value={deliveryContactNumber}
+                                            onChange={(e) => setDeliveryContactNumber(e.target.value)}
+                                            className="input-field flex-1"
+                                            placeholder="e.g., 912 345 6789"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -778,68 +836,13 @@ Please confirm this order. Thank you!
                             <div className="space-y-4">
                                 <div>
                                     <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                        Street Address *
+                                        Address *
                                     </label>
-                                    <input
-                                        type="text"
+                                    <textarea
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
-                                        className="input-field"
-                                        placeholder="House/Unit, Street Name"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                        Barangay *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={barangay}
-                                        onChange={(e) => setBarangay(e.target.value)}
-                                        className="input-field"
-                                        placeholder="Brgy. Name"
-                                        required
-                                    />
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                            City *
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={city}
-                                            onChange={(e) => setCity(e.target.value)}
-                                            className="input-field"
-                                            placeholder="City"
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                            Province *
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={state}
-                                            onChange={(e) => setState(e.target.value)}
-                                            className="input-field"
-                                            placeholder="Province"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-blush-600 uppercase tracking-wide mb-2">
-                                        ZIP/Postal Code *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={zipCode}
-                                        onChange={(e) => setZipCode(e.target.value)}
-                                        className="input-field"
-                                        placeholder="ZIP Code"
+                                        className="w-full px-4 py-3 bg-theme-bg border border-charcoal-600/50 rounded focus:outline-none focus:ring-2 focus:ring-blush-300 transition-all text-sm h-28"
+                                        placeholder="Complete delivery address"
                                         required
                                     />
                                 </div>

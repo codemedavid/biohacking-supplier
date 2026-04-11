@@ -157,12 +157,10 @@ const defaultProps = {
 async function fillDetailsForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByPlaceholderText('Juan Dela Cruz'), 'Test User');
   await user.type(screen.getByPlaceholderText('juan.delacruz@gmail.com'), 'test@gmail.com');
-  await user.type(screen.getByPlaceholderText('09XX XXX XXXX'), '09171234567');
-  await user.type(screen.getByPlaceholderText('House/Unit, Street Name'), '123 Main St');
-  await user.type(screen.getByPlaceholderText('Brgy. Name'), 'San Antonio');
-  await user.type(screen.getByPlaceholderText('City'), 'Makati');
-  await user.type(screen.getByPlaceholderText('Province'), 'Metro Manila');
-  await user.type(screen.getByPlaceholderText('ZIP Code'), '1200');
+  const phoneInputs = screen.getAllByPlaceholderText('e.g., 912 345 6789');
+  await user.type(phoneInputs[0], '9171234567');
+  await user.type(phoneInputs[1], '9187654321');
+  await user.type(screen.getByPlaceholderText('Complete delivery address'), '123 Main St, Makati City, Metro Manila, 1200');
 
   // Select courier
   const courierButton = screen.getByText('LBC Express');
@@ -190,17 +188,13 @@ describe('Checkout component', () => {
       expect(screen.getByText('Checkout Information')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('Juan Dela Cruz')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('juan.delacruz@gmail.com')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('09XX XXX XXXX')).toBeInTheDocument();
+      expect(screen.getAllByPlaceholderText('e.g., 912 345 6789').length).toBe(2);
     });
 
     it('renders shipping address fields', () => {
       render(<Checkout {...defaultProps} />);
 
-      expect(screen.getByPlaceholderText('House/Unit, Street Name')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('Brgy. Name')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('City')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('Province')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('ZIP Code')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('Complete delivery address')).toBeInTheDocument();
     });
 
     it('renders order summary with cart items', () => {
@@ -271,12 +265,10 @@ describe('Checkout component', () => {
       // Fill everything except use non-Gmail email
       await user.type(screen.getByPlaceholderText('Juan Dela Cruz'), 'Test User');
       await user.type(screen.getByPlaceholderText('juan.delacruz@gmail.com'), 'test@outlook.com');
-      await user.type(screen.getByPlaceholderText('09XX XXX XXXX'), '09171234567');
-      await user.type(screen.getByPlaceholderText('House/Unit, Street Name'), '123 Main St');
-      await user.type(screen.getByPlaceholderText('Brgy. Name'), 'San Antonio');
-      await user.type(screen.getByPlaceholderText('City'), 'Makati');
-      await user.type(screen.getByPlaceholderText('Province'), 'Metro Manila');
-      await user.type(screen.getByPlaceholderText('ZIP Code'), '1200');
+      const phoneInputs = screen.getAllByPlaceholderText('e.g., 912 345 6789');
+      await user.type(phoneInputs[0], '9171234567');
+      await user.type(phoneInputs[1], '9187654321');
+      await user.type(screen.getByPlaceholderText('Complete delivery address'), '123 Main St, Makati City, Metro Manila, 1200');
 
       const courierButton = screen.getByText('LBC Express');
       await user.click(courierButton);
