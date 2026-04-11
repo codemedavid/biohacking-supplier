@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { ArrowLeft, Package, CheckCircle, XCircle, Clock, Truck, AlertCircle, Search, RefreshCw, Eye, MessageCircle, Image as ImageIcon } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useMenu } from '../hooks/useMenu';
-import { useCouriers } from '../hooks/useCouriers';
 import posthog from '../lib/posthog';
 
 interface OrderItem {
@@ -271,14 +270,13 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
     }
   };
 
-  const handleSaveTracking = async (orderId: string, trackingNumber: string, shippingProvider: string, shippingNote: string) => {
+  const handleSaveTracking = async (orderId: string, trackingNumber: string, shippingNote: string) => {
     try {
       setIsProcessing(true);
       const { error } = await supabase
         .from('orders')
         .update({
           tracking_number: trackingNumber || null,
-          shipping_provider: shippingProvider || 'jnt',
           shipping_note: shippingNote || null,
           updated_at: new Date().toISOString()
         })
@@ -289,7 +287,7 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
       // Update local state
       const updatedOrders = orders.map(o =>
         o.id === orderId
-          ? { ...o, tracking_number: trackingNumber || null, shipping_provider: shippingProvider || 'jnt', shipping_note: shippingNote || null }
+          ? { ...o, tracking_number: trackingNumber || null, shipping_note: shippingNote || null }
           : o
       );
       setOrders(updatedOrders);
@@ -298,7 +296,6 @@ const OrdersManager: React.FC<OrdersManagerProps> = ({ onBack }) => {
         setSelectedOrder({
           ...selectedOrder,
           tracking_number: trackingNumber || null,
-          shipping_provider: shippingProvider || 'jnt',
           shipping_note: shippingNote || null
         });
       }
@@ -609,7 +606,7 @@ interface OrderDetailsViewProps {
   onBack: () => void;
   onConfirm: () => void;
   onUpdateStatus: (orderId: string, status: string) => void;
-  onSaveTracking: (orderId: string, trackingNumber: string, shippingProvider: string, shippingNote: string) => void;
+  onSaveTracking: (orderId: string, trackingNumber: string, shippingNote: string) => void;
   isProcessing: boolean;
 }
 
@@ -621,22 +618,14 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
   onSaveTracking,
   isProcessing
 }) => {
-  const { couriers } = useCouriers();
   const [trackingNumber, setTrackingNumber] = useState(order.tracking_number || '');
-  const [shippingProvider, setShippingProvider] = useState(order.shipping_provider || 'lbc');
   const [shippingNote, setShippingNote] = useState(order.shipping_note || '');
 
   // Update local state when order changes
   useEffect(() => {
     setTrackingNumber(order.tracking_number || '');
-    setShippingProvider(order.shipping_provider || 'lbc');
     setShippingNote(order.shipping_note || '');
   }, [order]);
-
-  const selectedCourier = couriers.find(c => c.code === shippingProvider);
-  const trackingUrl = selectedCourier?.tracking_url_template && trackingNumber
-    ? selectedCourier.tracking_url_template.replace('{tracking}', trackingNumber)
-    : null;
 
   const totalItems = order.order_items.reduce((sum, item) => sum + item.quantity, 0);
   const finalTotal = order.total_price + (order.shipping_fee || 0);
@@ -766,35 +755,13 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
                 <label className="block text-sm font-medium text-charcoal-700 mb-1">
                   Tracking Number
                 </label>
-                <div className="flex flex-col md:flex-row gap-2">
-                  <select
-                    value={shippingProvider}
-                    onChange={(e) => setShippingProvider(e.target.value)}
-                    className="px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-charcoal-800 bg-white backdrop-blur-md"
-                  >
-                    {couriers.filter(c => c.is_active).map(courier => (
-                      <option key={courier.id} value={courier.code}>{courier.name}</option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    value={trackingNumber}
-                    onChange={(e) => setTrackingNumber(e.target.value)}
-                    placeholder={selectedCourier?.tracking_url_template ? "Enter tracking number" : "See App for details"}
-                    className="flex-1 px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-charcoal-800"
-                  />
-                  {trackingUrl && (
-                    <a
-                      href={trackingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-2 bg-charcoal-800/50 text-charcoal-600 rounded-lg hover:bg-gray-200 flex items-center justify-center"
-                      title="Track Shipment"
-                    >
-                      <Truck className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
+                <input
+                  type="text"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
+                  placeholder="Enter tracking number"
+                  className="w-full px-3 py-2 border border-charcoal-600/50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-charcoal-800"
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-charcoal-700 mb-1">
@@ -809,7 +776,7 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
                 />
               </div>
               <button
-                onClick={() => onSaveTracking(order.id, trackingNumber, shippingProvider, shippingNote)}
+                onClick={() => onSaveTracking(order.id, trackingNumber, shippingNote)}
                 disabled={isProcessing}
                 className="self-end px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm transition-colors shadow-sm disabled:opacity-50"
               >

@@ -77,15 +77,6 @@ vi.mock('../../hooks/useMenu', () => ({
   }),
 }));
 
-const mockCouriers = [
-  { id: 'c-1', name: 'LBC Express', code: 'lbc', tracking_url_template: 'https://lbc.com/{tracking}', is_active: true, sort_order: 1, created_at: '2024-01-01T00:00:00Z' },
-  { id: 'c-2', name: 'J&T Express', code: 'jnt', tracking_url_template: 'https://jnt.com/{tracking}', is_active: true, sort_order: 2, created_at: '2024-01-01T00:00:00Z' },
-];
-
-vi.mock('../../hooks/useCouriers', () => ({
-  useCouriers: () => ({ couriers: mockCouriers, loading: false }),
-}));
-
 vi.mock('../../lib/posthog', () => ({
   default: {
     capture: vi.fn(),

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, Package, CreditCard, Activity, Copy, Check, MessageCircle, Tag, Upload, Database, Lock, Truck } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Package, CreditCard, Activity, Copy, Check, MessageCircle, Tag, Upload, Database, Lock } from 'lucide-react';
 import type { CartItem } from '../types';
 import { usePaymentMethods } from '../hooks/usePaymentMethods';
 import { useShippingLocations } from '../hooks/useShippingLocations';
-import { useCouriers } from '../hooks/useCouriers';
 import { supabase } from '../lib/supabase';
 import { useImageUpload } from '../hooks/useImageUpload';
 import posthog from '../lib/posthog';
@@ -22,7 +21,6 @@ const isValidUUID = (str: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a
 const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) => {
     const { paymentMethods } = usePaymentMethods();
     const { locations: shippingLocations } = useShippingLocations();
-    const { couriers } = useCouriers();
     const [step, setStep] = useState<'details' | 'payment' | 'confirmation'>('details');
 
     // Customer Details
@@ -35,7 +33,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 
     // Shipping Details
     const [address, setAddress] = useState('');
-    const [selectedCourierId, setSelectedCourierId] = useState('');
     const [shippingLocation, setShippingLocation] = useState<string>('');
 
     // Payment
@@ -176,7 +173,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
         phoneNumber.trim() !== '' &&
         deliveryContactNumber.trim() !== '' &&
         address.trim() !== '' &&
-        selectedCourierId !== '' &&
         shippingLocation !== '';
 
     const handleProceedToPayment = () => {
@@ -273,7 +269,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
                     order_items: orderItems,
                     total_price: Math.max(0, totalPrice - discountAmount),
                     shipping_fee: shippingFee,
-                    courier_id: selectedCourierId && isValidUUID(selectedCourierId) ? selectedCourierId : null,
                     shipping_location: shippingLocation,
                     payment_method_id: paymentMethod?.id && isValidUUID(paymentMethod.id) ? paymentMethod.id : null,
                     payment_method_name: paymentMethod?.name || null,
@@ -324,7 +319,6 @@ Delivery Contact: ${deliveryContactFull}
 
 📦 SHIPPING ADDRESS
 ${address}
-Courier: ${couriers.find(c => c.id === selectedCourierId)?.name || 'N/A'}
 
 🛒 ORDER DETAILS
 ${cartItems.map(item => {
@@ -872,59 +866,17 @@ Please confirm this order. Thank you!
                         </div>
                     </div>
 
-                    {/* Courier Selection */}
-                    <div className="bg-white rounded shadow-md p-6 border border-charcoal-100">
-                        <h2 className="font-heading text-lg font-bold text-charcoal-800 mb-3 flex items-center gap-2">
-                            <Truck className="w-5 h-5 text-glow-teal-600" />
-                            Select Courier Provider *
-                        </h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            {couriers
-                                .filter(c => c.is_active)
-                                .map((courier) => (
-                                    <button
-                                        key={courier.id}
-                                        onClick={() => {
-                                            setSelectedCourierId(courier.id);
-                                            setShippingLocation(''); // Reset location when courier changes
-                                        }}
-                                        className={`p-4 rounded border transition-all text-left flex items-center gap-3 ${selectedCourierId === courier.id
-                                            ? 'border-blush-600 bg-charcoal-50 ring-1 ring-blush-600'
-                                            : 'border-charcoal-200 hover:border-blush-300'
-                                            }`}
-                                    >
-                                        <div className="font-bold text-charcoal-800 text-sm">{courier.name}</div>
-                                    </button>
-                                ))}
-                        </div>
-                    </div>
-
                     {/* Shipping Location Selection */}
-                    <div className={`bg-white rounded shadow-md p-6 border border-charcoal-100 transition-opacity duration-300 ${!selectedCourierId ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+                    <div className="bg-white rounded shadow-md p-6 border border-charcoal-100">
                         <h2 className="font-heading text-lg font-bold text-charcoal-800 mb-3 flex items-center gap-2">
                             Choose Shipping Region *
                         </h2>
                         <p className="text-xs text-charcoal-500 mb-6 bg-white p-3 rounded border border-blue-100">
-                            {selectedCourierId
-                                ? 'Select the rate applicable to your location.'
-                                : 'Please select a courier provider above first.'}
+                            Select the rate applicable to your location.
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {shippingLocations
-                                .filter(loc => {
-                                    if (!selectedCourierId) return false;
-                                    const courier = couriers.find(c => c.id === selectedCourierId);
-                                    if (!courier) return false;
-
-                                    // Match logic:
-                                    // 1. If location ID explicitly contains courier code (e.g. LBC_METRO contains LBC)
-                                    // 2. Or check against common patterns if codes don't strictly match
-                                    const code = courier.code.toLowerCase();
-                                    const locId = loc.id.toLowerCase();
-                                    const locName = loc.name.toLowerCase();
-
-                                    return locId.includes(code) || locName.includes(code);
-                                })
+                                .filter(loc => loc.is_active)
                                 .map((loc) => (
                                     <button
                                         key={loc.id}

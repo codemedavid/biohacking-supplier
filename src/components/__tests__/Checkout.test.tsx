@@ -37,9 +37,6 @@ const mockShippingLocations = [
   { id: 'LBC_PROVINCIAL', name: 'LBC - Provincial', fee: 200, is_active: true, order_index: 2 },
 ];
 
-const mockCouriers = [
-  { id: 'a0000000-0000-0000-0000-000000000001', name: 'LBC Express', code: 'lbc', tracking_url_template: null, is_active: true, sort_order: 1, created_at: '2024-01-01T00:00:00Z' },
-];
 
 vi.mock('../../hooks/usePaymentMethods', () => ({
   usePaymentMethods: () => ({ paymentMethods: mockPaymentMethods, loading: false, error: null }),
@@ -52,10 +49,6 @@ vi.mock('../../hooks/useShippingLocations', () => ({
     error: null,
     getShippingFee: (id: string) => mockShippingLocations.find(l => l.id === id)?.fee ?? 0,
   }),
-}));
-
-vi.mock('../../hooks/useCouriers', () => ({
-  useCouriers: () => ({ couriers: mockCouriers, loading: false }),
 }));
 
 const mockUploadImage = vi.fn().mockResolvedValue('https://storage.example.com/proof.jpg');
@@ -162,14 +155,8 @@ async function fillDetailsForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(phoneInputs[1], '9187654321');
   await user.type(screen.getByPlaceholderText('Complete delivery address'), '123 Main St, Makati City, Metro Manila, 1200');
 
-  // Select courier
-  const courierButton = screen.getByText('LBC Express');
-  await user.click(courierButton);
-
   // Select shipping location
-  await waitFor(() => {
-    expect(screen.getByText('LBC - Metro Manila')).toBeInTheDocument();
-  });
+  await waitFor(() => expect(screen.getByText('LBC - Metro Manila')).toBeInTheDocument());
   await user.click(screen.getByText('LBC - Metro Manila'));
 }
 
@@ -212,12 +199,6 @@ describe('Checkout component', () => {
 
       await user.click(screen.getByText('Back to Cart'));
       expect(defaultProps.onBack).toHaveBeenCalled();
-    });
-
-    it('renders courier selection', () => {
-      render(<Checkout {...defaultProps} />);
-
-      expect(screen.getByText('LBC Express')).toBeInTheDocument();
     });
 
     it('renders promo code input', () => {
@@ -270,8 +251,6 @@ describe('Checkout component', () => {
       await user.type(phoneInputs[1], '9187654321');
       await user.type(screen.getByPlaceholderText('Complete delivery address'), '123 Main St, Makati City, Metro Manila, 1200');
 
-      const courierButton = screen.getByText('LBC Express');
-      await user.click(courierButton);
       await waitFor(() => expect(screen.getByText('LBC - Metro Manila')).toBeInTheDocument());
       await user.click(screen.getByText('LBC - Metro Manila'));
 
@@ -773,11 +752,8 @@ describe('Checkout component', () => {
     });
   });
 
-  describe('isValidUUID helper', () => {
-    // The isValidUUID function is used internally by Checkout to validate
-    // courier_id and payment_method_id before sending to DB.
-    // We test it indirectly through order placement.
-    it('sends valid UUID courier_id to order insert', async () => {
+  describe('order insert payload', () => {
+    it('does not include courier fields', async () => {
       const user = userEvent.setup();
       render(<Checkout {...defaultProps} />);
 
@@ -796,8 +772,7 @@ describe('Checkout component', () => {
       });
 
       const insertCall = mockSupabaseInsert.mock.calls[0][0][0];
-      // The courier ID is a valid UUID, so it should be passed through
-      expect(insertCall.courier_id).toBe('a0000000-0000-0000-0000-000000000001');
+      expect(insertCall.courier_id).toBeUndefined();
     });
   });
 
