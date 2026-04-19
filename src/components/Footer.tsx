@@ -1,8 +1,10 @@
 import React from 'react';
-import { HelpCircle, MapPin, Truck, FlaskConical, Heart } from 'lucide-react';
+import { HelpCircle, MapPin, Truck, FlaskConical, Heart, FileText } from 'lucide-react';
+import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const { coaPageEnabled } = useCOAPageSetting();
 
   return (
     <footer className="bg-white pt-16 pb-8 border-t border-charcoal-100">
@@ -70,6 +72,15 @@ const Footer: React.FC = () => {
               <HelpCircle className="w-4 h-4" />
               FAQ
             </a>
+            {coaPageEnabled && (
+              <a
+                href="/coa"
+                className="text-charcoal-500 hover:text-glow-teal-500 transition-colors flex items-center gap-2 text-sm"
+              >
+                <FileText className="w-4 h-4" />
+                COA
+              </a>
+            )}
           </div>
 
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Plus, Edit, Trash2, Save, X, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Plus, Edit, Trash2, Save, X, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { useProtocols, Protocol } from '../hooks/useProtocols';
+import { protocolTemplates } from '../lib/protocolTemplates';
 
 interface ProtocolManagerProps {
     onBack: () => void;
@@ -97,6 +98,51 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
         }
     };
 
+    const handleLoadTemplates = async () => {
+        const templateEntries = Object.entries(protocolTemplates).filter(([key]) => key !== 'default');
+        const existingNames = new Set(protocols.map(p => p.name.toLowerCase()));
+        const toAdd = templateEntries.filter(([category]) => !existingNames.has(`${category} protocol`.toLowerCase()));
+
+        if (toAdd.length === 0) {
+            alert('All template protocols are already loaded.');
+            return;
+        }
+
+        if (!confirm(`Add ${toAdd.length} protocol${toAdd.length === 1 ? '' : 's'} from the built-in library?`)) {
+            return;
+        }
+
+        setIsProcessing(true);
+        let successCount = 0;
+        let errorCount = 0;
+        let sortOrder = protocols.length;
+
+        for (const [category, template] of toAdd) {
+            try {
+                sortOrder += 1;
+                const result = await addProtocol({
+                    name: `${category} Protocol`,
+                    category,
+                    dosage: template.dosage,
+                    frequency: template.frequency,
+                    duration: template.duration,
+                    notes: template.notes,
+                    storage: template.storage,
+                    sort_order: sortOrder,
+                    active: true
+                });
+                if (result.success) successCount++;
+                else errorCount++;
+            } catch (err) {
+                console.error(`Failed to add ${category} protocol:`, err);
+                errorCount++;
+            }
+        }
+
+        setIsProcessing(false);
+        alert(`Loaded ${successCount} protocol${successCount === 1 ? '' : 's'}${errorCount ? ` (${errorCount} failed)` : ''}.`);
+    };
+
     const handleToggleActive = async (id: string, currentActive: boolean) => {
         setIsProcessing(true);
         try {
@@ -133,13 +179,24 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                             <h1 className="text-xl font-bold text-charcoal-800">📋 Protocol Manager</h1>
                         </div>
                         {!isAdding && !editingId && (
-                            <button
-                                onClick={handleAdd}
-                                className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-                            >
-                                <Plus className="w-4 h-4" />
-                                Add Protocol
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={handleLoadTemplates}
+                                    disabled={isProcessing}
+                                    className="flex items-center gap-2 px-4 py-2 bg-white border border-charcoal-300 text-charcoal-800 rounded-lg hover:bg-theme-bg transition-colors disabled:opacity-50"
+                                    title="Add protocols from the built-in template library"
+                                >
+                                    <Sparkles className="w-4 h-4" />
+                                    {isProcessing ? 'Loading...' : 'Load Templates'}
+                                </button>
+                                <button
+                                    onClick={handleAdd}
+                                    className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                                >
+                                    <Plus className="w-4 h-4" />
+                                    Add Protocol
+                                </button>
+                            </div>
                         )}
                     </div>
                 </div>

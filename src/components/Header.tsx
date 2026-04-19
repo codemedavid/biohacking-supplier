@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck, Calculator } from 'lucide-react';
+import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck, Calculator, FileText } from 'lucide-react';
+import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -10,6 +11,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const { coaPageEnabled } = useCOAPageSetting();
 
   return (
     <>
@@ -65,6 +67,15 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   <HelpCircle className="w-4 h-4" />
                   FAQ
                 </a>
+                {coaPageEnabled && (
+                  <a
+                    href="/coa"
+                    className={`text-sm font-medium ${currentPath === '/coa' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'} hover:text-glow-teal-600 hover:bg-glow-teal-50 px-4 py-2 rounded-xl transition-colors flex items-center gap-2`}
+                  >
+                    <FileText className="w-4 h-4" />
+                    COA
+                  </a>
+                )}
               </nav>
 
               {/* Cart Button */}
@@ -181,6 +192,18 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   </div>
                   FAQ
                 </a>
+
+                {coaPageEnabled && (
+                  <a
+                    href="/coa"
+                    className={`flex items-center gap-3 p-4 rounded-xl text-left font-medium hover:bg-glow-teal-50 transition-colors ${currentPath === '/coa' ? 'text-glow-teal-600 bg-glow-teal-50' : 'text-charcoal-500'}`}
+                  >
+                    <div className="p-2 rounded-lg bg-glow-teal-50 text-glow-teal-500">
+                      <FileText className="w-[18px] h-[18px]" />
+                    </div>
+                    COA
+                  </a>
+                )}
               </div>
             </nav>
           </div>

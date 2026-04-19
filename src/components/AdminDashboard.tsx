@@ -33,7 +33,7 @@ const AdminDashboard: React.FC = () => {
   const [managingVariationsProductId, setManagingVariationsProductId] = useState<string | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { addProtocol, protocols } = useProtocols();
+  const { addProtocol } = useProtocols();
 
   const variationManagerProduct = managingVariationsProductId
     ? products.find((product) => product.id === managingVariationsProductId) || null
@@ -432,44 +432,6 @@ const AdminDashboard: React.FC = () => {
     setIsRefreshing(true);
     await refreshProducts();
     setTimeout(() => setIsRefreshing(false), 500);
-  };
-
-  const handleBulkGenerateProtocols = async () => {
-    if (!confirm(`This will generate/regenerate protocols for ALL ${products.length} products using AI. This may take a while and will consume API credits. Continue?`)) {
-      return;
-    }
-
-    try {
-      setIsProcessing(true);
-      let successCount = 0;
-      let errorCount = 0;
-
-      for (const product of products) {
-        try {
-          console.log(`📋 Generating protocol for: ${product.name}`);
-          // Convert category ID to display name for template matching
-          const categoryName = categories.find(cat => cat.id === product.category)?.name || product.category || 'default';
-          const protocolData = generateProtocolFromTemplate(product.name, categoryName);
-          await addProtocol({
-            ...protocolData,
-            product_id: product.id
-          });
-          successCount++;
-          console.log(`✅ Protocol created for: ${product.name}`);
-        } catch (err) {
-          console.error(`❌ Failed to generate protocol for ${product.name}:`, err);
-          errorCount++;
-        }
-      }
-
-      alert(`Bulk Generation Complete:\n✅ Generated: ${successCount}\n❌ Failed: ${errorCount}`);
-
-    } catch (error) {
-      console.error('Bulk generation error:', error);
-      alert('Bulk generation failed.');
-    } finally {
-      setIsProcessing(false);
-    }
   };
 
   // Login Screen
@@ -1254,26 +1216,6 @@ const AdminDashboard: React.FC = () => {
   if (currentView === 'protocols') {
     return (
       <div className="min-h-screen bg-theme-bg">
-        {/* Bulk Generate Banner */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4">
-          <div className="max-w-4xl mx-auto flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-purple-200" />
-              <div>
-                <h3 className="font-bold text-white">AI Protocol Assistant</h3>
-                <p className="text-xs text-purple-200">Generate protocols for all {products.length} products</p>
-              </div>
-            </div>
-            <button
-              onClick={handleBulkGenerateProtocols}
-              disabled={isProcessing}
-              className="bg-white text-purple-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-purple-50 transition-colors disabled:opacity-50 border border-gray-200"
-            >
-              {isProcessing ? 'Generating...' : '🤖 Bulk Generate All Protocols'}
-            </button>
-          </div>
-        </div>
-
         <ProtocolManager onBack={() => setCurrentView('dashboard')} />
       </div>
     );

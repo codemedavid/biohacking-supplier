@@ -284,7 +284,7 @@ const COAManager: React.FC<COAManagerProps> = ({ onBack }) => {
           </div>
           <button
             onClick={handleAdd}
-            className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-md"
+            className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-black px-4 py-2 rounded-lg font-medium transition-all shadow-md"
           >
             <Plus className="w-5 h-5" />
             Add COA Report
