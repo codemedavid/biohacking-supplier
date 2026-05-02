@@ -10,17 +10,53 @@ BEGIN
   -- FIX PRODUCT CODES (products exist but with wrong/missing codes)
   -- ============================================================
 
-  -- SLU-PP-322: code should be '322'
-  UPDATE products SET code = '322' WHERE name = 'SLU-PP-322' AND (code IS NULL OR code != '322');
+  -- SLU-PP-322: code should be '322'. Skip if a corrected row already exists.
+  UPDATE products p
+     SET code = '322'
+   WHERE p.name = 'SLU-PP-322'
+     AND (p.code IS NULL OR p.code != '322')
+     AND NOT EXISTS (
+       SELECT 1 FROM products existing
+        WHERE existing.code = '322'
+          AND existing.spec IS NOT DISTINCT FROM p.spec
+          AND existing.id <> p.id
+     );
 
-  -- LL37: code should be '375'
-  UPDATE products SET code = '375' WHERE (name = 'LL37' OR name LIKE 'LL-37%') AND (code IS NULL OR code != '375');
+  -- LL37: code should be '375'. Skip if a corrected row already exists.
+  UPDATE products p
+     SET code = '375'
+   WHERE (p.name = 'LL37' OR p.name LIKE 'LL-37%')
+     AND (p.code IS NULL OR p.code != '375')
+     AND NOT EXISTS (
+       SELECT 1 FROM products existing
+        WHERE existing.code = '375'
+          AND existing.spec IS NOT DISTINCT FROM p.spec
+          AND existing.id <> p.id
+     );
 
-  -- Lemon Bottle: update code to match Excel
-  UPDATE products SET code = '柠檬瓶' WHERE name LIKE 'Lemon Bottle%' AND (code IS NULL OR code = 'Lemon Bottle');
+  -- Lemon Bottle: update code to match Excel. Skip if a corrected row already exists.
+  UPDATE products p
+     SET code = '柠檬瓶'
+   WHERE p.name LIKE 'Lemon Bottle%'
+     AND (p.code IS NULL OR p.code = 'Lemon Bottle')
+     AND NOT EXISTS (
+       SELECT 1 FROM products existing
+        WHERE existing.code = '柠檬瓶'
+          AND existing.spec IS NOT DISTINCT FROM p.spec
+          AND existing.id <> p.id
+     );
 
-  -- AHK-CU: Excel uses code 'AHKCU 100', DB has 'AU100' - update to match Excel
-  UPDATE products SET code = 'AHKCU 100' WHERE name = 'AHK-CU' AND code = 'AU100';
+  -- AHK-CU: Excel uses code 'AHKCU 100', DB has 'AU100'. Skip if a corrected row already exists.
+  UPDATE products p
+     SET code = 'AHKCU 100'
+   WHERE p.name = 'AHK-CU'
+     AND p.code = 'AU100'
+     AND NOT EXISTS (
+       SELECT 1 FROM products existing
+        WHERE existing.code = 'AHKCU 100'
+          AND existing.spec IS NOT DISTINCT FROM p.spec
+          AND existing.id <> p.id
+     );
 
   -- ============================================================
   -- ADD MISSING PRODUCTS
