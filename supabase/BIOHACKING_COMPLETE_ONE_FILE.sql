@@ -3278,53 +3278,17 @@ BEGIN
   -- FIX PRODUCT CODES (products exist but with wrong/missing codes)
   -- ============================================================
 
-  -- SLU-PP-322: code should be '322'. Skip if a corrected row already exists.
-  UPDATE products p
-     SET code = '322'
-   WHERE p.name = 'SLU-PP-322'
-     AND (p.code IS NULL OR p.code != '322')
-     AND NOT EXISTS (
-       SELECT 1 FROM products existing
-        WHERE existing.code = '322'
-          AND existing.spec IS NOT DISTINCT FROM p.spec
-          AND existing.id <> p.id
-     );
+  -- SLU-PP-322: code should be '322'
+  UPDATE products SET code = '322' WHERE name = 'SLU-PP-322' AND (code IS NULL OR code != '322');
 
-  -- LL37: code should be '375'. Skip if a corrected row already exists.
-  UPDATE products p
-     SET code = '375'
-   WHERE (p.name = 'LL37' OR p.name LIKE 'LL-37%')
-     AND (p.code IS NULL OR p.code != '375')
-     AND NOT EXISTS (
-       SELECT 1 FROM products existing
-        WHERE existing.code = '375'
-          AND existing.spec IS NOT DISTINCT FROM p.spec
-          AND existing.id <> p.id
-     );
+  -- LL37: code should be '375'
+  UPDATE products SET code = '375' WHERE (name = 'LL37' OR name LIKE 'LL-37%') AND (code IS NULL OR code != '375');
 
-  -- Lemon Bottle: update code to match Excel. Skip if a corrected row already exists.
-  UPDATE products p
-     SET code = '柠檬瓶'
-   WHERE p.name LIKE 'Lemon Bottle%'
-     AND (p.code IS NULL OR p.code = 'Lemon Bottle')
-     AND NOT EXISTS (
-       SELECT 1 FROM products existing
-        WHERE existing.code = '柠檬瓶'
-          AND existing.spec IS NOT DISTINCT FROM p.spec
-          AND existing.id <> p.id
-     );
+  -- Lemon Bottle: update code to match Excel
+  UPDATE products SET code = '柠檬瓶' WHERE name LIKE 'Lemon Bottle%' AND (code IS NULL OR code = 'Lemon Bottle');
 
-  -- AHK-CU: Excel uses code 'AHKCU 100', DB has 'AU100'. Skip if a corrected row already exists.
-  UPDATE products p
-     SET code = 'AHKCU 100'
-   WHERE p.name = 'AHK-CU'
-     AND p.code = 'AU100'
-     AND NOT EXISTS (
-       SELECT 1 FROM products existing
-        WHERE existing.code = 'AHKCU 100'
-          AND existing.spec IS NOT DISTINCT FROM p.spec
-          AND existing.id <> p.id
-     );
+  -- AHK-CU: Excel uses code 'AHKCU 100', DB has 'AU100' - update to match Excel
+  UPDATE products SET code = 'AHKCU 100' WHERE name = 'AHK-CU' AND code = 'AU100';
 
   -- ============================================================
   -- ADD MISSING PRODUCTS
@@ -3776,21 +3740,15 @@ DECLARE
   pid_10ml UUID;
 BEGIN
   -- Rename the existing Sterile Water (code WA3) to "Sterile Water 3ml"
-  UPDATE products p
+  UPDATE products
      SET name = 'Sterile Water 3ml',
          spec = '3ml*10vials',
          base_price = 13.80,
          image_url = '/product-images/122_Sterile-Water_3ml.png'
-   WHERE p.code = 'WA3'
-     AND p.name IN ('Sterile Water', 'Sterile Water 3ml')
-     AND NOT EXISTS (
-       SELECT 1 FROM products existing
-        WHERE existing.code = 'WA3'
-          AND existing.spec = '3ml*10vials'
-          AND existing.id <> p.id
-     );
+   WHERE code = 'WA3'
+     AND name IN ('Sterile Water', 'Sterile Water 3ml');
 
-  SELECT id INTO pid_3ml FROM products WHERE code = 'WA3' AND spec = '3ml*10vials' LIMIT 1;
+  SELECT id INTO pid_3ml FROM products WHERE code = 'WA3' LIMIT 1;
 
   -- Keep only the 3ml variation on the renamed product
   IF pid_3ml IS NOT NULL THEN
@@ -3853,9 +3811,9 @@ WITH source (code, name, spec, price, category, image_url) AS (
   ('BT10', 'TB500 (Thymosin B4 Acetate) 10mg', '10mg*10vials', 158.45, 'healing-recovery', '/product-images/112_TB-500_10mg.png'),
   ('CU100', 'GHK-CU 100mg', '100mg*10vials', 78.59, 'skin-hair', '/product-images/42_GHK-Cu_100mg.png'),
   ('CND10', 'CJC-1295 NO DAC 10mg', '10mg*10vials', 173.66, 'healing-recovery', '/product-images/CJC-1295-NODAC-10mg.png'),
-  ('CS10', 'CagriSema 10mg', '10mg*10vials', 202.11, 'weight-loss', '/product-images/28_Cagrilintide_10mg_blend.png'),
+  ('CS10', 'CagriSema 10mg', '10mg*10vials', 202.11, 'weight-loss', NULL),
   ('CGL10', 'Cagrilintide 10mg', '10mg*10vials', 181.27, 'weight-loss', '/product-images/26_Cagrilintide_10mg.png'),
-  ('D15', 'DSIP 15mg', '15mg*10vials', 116.62, 'healing-recovery', '/product-images/DSIP_15mg.png'),
+  ('D15', 'DSIP 15mg', '15mg*10vials', 116.62, 'healing-recovery', NULL),
   ('ET50', 'Epithalon 50mg', '50mg*10vials', 224.93, 'anti-aging', '/product-images/Epithalon-50mg.png'),
   ('G10k', 'HCG 10000', '10000*10vials', 167.89, 'hormone-libido', '/product-images/119_HCG_10000IU.png'),
   ('H15', 'HGH 191AA (Somatropin) 15iu', '15iu*10vials', 107.04, 'growth-hormone', '/product-images/50_HGH_15iu.png'),
@@ -3901,7 +3859,7 @@ WITH source (code, name, spec, price, category, image_url) AS (
   ('WA10', 'BAC Water 10mg', '10mg*10vials', 54.79, 'water-reconstitution', '/product-images/123_Sterile-Water_10ml.png'),
   ('XA10', 'Semax 10mg', '10mg*10vials', 88.03, 'neuropeptides', '/product-images/101_Semax_10mg.png'),
   ('375', 'LL37', '5mg*10vials', 112.82, 'healing-recovery', '/product-images/68_LL-37_5mg.png'),
-  ('10AD', 'AOD-9604 10mg', '10mg*10vials', 189.80, 'weight-loss', '/product-images/12_AOD-9604_10mg.png'),
+  ('10AD', 'AOD-9604 10mg', '10mg*10vials', 189.80, 'weight-loss', NULL),
   ('322', 'SLU-PP-322', '5mg*10vials', 126.06, 'mitochondrial', '/product-images/105_SLU-PP-322_5mg.png'),
   ('2S50', 'SS-31 50mg', '50mg*10vials', 278.17, 'mitochondrial', '/product-images/SS-31_50mg.png'),
   ('5AM-10', '5-amino-1mq 10mg', '10mg*10vials', 116.00, 'weight-loss', '/product-images/07_5-Amino-1MQ_10mg.png'),
